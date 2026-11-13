@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@theme {
+  --color-tinta: #101214;
+  --color-papel: #ecece7;
+  --color-destaque: #ffb000;
+  --color-perigo: #b3261e;
+
+  --font-titulo: "Anybody", "Arial Narrow", sans-serif;
+  --font-texto: "Public Sans", "Segoe UI", sans-serif;
+  --font-dado: "Fragment Mono", Consolas, monospace;
+}
+
+@layer base {
+  body {
+    @apply bg-papel font-texto text-tinta antialiased;
+  }
+
+  ::selection {
+    @apply bg-destaque text-tinta;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-current;
+  }
+}
+
+@layer components {
+  .titulo {
+    @apply font-titulo font-black uppercase;
+    font-stretch: 62%;
+    line-height: 0.86;
+  }
+
+  .subtitulo {
+    @apply font-titulo font-bold;
+    font-stretch: 80%;
+    line-height: 1.05;
+  }
+
+  .dado {
+    @apply font-dado text-xs uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .botao {
+    @apply inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 px-5 py-2.5 text-sm font-bold uppercase transition-colors duration-200;
+    letter-spacing: 0.04em;
+  }
+
+  .botao:disabled {
+    @apply pointer-events-none opacity-50;
+  }
+
+  .botao-tinta {
+    @apply bg-tinta text-papel hover:bg-destaque hover:text-tinta;
+  }
+
+  .botao-destaque {
+    @apply bg-destaque text-tinta hover:bg-papel;
+  }
+
+  .botao-linha {
+    @apply border border-current hover:bg-tinta hover:text-papel;
+  }
+
+  .botao-perigo {
+    @apply border border-perigo text-perigo hover:bg-perigo hover:text-papel;
+  }
+
+  .campo {
+    @apply w-full border border-tinta/30 bg-white/60 px-3.5 py-3 text-base text-tinta transition-colors duration-200 placeholder:text-tinta/40 focus:border-tinta;
+  }
+}
+
+.letra-mask {
+  padding-top: 0.24em;
+  margin-top: -0.24em;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+
+.galeria-grade {
+  --celula: min(7vw, 3.5rem);
+}
