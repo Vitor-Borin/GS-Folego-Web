@@ -6,6 +6,8 @@ import { Flip } from "gsap/Flip"
 
 gsap.registerPlugin(ScrollTrigger, SplitText, ScrambleTextPlugin, Flip)
 
+gsap.ticker.lagSmoothing(0)
+
 document.fonts.ready.then(() => {
   ScrollTrigger.refresh()
 })

@@ -40,14 +40,19 @@ const useConstelacao = () => {
 
       fotos.forEach((foto) => {
         const profundidade = Number(foto.dataset.profundidade)
-        const cosseno = Number(foto.dataset.cosseno)
-        const seno = Number(foto.dataset.seno)
+
+        const caixa = foto.getBoundingClientRect()
+        const distanciaX = caixa.left + caixa.width / 2 - window.innerWidth / 2
+        const distanciaY = caixa.top + caixa.height / 2 - window.innerHeight / 2
+        const distancia = Math.sqrt(distanciaX * distanciaX + distanciaY * distanciaY) || 1
+        const direcaoX = distanciaX / distancia
+        const direcaoY = distanciaY / distancia
 
         voo.to(
           foto,
           {
-            x: () => cosseno * window.innerWidth * (0.5 + profundidade * 0.45),
-            y: () => seno * window.innerHeight * (0.6 + profundidade * 0.5),
+            x: () => direcaoX * window.innerWidth * (0.5 + profundidade * 0.45),
+            y: () => direcaoY * window.innerHeight * (0.6 + profundidade * 0.5),
             scale: 1.8 + profundidade * 2.4,
             opacity: 1,
             ease: "power2.in",

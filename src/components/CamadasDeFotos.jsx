@@ -25,7 +25,7 @@ const CamadasDeFotos = () => {
                   <span>{`0${camadas.length}`}</span>
                 </p>
                 <p className="etiqueta">{camada.etiqueta}</p>
-                <h2 className="titulo max-w-4xl text-[clamp(2rem,4.6vw,4.5rem)]">
+                <h2 className="titulo max-w-6xl text-[clamp(2rem,4.4vw,4.25rem)]">
                   {camada.linhas.map((linha) => (
                     <span key={linha} className="block">
                       {linha}

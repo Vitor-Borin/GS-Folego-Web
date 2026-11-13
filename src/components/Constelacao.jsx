@@ -17,13 +17,13 @@ const Constelacao = ({ pontosComEnergia, carregando, erro }) => {
           {estrelas.map((estrela) => (
             <div
               key={estrela.id}
-              className="js-foto absolute -translate-x-1/2 -translate-y-1/2"
+              className="js-foto absolute left-[var(--x-celular)] top-[var(--y-celular)] -translate-x-1/2 -translate-y-1/2 md:left-[var(--x)] md:top-[var(--y)]"
               data-profundidade={estrela.profundidade}
-              data-cosseno={estrela.cosseno}
-              data-seno={estrela.seno}
               style={{
-                left: `${estrela.esquerda}%`,
-                top: `${estrela.topo}%`,
+                "--x": `${estrela.esquerda}%`,
+                "--y": `${estrela.topo}%`,
+                "--x-celular": `${estrela.esquerdaNoCelular}%`,
+                "--y-celular": `${estrela.topoNoCelular}%`,
                 width: `max(${estrela.largura}vw, ${estrela.larguraMinima}px)`,
                 opacity: estrela.opacidade,
                 zIndex: Math.round(estrela.profundidade * 10),

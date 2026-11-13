@@ -10,21 +10,23 @@ const arredondar = (numero) => {
 
 export const montarConstelacao = (fotos) => {
   return fotos.map((foto, indice) => {
-    const angulo = indice * 2.39996 + pseudoAleatorio(indice + 3) * 0.6
-    const profundidade = pseudoAleatorio(indice + 11)
-    const raioHorizontal = 17 + profundidade * 33
-    const raioVertical = 19 + profundidade * 29
+    const angulo = indice * 2.39996
+    const profundidade = (indice * 0.7548777) % 1
+    const raioHorizontal = 27 + profundidade * 24
+    const raioVertical = 26 + profundidade * 23
+
+    const inicioDaFaixa = Math.sin(angulo) < 0 ? 9 : 74
 
     return {
       id: indice,
       src: foto.src,
       profundidade: arredondar(profundidade),
-      cosseno: arredondar(Math.cos(angulo)),
-      seno: arredondar(Math.sin(angulo)),
       esquerda: arredondar(50 + Math.cos(angulo) * raioHorizontal),
       topo: arredondar(50 + Math.sin(angulo) * raioVertical),
-      largura: arredondar(3.2 + profundidade * profundidade * 8.8),
-      larguraMinima: Math.round(30 + profundidade * 64),
+      esquerdaNoCelular: arredondar(6 + pseudoAleatorio(indice + 71) * 88),
+      topoNoCelular: arredondar(inicioDaFaixa + pseudoAleatorio(indice + 91) * 17),
+      largura: arredondar(2.6 + profundidade * profundidade * 6.4),
+      larguraMinima: Math.round(28 + profundidade * 56),
       opacidade: arredondar(0.28 + profundidade * 0.72),
     }
   })

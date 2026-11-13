@@ -54,7 +54,7 @@ const Rodape = () => {
         <summary className="cursor-pointer">Créditos das fotos (banco livre, usadas só nesta prévia)</summary>
         <ul className="mt-4 grid gap-1.5 md:grid-cols-2">
           {todasAsFotos.map((foto) => (
-            <li key={foto.pagina}>
+            <li key={foto.src}>
               <a href={foto.pagina} className="underline hover:text-white">
                 {foto.autor}
               </a>
