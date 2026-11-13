@@ -1,0 +1,68 @@
+[
+  {
+    "id": "1",
+    "nome": "Padaria da esquina (exemplo)",
+    "tipo": "comercio",
+    "bairro": "Bela Vista",
+    "endereco": "Rua de exemplo, 100",
+    "descricao": "Texto de exemplo. Aqui entra o que este ponto oferece para a vizinhança.",
+    "vagas": 3,
+    "ativo": true,
+    "minutosAtras": 18
+  },
+  {
+    "id": "2",
+    "nome": "Condomínio Mirante (exemplo)",
+    "tipo": "condominio",
+    "bairro": "Bela Vista",
+    "endereco": "Avenida de exemplo, 2450",
+    "descricao": "Texto de exemplo. Salão no térreo aberto para os vizinhos.",
+    "vagas": 6,
+    "ativo": true,
+    "minutosAtras": 95
+  },
+  {
+    "id": "3",
+    "nome": "Associação de moradores (exemplo)",
+    "tipo": "associacao",
+    "bairro": "Liberdade",
+    "endereco": "Travessa de exemplo, 12",
+    "descricao": "Texto de exemplo. Atende de segunda a sábado.",
+    "vagas": 4,
+    "ativo": true,
+    "minutosAtras": 260
+  },
+  {
+    "id": "4",
+    "nome": "Casa da Dona Lúcia (exemplo)",
+    "tipo": "morador",
+    "bairro": "Cambuci",
+    "endereco": "Rua de exemplo, 87",
+    "descricao": "Texto de exemplo. Ajuda quem mora na mesma quadra.",
+    "vagas": 1,
+    "ativo": true,
+    "minutosAtras": 40
+  },
+  {
+    "id": "5",
+    "nome": "UBS do bairro (exemplo)",
+    "tipo": "servico",
+    "bairro": "Liberdade",
+    "endereco": "Praça de exemplo, s/n",
+    "descricao": "Texto de exemplo. Serviço público com atendimento no horário comercial.",
+    "vagas": 8,
+    "ativo": false,
+    "minutosAtras": 1500
+  },
+  {
+    "id": "6",
+    "nome": "Mercadinho do Zé (exemplo)",
+    "tipo": "comercio",
+    "bairro": "Cambuci",
+    "endereco": "Rua de exemplo, 301",
+    "descricao": "Texto de exemplo. Aberto todos os dias.",
+    "vagas": 2,
+    "ativo": true,
+    "minutosAtras": 600
+  }
+]

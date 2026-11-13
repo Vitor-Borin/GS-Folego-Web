@@ -1,0 +1,29 @@
+[
+  {
+    "id": "1",
+    "titulo": "Pedido de exemplo com prioridade alta",
+    "bairro": "Bela Vista",
+    "detalhe": "Texto de exemplo. O que a pessoa precisa e por quanto tempo.",
+    "prioridade": "alta",
+    "status": "aberto",
+    "minutosAtras": 12
+  },
+  {
+    "id": "2",
+    "titulo": "Pedido de exemplo já em andamento",
+    "bairro": "Cambuci",
+    "detalhe": "Texto de exemplo. Um vizinho já está a caminho.",
+    "prioridade": "media",
+    "status": "andamento",
+    "minutosAtras": 48
+  },
+  {
+    "id": "3",
+    "titulo": "Pedido de exemplo resolvido",
+    "bairro": "Liberdade",
+    "detalhe": "Texto de exemplo. Resolvido com a ajuda de um ponto da rede.",
+    "prioridade": "baixa",
+    "status": "resolvido",
+    "minutosAtras": 300
+  }
+]
