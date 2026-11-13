@@ -30,14 +30,14 @@ const CartaoPonto = ({ ponto, agora, ocupado, aoConfirmar, aoApagar }) => {
         <p className="flex items-center gap-2 font-semibold">
           <span
             aria-hidden="true"
-            className={`block size-3 shrink-0 border border-tinta ${emDia ? "bg-destaque" : "bg-transparent"}`}
+            className={`block size-3 shrink-0 rounded-full border border-tinta/40 ${emDia ? "bg-destaque" : "bg-transparent"}`}
           />
           {!ponto.ativo && "Fora da rede no momento"}
           {ponto.ativo && emDia && `Confirmado ${tempo}`}
           {ponto.ativo && !emDia && `Última confirmação ${tempo}`}
         </p>
         <p className="dado text-tinta/60">
-          {ponto.vagas} {Number(ponto.vagas) === 1 ? "vaga" : "vagas"}
+          {ponto.vagas} {Number(ponto.vagas) === 1 ? "tomada livre" : "tomadas livres"}
         </p>
       </div>
 

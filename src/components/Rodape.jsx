@@ -1,52 +1,69 @@
 import { Link } from "react-router"
-import { equipe, linksDoMenu, ods, projeto } from "../data/conteudo"
+import Marca from "./Marca"
+import { equipe, linksDoMenu, projeto } from "../data/conteudo"
+import { fotos, fotosGrandes } from "../data/fotos"
+
+const todasAsFotos = fotosGrandes.concat(fotos)
 
 const Rodape = () => {
   return (
-    <footer className="border-t border-tinta bg-papel px-4 pb-10 pt-14 md:px-8">
-      <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)_minmax(0,1fr)]">
+    <footer className="bg-tinta px-4 pb-10 pt-16 text-white md:px-10">
+      <div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)_minmax(0,0.7fr)]">
         <div className="grid content-start gap-4">
-          <p className="titulo text-5xl md:text-6xl">{projeto.nome}</p>
-          <p className="max-w-sm text-tinta/70">
-            Projeto acadêmico da {projeto.edicao}, FIAP, Engenharia de Software, 1º ano.
+          <p className="flex items-center gap-3 text-3xl font-medium">
+            <Marca />
+            {projeto.nome}
           </p>
+          <p className="max-w-sm text-white/60">
+            Projeto acadêmico da {projeto.edicao}, FIAP, Engenharia de Software, 1º ano. Os dados da rede são
+            simulados.
+          </p>
+          <p className="max-w-sm font-medium">Em emergência, ligue 192.</p>
         </div>
 
         <div className="grid content-start gap-3">
-          <h2 className="dado text-tinta/60">Equipe</h2>
-          <ul className="grid gap-2">
+          <h2 className="text-sm text-white/60">Equipe</h2>
+          <ul className="grid gap-3">
             {equipe.map((pessoa) => (
-              <li key={pessoa.nome} className="grid gap-0.5 border-t border-tinta/15 pt-2">
-                <span className="font-semibold">
+              <li key={pessoa.nome} className="grid gap-0.5 border-t border-white/15 pt-3">
+                <span className="font-medium">
                   {pessoa.nome}
-                  {pessoa.rm !== "" && <span className="dado ml-2 text-tinta/60">{pessoa.rm}</span>}
+                  {pessoa.rm !== "" && <span className="ml-2 text-sm text-white/60">{pessoa.rm}</span>}
                 </span>
-                <span className="text-sm text-tinta/70">{pessoa.parte}</span>
+                <span className="text-sm text-white/60">{pessoa.parte}</span>
               </li>
             ))}
           </ul>
         </div>
 
         <div className="grid content-start gap-3">
-          <h2 className="dado text-tinta/60">Navegação</h2>
-          <ul className="grid gap-2">
+          <h2 className="text-sm text-white/60">Navegação</h2>
+          <ul className="grid gap-3">
             {linksDoMenu.map((link) => (
-              <li key={link.para} className="border-t border-tinta/15 pt-2">
-                <Link to={link.para} className="font-semibold hover:underline">
+              <li key={link.para} className="border-t border-white/15 pt-3">
+                <Link to={link.para} className="font-medium hover:text-destaque">
                   {link.rotulo}
                 </Link>
               </li>
             ))}
           </ul>
-          <ul className="mt-4 flex flex-wrap gap-2">
-            {ods.map((item) => (
-              <li key={item} className="dado border border-tinta/30 px-2 py-1">
-                {item}
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
+
+      <details className="mx-auto mt-14 max-w-6xl border-t border-white/15 pt-5 text-sm text-white/60">
+        <summary className="cursor-pointer">Créditos das fotos (banco livre, usadas só nesta prévia)</summary>
+        <ul className="mt-4 grid gap-1.5 md:grid-cols-2">
+          {todasAsFotos.map((foto) => (
+            <li key={foto.pagina}>
+              <a href={foto.pagina} className="underline hover:text-white">
+                {foto.autor}
+              </a>
+              {" · "}
+              {foto.licenca} · Wikimedia Commons
+            </li>
+          ))}
+        </ul>
+      </details>
     </footer>
   )
 }

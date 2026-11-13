@@ -56,12 +56,12 @@ const FormularioPonto = ({ formulario, ocupado, textoDoBotao, aoEnviar, children
       <div className="grid gap-4 md:grid-cols-2 md:items-start">
         <Campo
           id="ponto-vagas"
-          rotulo="Vagas"
+          rotulo="Tomadas livres"
           tipo="numero"
           valor={formulario.vagas}
           aoMudar={formulario.setVagas}
           erro={formulario.erros.vagas}
-          dica="Quantas pessoas o ponto atende ao mesmo tempo."
+          dica="Quantos aparelhos dá para ligar ao mesmo tempo."
         />
 
         <label className="flex min-h-11 cursor-pointer items-center gap-3 md:mt-7">

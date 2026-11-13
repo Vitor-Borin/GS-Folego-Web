@@ -74,7 +74,7 @@ const RedePage = () => {
         <>
           <p className="dado border-b border-tinta/15 py-4 text-tinta/70">
             {pontos.length} pontos · {contarConfirmados(pontos, agora)} confirmados nas últimas 2 horas ·{" "}
-            {somarVagas(pontos, agora)} vagas confirmadas
+            {somarVagas(pontos, agora)} tomadas livres
           </p>
 
           <FiltroPontos busca={busca} aoBuscar={aoBuscar} tipo={tipo} aoEscolherTipo={aoEscolherTipo} />

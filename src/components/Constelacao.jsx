@@ -1,0 +1,75 @@
+import { Link } from "react-router"
+import { PiArrowRight } from "react-icons/pi"
+import { projeto } from "../data/conteudo"
+import { fotos } from "../data/fotos"
+import useConstelacao from "../hooks/useConstelacao"
+import { montarConstelacao } from "../utils/desenho"
+
+const estrelas = montarConstelacao(fotos)
+
+const Constelacao = ({ pontosComEnergia, carregando, erro }) => {
+  useConstelacao()
+
+  return (
+    <section className="js-ceu relative z-0 h-[200svh]">
+      <div className="sticky top-0 h-svh overflow-hidden">
+        <div aria-hidden="true" className="absolute inset-0">
+          {estrelas.map((estrela) => (
+            <div
+              key={estrela.id}
+              className="js-foto absolute -translate-x-1/2 -translate-y-1/2"
+              data-profundidade={estrela.profundidade}
+              data-cosseno={estrela.cosseno}
+              data-seno={estrela.seno}
+              style={{
+                left: `${estrela.esquerda}%`,
+                top: `${estrela.topo}%`,
+                width: `max(${estrela.largura}vw, ${estrela.larguraMinima}px)`,
+                opacity: estrela.opacidade,
+                zIndex: Math.round(estrela.profundidade * 10),
+              }}
+            >
+              <div className="js-foto-paralaxe" data-profundidade={estrela.profundidade}>
+                <img src={estrela.src} alt="" className="js-foto-imagem block w-full rounded-md" />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="js-ceu-conteudo relative z-20 flex h-full flex-col items-center justify-center px-4 text-center">
+          <p
+            role="status"
+            className="js-ceu-apoio mb-7 inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-1.5 text-sm"
+          >
+            <span aria-hidden="true" className="block size-2 rounded-full bg-destaque" />
+            {carregando && "Lendo a rede"}
+            {erro && "Rede fora do ar"}
+            {!carregando && !erro && `${pontosComEnergia} pontos com energia agora`}
+          </p>
+
+          <h1 className="titulo text-[clamp(2.4rem,5.4vw,5.25rem)]">
+            {projeto.linhasDoTitulo.map((linha) => (
+              <span key={linha} className="block overflow-hidden pb-[0.12em]">
+                <span className="js-ceu-linha block">{linha}</span>
+              </span>
+            ))}
+          </h1>
+
+          <p className="js-ceu-apoio mt-6 max-w-md text-lg text-tinta/70">{projeto.apoio}</p>
+
+          <div className="js-ceu-apoio mt-8 flex flex-wrap justify-center gap-3">
+            <Link to="/rede" className="botao botao-tinta">
+              Encontrar um ponto
+              <PiArrowRight size={18} aria-hidden="true" />
+            </Link>
+            <Link to="/rede/novo" className="botao botao-claro">
+              Oferecer minha tomada
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export default Constelacao

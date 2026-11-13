@@ -23,8 +23,8 @@ const FiltroPontos = ({ busca, aoBuscar, tipo, aoEscolherTipo }) => {
             type="button"
             aria-pressed={tipo === "todos"}
             onClick={() => aoEscolherTipo("todos")}
-            className={`dado cursor-pointer border border-tinta px-3 py-2 transition-colors duration-200 ${
-              tipo === "todos" ? "bg-tinta text-papel" : "hover:bg-tinta/10"
+            className={`cursor-pointer rounded-full border px-4 py-2 text-sm transition-colors duration-200 ${
+              tipo === "todos" ? "border-tinta bg-tinta text-white" : "border-tinta/25 hover:border-tinta"
             }`}
           >
             Todos
@@ -36,8 +36,8 @@ const FiltroPontos = ({ busca, aoBuscar, tipo, aoEscolherTipo }) => {
               type="button"
               aria-pressed={tipo === item.valor}
               onClick={() => aoEscolherTipo(item.valor)}
-              className={`dado cursor-pointer border border-tinta px-3 py-2 transition-colors duration-200 ${
-                tipo === item.valor ? "bg-tinta text-papel" : "hover:bg-tinta/10"
+              className={`cursor-pointer rounded-full border px-4 py-2 text-sm transition-colors duration-200 ${
+                tipo === item.valor ? "border-tinta bg-tinta text-white" : "border-tinta/25 hover:border-tinta"
               }`}
             >
               {item.rotulo}

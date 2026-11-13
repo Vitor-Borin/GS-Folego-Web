@@ -1,14 +1,13 @@
 @import "tailwindcss";
 
 @theme {
-  --color-tinta: #101214;
-  --color-papel: #ecece7;
-  --color-destaque: #ffb000;
+  --color-papel: #f3f1ec;
+  --color-tinta: #15171a;
+  --color-destaque: #ffc83d;
+  --color-noite: #0e1014;
   --color-perigo: #b3261e;
 
-  --font-titulo: "Anybody", "Arial Narrow", sans-serif;
-  --font-texto: "Public Sans", "Segoe UI", sans-serif;
-  --font-dado: "Fragment Mono", Consolas, monospace;
+  --font-texto: "Host Grotesk", "Segoe UI", sans-serif;
 }
 
 @layer base {
@@ -27,25 +26,24 @@
 
 @layer components {
   .titulo {
-    @apply font-titulo font-black uppercase;
-    font-stretch: 62%;
-    line-height: 0.86;
+    @apply font-medium;
+    letter-spacing: -0.03em;
+    line-height: 1;
   }
 
   .subtitulo {
-    @apply font-titulo font-bold;
-    font-stretch: 80%;
-    line-height: 1.05;
+    @apply font-medium;
+    letter-spacing: -0.015em;
+    line-height: 1.12;
   }
 
   .dado {
-    @apply font-dado text-xs uppercase;
-    letter-spacing: 0.06em;
+    @apply text-sm text-tinta/60;
   }
 
   .botao {
-    @apply inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 px-5 py-2.5 text-sm font-bold uppercase transition-colors duration-200;
-    letter-spacing: 0.04em;
+    @apply inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-full px-5 py-2.5 font-medium transition-colors duration-200;
+    font-size: 0.95rem;
   }
 
   .botao:disabled {
@@ -53,33 +51,39 @@
   }
 
   .botao-tinta {
-    @apply bg-tinta text-papel hover:bg-destaque hover:text-tinta;
+    @apply bg-tinta text-white hover:bg-tinta/80;
   }
 
   .botao-destaque {
-    @apply bg-destaque text-tinta hover:bg-papel;
+    @apply bg-destaque text-tinta hover:bg-white;
+  }
+
+  .botao-claro {
+    @apply bg-white text-tinta hover:bg-tinta hover:text-white;
   }
 
   .botao-linha {
-    @apply border border-current hover:bg-tinta hover:text-papel;
+    @apply border border-tinta/25 hover:border-tinta hover:bg-tinta hover:text-white;
   }
 
   .botao-perigo {
-    @apply border border-perigo text-perigo hover:bg-perigo hover:text-papel;
+    @apply border border-perigo text-perigo hover:bg-perigo hover:text-white;
   }
 
   .campo {
-    @apply w-full border border-tinta/30 bg-white/60 px-3.5 py-3 text-base text-tinta transition-colors duration-200 placeholder:text-tinta/40 focus:border-tinta;
+    @apply w-full rounded-xl border border-tinta/20 bg-white px-4 py-3 text-base text-tinta transition-colors duration-200 placeholder:text-tinta/40 focus:border-tinta;
+  }
+
+  .etiqueta {
+    @apply inline-flex items-center gap-1.5 rounded-full bg-destaque px-3 py-1 text-sm font-medium text-tinta;
+  }
+
+  .cartao {
+    @apply rounded-2xl bg-white p-5;
+    box-shadow: 0 1px 0 rgb(21 23 26 / 0.05), 0 18px 40px -24px rgb(21 23 26 / 0.35);
   }
 }
 
-.letra-mask {
-  padding-top: 0.24em;
-  margin-top: -0.24em;
-  padding-bottom: 0.06em;
-  margin-bottom: -0.06em;
-}
-
-.galeria-grade {
-  --celula: min(6.4vw, 3.5rem);
+.logo-grade {
+  --celula: min(6.2vw, 7.2svh, 3.6rem);
 }

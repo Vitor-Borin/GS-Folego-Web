@@ -58,7 +58,7 @@ const PontoPage = () => {
               <dd className="font-semibold">{textoDoTempo(minutosEntre(agora, ponto.atualizadoEm))}</dd>
             </div>
             <div className="grid gap-1">
-              <dt className="dado text-tinta/60">Vagas</dt>
+              <dt className="dado text-tinta/60">Tomadas livres</dt>
               <dd className="font-semibold">{ponto.vagas}</dd>
             </div>
           </dl>
