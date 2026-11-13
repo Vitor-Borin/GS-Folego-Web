@@ -38,6 +38,15 @@ export const numeros = [
   { valor: "00", descricao: "Terceiro indicador de impacto do projeto", fonte: "Fonte a definir" },
 ]
 
+export const titulos = {
+  passos: "Como funciona",
+  participantes: "Quem faz parte",
+  numeros: "O tamanho do problema",
+  rede: "A rede está aberta",
+  textoDaRede:
+    "Estes são os pontos cadastrados agora. Qualquer pessoa do bairro pode entrar, confirmar um ponto ou abrir um pedido.",
+}
+
 export const galeria = {
   legenda: "Fotos do território, tiradas pelo grupo",
   fecho: "O que a gente viu na rua virou o que a gente construiu.",

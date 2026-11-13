@@ -29,9 +29,10 @@ const useGaleriaLogo = () => {
           ease: "power2.inOut",
           stagger: { each: 0.012, from: "edges" },
         })
-        .to(".js-galeria-legenda", { autoAlpha: 0, duration: 0.2 }, 0.75)
-        .to(".js-peca-cor", { opacity: 0.88, duration: 0.25 }, ">")
-        .from(".js-galeria-fecho", { autoAlpha: 0, y: 30, duration: 0.25 }, "<")
+        .addLabel("montado")
+        .to(".js-galeria-legenda", { autoAlpha: 0, duration: 0.2 }, 0.6)
+        .to(".js-peca-cor", { opacity: 0.88, duration: 0.25 }, "montado")
+        .from(".js-galeria-fecho", { autoAlpha: 0, y: 30, duration: 0.25 }, "montado")
         .to({}, { duration: 0.3 })
     })
 

@@ -21,6 +21,11 @@ const useFormularioPedido = () => {
       valido = false
     }
 
+    if (prioridade === "") {
+      novosErros.prioridade = "Escolha a prioridade."
+      valido = false
+    }
+
     if (detalhe.length > 200) {
       novosErros.detalhe = "O detalhe cabe em até 200 letras."
       valido = false
