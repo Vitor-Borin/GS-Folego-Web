@@ -1,0 +1,53 @@
+export const RENDIMENTO = 0.85
+
+export const LIMITE_ALERTA_MIN = 120
+export const LIMITE_CRITICO_MIN = 30
+
+export const PICO_SEM_LUZ = 2200000
+export const SEM_LUZ_NO_FIM = 158000
+export const DIAS_DO_MODELO = 5
+
+export const TAXA_DE_VOLTA = Math.log(PICO_SEM_LUZ / SEM_LUZ_NO_FIM) / DIAS_DO_MODELO
+
+export const calcularAutonomia = (energia, consumo) => {
+  if (consumo <= 0) {
+    return 0
+  }
+
+  return Math.round(((energia * RENDIMENTO) / consumo) * 60)
+}
+
+export const estadoDaBateria = (minutos) => {
+  if (minutos < LIMITE_CRITICO_MIN) {
+    return "critico"
+  }
+
+  if (minutos < LIMITE_ALERTA_MIN) {
+    return "alerta"
+  }
+
+  return "reserva"
+}
+
+export const textoDaDuracao = (minutos) => {
+  if (minutos < 60) {
+    return `${minutos} min`
+  }
+
+  const horas = Math.floor(minutos / 60)
+  const resto = minutos % 60
+
+  return `${horas}h${resto < 10 ? "0" : ""}${resto}`
+}
+
+export const imoveisSemLuz = (dias) => {
+  return PICO_SEM_LUZ * Math.exp(-TAXA_DE_VOLTA * dias)
+}
+
+export const fracaoSemLuz = (minutos) => {
+  return Math.exp(-TAXA_DE_VOLTA * (minutos / 1440))
+}
+
+export const porCento = (fracao) => {
+  return `${(fracao * 100).toFixed(1).replace(".", ",")}%`
+}

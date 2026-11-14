@@ -1,9 +1,7 @@
 import { Link } from "react-router"
 import Marca from "./Marca"
 import { equipe, linksDoMenu, projeto } from "../data/conteudo"
-import { fotos, fotosGrandes } from "../data/fotos"
-
-const todasAsFotos = fotosGrandes.concat(fotos)
+import { fotos } from "../data/fotos"
 
 const Rodape = () => {
   return (
@@ -53,7 +51,7 @@ const Rodape = () => {
       <details className="mx-auto mt-14 max-w-6xl border-t border-white/15 pt-5 text-sm text-white/60">
         <summary className="cursor-pointer">Créditos das fotos (banco livre, usadas só nesta prévia)</summary>
         <ul className="mt-4 grid gap-1.5 md:grid-cols-2">
-          {todasAsFotos.map((foto) => (
+          {fotos.map((foto) => (
             <li key={foto.src}>
               <a href={foto.pagina} className="underline hover:text-white">
                 {foto.autor}

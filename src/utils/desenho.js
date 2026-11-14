@@ -1,3 +1,5 @@
+import { DIAS_DO_MODELO, imoveisSemLuz, PICO_SEM_LUZ } from "./autonomia"
+
 export const pseudoAleatorio = (indice) => {
   const valor = Math.sin(indice * 12.9898) * 43758.5453
 
@@ -30,6 +32,24 @@ export const montarConstelacao = (fotos) => {
       opacidade: arredondar(0.28 + profundidade * 0.72),
     }
   })
+}
+
+export const montarCurva = (fechada) => {
+  const trechos = []
+
+  for (let passo = 0; passo <= 50; passo = passo + 1) {
+    const dias = (passo / 50) * DIAS_DO_MODELO
+    const x = (dias / DIAS_DO_MODELO) * 100
+    const y = 100 - (imoveisSemLuz(dias) / PICO_SEM_LUZ) * 100
+
+    trechos.push(`${passo === 0 ? "M" : "L"}${arredondar(x)} ${arredondar(y)}`)
+  }
+
+  if (fechada) {
+    trechos.push("L100 100 L0 100 Z")
+  }
+
+  return trechos.join(" ")
 }
 
 export const montarCelulas = (desenho) => {

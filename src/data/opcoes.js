@@ -18,6 +18,19 @@ export const statusDoPedido = [
   { valor: "resolvido", rotulo: "Resolvido" },
 ]
 
+export const bateriasDeExemplo = [
+  { rotulo: "Nobreak comum", valor: 84 },
+  { rotulo: "Bateria grande", valor: 1200 },
+]
+
+export const aparelhosDeExemplo = [{ rotulo: "Concentrador de oxigênio", valor: 290 }]
+
+export const estadosDaBateria = [
+  { valor: "critico", rotulo: "Crítico", faixa: "menos de 30 min" },
+  { valor: "alerta", rotulo: "Alerta", faixa: "menos de 2 h" },
+  { valor: "reserva", rotulo: "Reserva", faixa: "2 h ou mais" },
+]
+
 export const pontoVazio = {
   nome: "",
   tipo: "",
