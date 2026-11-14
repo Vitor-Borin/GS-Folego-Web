@@ -58,12 +58,12 @@ const Constelacao = ({ pontosComEnergia, carregando, erro }) => {
           <p className="js-ceu-apoio mt-6 max-w-md text-lg text-tinta/70">{projeto.apoio}</p>
 
           <div className="js-ceu-apoio mt-8 flex flex-wrap justify-center gap-3">
-            <Link to="/rede" className="botao botao-tinta">
-              Encontrar um ponto
+            <Link to="/plano" className="botao botao-tinta">
+              Montar meu plano
               <PiArrowRight size={18} aria-hidden="true" />
             </Link>
             <Link to="/rede/novo" className="botao botao-claro">
-              Oferecer minha tomada
+              Cadastrar um ponto de energia
             </Link>
           </div>
         </div>

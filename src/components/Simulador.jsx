@@ -1,3 +1,5 @@
+import { Link } from "react-router"
+import { PiArrowRight } from "react-icons/pi"
 import CabecalhoDeSecao from "./CabecalhoDeSecao"
 import ControleDeslizante from "./ControleDeslizante"
 import { simulador } from "../data/conteudo"
@@ -43,7 +45,13 @@ const Simulador = () => {
               aoMudar={setConsumo}
               exemplos={aparelhosDeExemplo}
             />
-            <p className="dado">{simulador.nota}</p>
+            <div className="grid justify-items-start gap-4">
+              <p className="dado">{simulador.nota}</p>
+              <Link to="/plano" className="botao botao-linha">
+                Montar meu plano de apagão
+                <PiArrowRight size={18} aria-hidden="true" />
+              </Link>
+            </div>
           </div>
 
           <div

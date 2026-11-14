@@ -15,11 +15,11 @@ const ChamadaFinal = () => {
         </h2>
         <div className="js-revelar flex flex-wrap justify-center gap-3">
           <Link to="/rede/novo" className="botao botao-tinta">
-            Oferecer minha tomada
+            Cadastrar um ponto de energia
             <PiArrowRight size={18} aria-hidden="true" />
           </Link>
-          <Link to="/pedidos" className="botao botao-claro">
-            Pedir tomada
+          <Link to="/plano" className="botao botao-claro">
+            Montar meu plano
           </Link>
         </div>
         <p className="js-revelar text-sm font-medium">{chamada.aviso}</p>

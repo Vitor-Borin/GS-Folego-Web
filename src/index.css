@@ -13,7 +13,7 @@
 
 @layer base {
   body {
-    @apply bg-papel font-texto text-tinta antialiased;
+    @apply bg-papel font-texto text-tinta antialiased print:bg-white;
   }
 
   ::selection {

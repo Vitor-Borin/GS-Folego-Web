@@ -87,7 +87,7 @@ const FormularioPonto = ({ formulario, ocupado, textoDoBotao, aoEnviar, children
               type="checkbox"
               checked={formulario.empresta}
               onChange={(evento) => formulario.setEmpresta(evento.target.checked)}
-              className="size-5 accent-tinta"
+              className="size-5 shrink-0 accent-tinta"
             />
             <span className="font-medium">Tem bateria reserva para emprestar</span>
           </label>
@@ -96,7 +96,7 @@ const FormularioPonto = ({ formulario, ocupado, textoDoBotao, aoEnviar, children
               type="checkbox"
               checked={formulario.ativo}
               onChange={(evento) => formulario.setAtivo(evento.target.checked)}
-              className="size-5 accent-tinta"
+              className="size-5 shrink-0 accent-tinta"
             />
             <span className="font-medium">O ponto está na rede agora</span>
           </label>

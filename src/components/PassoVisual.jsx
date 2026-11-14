@@ -59,7 +59,7 @@ const PassoVisual = ({ tipo }) => {
             </span>
             <span className="dado">Bela Vista</span>
           </p>
-          <p className="subtitulo text-2xl md:text-3xl">Tomada para concentrador de oxigênio</p>
+          <p className="subtitulo text-2xl md:text-3xl">Bateria carregada para o nobreak</p>
           <p className="flex items-baseline justify-between gap-4 border-t border-tinta/10 pt-5">
             <span className="dado">Bateria restante</span>
             <span className="titulo text-5xl tabular-nums">1h47</span>
@@ -70,17 +70,17 @@ const PassoVisual = ({ tipo }) => {
       {tipo === "ponto" && (
         <div className="grid w-full max-w-sm rotate-2 gap-5 rounded-3xl bg-papel p-5 md:p-6">
           <p className="flex items-center justify-between gap-3">
-            <span className="dado">Comércio · Bela Vista</span>
+            <span className="dado">Condomínio · Bela Vista</span>
             <span className="block size-2.5 rounded-full bg-destaque" />
           </p>
-          <p className="subtitulo text-2xl md:text-3xl">Padaria Estrela do Bixiga</p>
+          <p className="subtitulo text-2xl md:text-3xl">Condomínio Mirante</p>
           <p className="grid gap-1 border-t border-tinta/10 pt-4">
             <span className="font-medium">Com energia, confirmado há 20 min</span>
-            <span className="dado">3 tomadas livres</span>
+            <span className="dado">Gerador · empresta bateria</span>
           </p>
           <span className="botao botao-tinta justify-self-start">
             <PiCheckBold size={16} />
-            Estou a caminho
+            Levo a bateria
           </span>
         </div>
       )}

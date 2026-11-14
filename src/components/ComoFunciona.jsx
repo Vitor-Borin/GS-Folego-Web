@@ -3,7 +3,7 @@ import PassoVisual from "./PassoVisual"
 import { comoFunciona } from "../data/conteudo"
 import usePassos from "../hooks/usePassos"
 
-const cores = ["bg-white text-tinta", "bg-destaque text-tinta", "bg-tinta text-white", "bg-white text-tinta"]
+const cores = ["bg-destaque text-tinta", "bg-white text-tinta", "bg-tinta text-white", "bg-white text-tinta"]
 
 const paradas = ["md:top-24", "md:top-28", "md:top-32", "md:top-36"]
 
