@@ -9,6 +9,7 @@ import RedePage from "./pages/RedePage.jsx"
 import NovoPontoPage from "./pages/NovoPontoPage.jsx"
 import PontoPage from "./pages/PontoPage.jsx"
 import PedidosPage from "./pages/PedidosPage.jsx"
+import PlanoPage from "./pages/PlanoPage.jsx"
 import PageNotFound from "./pages/PageNotFound.jsx"
 
 const router = createBrowserRouter([
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
       { path: "rede/novo", element: <NovoPontoPage /> },
       { path: "rede/:id", element: <PontoPage /> },
       { path: "pedidos", element: <PedidosPage /> },
+      { path: "plano", element: <PlanoPage /> },
       { path: "*", element: <PageNotFound /> },
     ],
   },

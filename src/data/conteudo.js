@@ -1,7 +1,7 @@
 export const projeto = {
   nome: "Fôlego",
   linhasDoTitulo: ["Quando a luz cai,", "a ajuda mora ao lado."],
-  apoio: "Uma rede de vizinhos para quem depende de energia elétrica para respirar.",
+  apoio: "O plano de apagão do bairro, para quem depende de energia elétrica para respirar.",
   cidade: "São Paulo, SP",
   edicao: "Global Solution 2026.2",
 }
@@ -40,31 +40,31 @@ export const citacao = {
   destaque: "do meu vizinho.",
   autoria: "Mãe de um paciente em ventilação mecânica, no apagão de outubro de 2024",
   fonte: "Band, 14/10/2024",
-  fecho: "A ajuda existia, a uma casa de distância. Faltava saber que ela estava ali.",
+  fecho: "Ela levou as baterias do aparelho para carregar na casa ao lado. A ajuda existia. Faltava um plano.",
 }
 
 export const comoFunciona = {
   etiqueta: "Como funciona",
-  linhas: ["Do apagão à tomada,", "em quatro passos."],
+  linhas: ["Do plano à bateria cheia,", "em quatro passos."],
   passos: [
     {
-      titulo: "A luz cai",
-      texto: "Um aparelho pequeno, ligado na mesma tomada do respirador, percebe na hora. Ele funciona mesmo sem internet.",
-      visual: "visor",
-    },
-    {
-      titulo: "Ele conta o tempo",
-      texto: "Lê a bateria, calcula quantos minutos sobram e mostra no visor. Em minutos, não em porcentagem.",
+      titulo: "Antes, o plano",
+      texto: "Com calma, a família calcula quanto a bateria dura e imprime o plano: os pontos com energia do bairro e os telefones. Sem internet, o papel continua valendo.",
       visual: "conta",
     },
     {
-      titulo: "Pede ajuda",
-      texto: "Com menos de duas horas de bateria, toca um alarme e abre um pedido na rede do bairro.",
+      titulo: "A luz cai",
+      texto: "Um aparelho pequeno, ligado na mesma tomada do respirador, percebe na hora e começa a contar o tempo. Ele apita sem precisar de internet.",
+      visual: "visor",
+    },
+    {
+      titulo: "A fila anda pelo relógio",
+      texto: "Com menos de duas horas de bateria, o pedido entra na fila do bairro. Quem tem menos tempo fica em primeiro.",
       visual: "pedido",
     },
     {
-      titulo: "A rede responde",
-      texto: "O site mostra quem está com energia por perto. Um vizinho aceita, e a família sai de casa sabendo para onde ir.",
+      titulo: "A bateria vai até a casa",
+      texto: "Quem ajuda leva uma bateria carregada e traz a vazia para recarregar no ponto. A pessoa que respira por aparelho não precisa sair de casa.",
       visual: "ponto",
     },
   ],
@@ -76,10 +76,24 @@ export const simulador = {
   texto: "É a mesma fórmula que roda no aparelho, no programa em Python e no relatório de Matemática.",
   nota: "Os 290 W são de concentradores domésticos citados em fontes. Confira o manual do seu aparelho.",
   mensagens: {
-    reserva: "Com duas horas ou mais, dá tempo de chegar a um ponto com folga.",
-    alerta: "Menos de duas horas. O aparelho toca o alarme e abre um pedido na rede.",
+    reserva: "Com duas horas ou mais, dá tempo de a bateria reserva chegar com folga.",
+    alerta: "Menos de duas horas. É a hora de pedir ajuda: o pedido entra na fila do bairro.",
     critico: "Menos de trinta minutos. O alarme fica contínuo. Em emergência, ligue 192.",
   },
+}
+
+export const plano = {
+  rotulo: "Antes do apagão",
+  titulo: "Meu plano de apagão",
+  texto: "Monte agora, com calma, e deixe impresso em casa. No dia em que a luz cair, o papel funciona sem internet.",
+  passos: [
+    "Anote a hora em que a luz caiu. O relógio da bateria começa aí.",
+    "Ligue para um ponto desta lista ou abra um pedido no site, se houver sinal no celular.",
+    "Combine quem traz a bateria carregada e quem leva a vazia para recarregar.",
+    "Com menos de 30 minutos de bateria e sem ajuda a caminho, ligue 192.",
+  ],
+  emergencia: "Em emergência, ligue 192.",
+  aviso: "Gerador só em área aberta: a fumaça em lugar fechado mata. Este plano organiza a ajuda entre vizinhos e não substitui o SAMU nem a distribuidora. Projeto acadêmico, com dados simulados.",
 }
 
 export const assinatura = {
@@ -92,23 +106,23 @@ export const quemFaz = {
   papeis: [
     {
       titulo: "Quem cuida",
-      texto: "Vê quanto tempo de bateria sobra, pede uma tomada e encontra um ponto com energia no bairro.",
-      acao: "Pedir tomada",
-      para: "/pedidos",
+      texto: "Monta o plano antes. No apagão, abre um pedido com os minutos de bateria que sobram.",
+      acao: "Montar meu plano",
+      para: "/plano",
       foto: 32,
     },
     {
       titulo: "Quem tem energia",
-      texto: "Gerador, nobreak, placa solar ou a bateria do carro. Cadastra o que tem e atende os pedidos de perto.",
-      acao: "Oferecer minha tomada",
+      texto: "Gerador, placa solar, nobreak ou bateria reserva. Cadastra o ponto e diz se pode emprestar uma bateria.",
+      acao: "Cadastrar meu ponto",
       para: "/rede/novo",
       foto: 23,
     },
     {
-      titulo: "Quem abre as portas",
-      texto: "Padaria, igreja, condomínio, posto de saúde. Confirma que está com energia e quantas tomadas tem livres.",
-      acao: "Confirmar um ponto",
-      para: "/rede",
+      titulo: "Quem leva e traz",
+      texto: "Voluntário ou equipe de saúde do bairro. Atende a fila na ordem do relógio: leva a bateria cheia e traz a vazia.",
+      acao: "Ver a fila",
+      para: "/pedidos",
       foto: 1,
     },
   ],
@@ -124,11 +138,11 @@ export const porDentro = {
   linhas: ["Uma ideia,", "sete disciplinas."],
   texto: "O mesmo problema atravessa todas as entregas da Global Solution. Os números são os mesmos em todas elas.",
   partes: [
-    { nome: "Edge Computing", faz: "O aparelho com ESP32 que mede a bateria e decide sozinho." },
-    { nome: "Python", faz: "A central que simula o apagão e monta a fila de prioridade." },
+    { nome: "Edge Computing", faz: "O aparelho com ESP32 que percebe a queda de luz, conta o tempo e decide sozinho." },
+    { nome: "Python", faz: "A central que simula o apagão e monta a fila pelo tempo de bateria." },
     { nome: "Matemática", faz: "O modelo da bateria descarregando e da cidade voltando a ter luz." },
-    { nome: "Front-end e Web", faz: "Esta página e a rede de pontos e pedidos." },
-    { nome: "Experiência", faz: "A jornada de quem cuida, do alarme até a tomada." },
+    { nome: "Front-end e Web", faz: "Esta página, o plano, a rede de pontos e a fila de pedidos." },
+    { nome: "Experiência", faz: "A jornada de quem cuida, do plano até a bateria cheia." },
     { nome: "Pitch", faz: "A história contada em três minutos." },
   ],
   ods: [
@@ -145,6 +159,14 @@ export const perguntas = {
   linhas: ["O que todo mundo", "pergunta primeiro."],
   itens: [
     {
+      pergunta: "E se a internet cair junto com a luz?",
+      resposta: "Por isso o plano é feito antes e fica impresso em casa, com os pontos e os telefones. O aparelho apita sem internet. O site ajuda enquanto houver sinal.",
+    },
+    {
+      pergunta: "A pessoa precisa ir até o ponto de energia?",
+      resposta: "Quase nunca. O mais comum é a bateria andar: alguém traz uma carregada e leva a vazia para recarregar. Ir até o ponto é só para quem consegue se deslocar.",
+    },
+    {
       pergunta: "O Fôlego substitui o SAMU ou a distribuidora?",
       resposta: "Não. Ele organiza a ajuda entre vizinhos enquanto a energia não volta. Em emergência, ligue 192.",
     },
@@ -154,15 +176,11 @@ export const perguntas = {
     },
     {
       pergunta: "O vizinho fica sabendo do problema de saúde de quem pede ajuda?",
-      resposta: "Não. O pedido mostra só o necessário, como “preciso de uma tomada por duas horas”. Dado de saúde é sensível e fica de fora.",
-    },
-    {
-      pergunta: "Por que um ponto deixa de aparecer como confirmado?",
-      resposta: "Porque a confirmação vale por duas horas. Numa emergência, informação velha é pior do que nenhuma.",
+      resposta: "Não. O pedido mostra só o necessário, como “preciso de uma bateria carregada”. Dado de saúde é sensível e fica de fora.",
     },
     {
       pergunta: "Como o aparelho sabe quanto tempo falta?",
-      resposta: "Ele mede a energia que resta na bateria, desconta a perda do inversor e divide pelo consumo do respirador. É a conta do simulador desta página.",
+      resposta: "Ele percebe que a luz caiu e passa a contar o tempo. A duração da bateria vem da conta do simulador desta página, com margem de segurança.",
     },
     {
       pergunta: "Posso ligar um gerador dentro de casa?",
@@ -184,6 +202,7 @@ export const equipe = [
 
 export const linksDoMenu = [
   { para: "/", rotulo: "Início" },
+  { para: "/plano", rotulo: "Meu plano" },
   { para: "/rede", rotulo: "Rede" },
   { para: "/pedidos", rotulo: "Pedidos" },
 ]

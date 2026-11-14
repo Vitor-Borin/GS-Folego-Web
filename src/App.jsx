@@ -7,7 +7,7 @@ const App = () => {
     <>
       <a
         href="#conteudo"
-        className="fixed left-3 top-3 z-[60] -translate-y-[300%] bg-destaque px-4 py-3 text-sm font-bold text-tinta focus:translate-y-0"
+        className="fixed left-3 top-3 z-[60] -translate-y-[300%] rounded-full bg-destaque px-4 py-3 text-sm font-medium text-tinta focus:translate-y-0 print:hidden"
       >
         Pular para o conteúdo
       </a>

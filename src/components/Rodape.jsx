@@ -5,7 +5,7 @@ import { fotos } from "../data/fotos"
 
 const Rodape = () => {
   return (
-    <footer className="bg-tinta px-4 pb-10 pt-16 text-white md:px-10">
+    <footer className="bg-tinta px-4 pb-10 pt-16 text-white md:px-10 print:hidden">
       <div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)_minmax(0,0.7fr)]">
         <div className="grid content-start gap-4">
           <p className="flex items-center gap-3 text-3xl font-medium">

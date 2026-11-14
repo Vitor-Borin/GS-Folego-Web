@@ -11,7 +11,7 @@ const Menu = () => {
   useMenuRetratil()
 
   return (
-    <header className="js-menu fixed inset-x-3 top-3 z-50 md:inset-x-6 md:top-5">
+    <header className="js-menu fixed inset-x-3 top-3 z-50 md:inset-x-6 md:top-5 print:hidden">
       <nav aria-label="Principal" className="flex items-center justify-between gap-3">
         <Link
           to="/"
