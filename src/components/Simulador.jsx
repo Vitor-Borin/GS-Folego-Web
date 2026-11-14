@@ -59,7 +59,7 @@ const Simulador = () => {
                   }`}
                 >
                   <span className="font-medium">{item.rotulo}</span>
-                  <span className="text-xs opacity-70">{item.faixa}</span>
+                  <span className="whitespace-nowrap text-xs opacity-70">{item.faixa}</span>
                 </li>
               ))}
             </ul>

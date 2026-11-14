@@ -26,8 +26,8 @@ export const bateriasDeExemplo = [
 export const aparelhosDeExemplo = [{ rotulo: "Concentrador de oxigênio", valor: 290 }]
 
 export const estadosDaBateria = [
-  { valor: "critico", rotulo: "Crítico", faixa: "menos de 30 min" },
-  { valor: "alerta", rotulo: "Alerta", faixa: "menos de 2 h" },
+  { valor: "critico", rotulo: "Crítico", faixa: "até 30 min" },
+  { valor: "alerta", rotulo: "Alerta", faixa: "até 2 h" },
   { valor: "reserva", rotulo: "Reserva", faixa: "2 h ou mais" },
 ]
 

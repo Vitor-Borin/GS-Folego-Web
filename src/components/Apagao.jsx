@@ -49,18 +49,15 @@ const Apagao = () => {
                     />
                   </svg>
 
-                  <p className="absolute left-3 top-2 text-sm text-white/70">2,2 milhões</p>
+                  <p className="absolute -top-6 right-0 text-sm text-white/70">2,2 milhões</p>
                   <p className="absolute bottom-[9%] right-0 text-sm text-white/70">158 mil</p>
 
-                  <div
-                    className="js-marco absolute left-[10%] grid -translate-y-1/2 justify-items-start"
-                    style={{ top: `${(1 - semLuzEm12Horas) * 100}%` }}
-                  >
-                    <span className="-ml-1.5 block size-3 rounded-full bg-white ring-4 ring-white/25" />
-                    <span className="ml-4 -mt-3 rounded-xl bg-white px-3 py-2 text-sm leading-tight text-tinta">
+                  <div className="js-marco absolute left-[10%]" style={{ top: `${(1 - semLuzEm12Horas) * 100}%` }}>
+                    <span className="absolute -left-1.5 -top-1.5 block size-3 rounded-full bg-white ring-4 ring-white/25" />
+                    <p className="absolute bottom-3 left-3 w-max rounded-xl bg-white px-3 py-2 text-sm leading-tight text-tinta">
                       <strong className="block font-medium">12 horas: a bateria acabou</strong>
                       {porCento(semLuzEm12Horas)} ainda sem luz
-                    </span>
+                    </p>
                   </div>
                 </div>
 

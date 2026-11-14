@@ -10,10 +10,10 @@ const Perguntas = () => {
       <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)] lg:gap-16">
         <div className="js-revelar grid content-start justify-items-start gap-5 lg:sticky lg:top-28 lg:self-start">
           <p className="etiqueta">{perguntas.etiqueta}</p>
-          <h2 className="titulo text-[clamp(2.4rem,4.4vw,4.25rem)]">
+          <h2 className="titulo text-[clamp(2.2rem,3.5vw,3.5rem)]">
             {perguntas.linhas.map((linha) => (
-              <span key={linha} className="block">
-                {linha}
+              <span key={linha} className="lg:block">
+                {`${linha} `}
               </span>
             ))}
           </h2>

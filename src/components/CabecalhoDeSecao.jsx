@@ -5,8 +5,8 @@ const CabecalhoDeSecao = ({ etiqueta, linhas, texto }) => {
         <p className="etiqueta">{etiqueta}</p>
         <h2 className="titulo text-[clamp(2.4rem,5.4vw,5.25rem)]">
           {linhas.map((linha) => (
-            <span key={linha} className="block">
-              {linha}
+            <span key={linha} className="md:block">
+              {`${linha} `}
             </span>
           ))}
         </h2>

@@ -8,8 +8,8 @@ const ChamadaFinal = () => {
       <div className="mx-auto grid max-w-[96rem] justify-items-center gap-10 rounded-[2rem] bg-destaque px-5 py-24 text-center md:rounded-[3rem] md:py-40">
         <h2 className="js-revelar titulo max-w-5xl text-[clamp(2.4rem,6vw,6rem)]">
           {chamada.linhas.map((linha) => (
-            <span key={linha} className="block">
-              {linha}
+            <span key={linha} className="md:block">
+              {`${linha} `}
             </span>
           ))}
         </h2>
