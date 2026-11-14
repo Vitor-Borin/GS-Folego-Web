@@ -89,7 +89,7 @@ export const plano = {
   passos: [
     "Anote a hora em que a luz caiu. O relógio da bateria começa aí.",
     "Ligue para um ponto desta lista ou abra um pedido no site, se houver sinal no celular.",
-    "Combine quem traz a bateria carregada e quem leva a vazia para recarregar.",
+    "Combine quem traz a bateria carregada. A vazia só sai de casa depois que a carregada estiver funcionando no aparelho.",
     "Com menos de 30 minutos de bateria e sem ajuda a caminho, ligue 192.",
   ],
   emergencia: "Em emergência, ligue 192.",
@@ -165,6 +165,10 @@ export const perguntas = {
     {
       pergunta: "A pessoa precisa ir até o ponto de energia?",
       resposta: "Quase nunca. O mais comum é a bateria andar: alguém traz uma carregada e leva a vazia para recarregar. Ir até o ponto é só para quem consegue se deslocar.",
+    },
+    {
+      pergunta: "Trocar a bateria tem risco?",
+      resposta: "Tem, e por isso a troca é combinada antes do apagão. Ninguém abre o aparelho: a bateria emprestada tem tomada comum, e ele é ligado nela como na parede. Confira no manual ou com a equipe de saúde se essa bateria aguenta o aparelho e se ele pode ficar alguns segundos desligado. E a bateria vazia só sai de casa depois que a carregada estiver funcionando.",
     },
     {
       pergunta: "O Fôlego substitui o SAMU ou a distribuidora?",

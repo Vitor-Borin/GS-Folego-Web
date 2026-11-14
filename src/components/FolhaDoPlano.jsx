@@ -13,8 +13,8 @@ const FolhaDoPlano = ({ minutos, estado, bairro, pontos }) => {
   const folga = minutos - LIMITE_ALERTA_MIN
 
   return (
-    <article className="folha grid gap-8 [print-color-adjust:exact] print:rounded-none print:p-0">
-      <header className="flex flex-wrap items-center justify-between gap-3 border-b border-tinta/10 pb-6">
+    <article className="folha grid gap-8 [print-color-adjust:exact] print:gap-5 print:rounded-none print:p-0">
+      <header className="flex flex-wrap items-center justify-between gap-3 border-b border-tinta/10 pb-6 print:pb-4">
         <p className="flex items-center gap-2 text-xl font-medium">
           <Marca />
           Plano de apagão
@@ -24,7 +24,7 @@ const FolhaDoPlano = ({ minutos, estado, bairro, pontos }) => {
         </p>
       </header>
 
-      <section className="grid gap-3 md:grid-cols-2">
+      <section className="grid gap-3 md:grid-cols-2 print:grid-cols-2">
         <div className={`grid content-between gap-6 rounded-3xl p-6 transition-colors duration-500 ${coresDoEstado[estado]}`}>
           <p className="flex items-center justify-between gap-3 text-sm font-medium">
             <span>A bateria dura cerca de</span>
@@ -44,9 +44,9 @@ const FolhaDoPlano = ({ minutos, estado, bairro, pontos }) => {
         </div>
       </section>
 
-      <section className="grid gap-4">
+      <section className="grid gap-4 print:gap-3">
         <h2 className="subtitulo text-2xl">Quando a luz cair</h2>
-        <ol className="grid gap-3">
+        <ol className="grid gap-3 print:gap-2">
           {plano.passos.map((passo, indice) => (
             <li key={passo} className="grid grid-cols-[2rem_minmax(0,1fr)] items-start gap-3">
               <span className="grid size-8 place-items-center rounded-full bg-tinta text-sm font-medium text-white">
@@ -58,7 +58,7 @@ const FolhaDoPlano = ({ minutos, estado, bairro, pontos }) => {
         </ol>
       </section>
 
-      <section className="grid gap-4">
+      <section className="grid gap-4 print:gap-3">
         <h2 className="subtitulo text-2xl">
           {bairro === "" ? "Pontos com energia do bairro" : `Pontos com energia em ${bairro}`}
         </h2>
@@ -72,11 +72,11 @@ const FolhaDoPlano = ({ minutos, estado, bairro, pontos }) => {
         )}
 
         {pontos.length > 0 && (
-          <ul className="grid gap-3">
+          <ul className="grid gap-3 print:gap-2">
             {pontos.map((ponto) => (
               <li
                 key={ponto.id}
-                className="grid gap-3 rounded-2xl bg-papel p-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-center"
+                className="grid gap-3 rounded-2xl bg-papel p-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-center print:break-inside-avoid print:grid-cols-[minmax(0,1fr)_auto] print:items-center print:p-4"
               >
                 <span className="grid gap-1">
                   <span className="text-lg font-medium">{ponto.nome}</span>
@@ -93,7 +93,7 @@ const FolhaDoPlano = ({ minutos, estado, bairro, pontos }) => {
         )}
       </section>
 
-      <footer className="grid gap-2 border-t border-tinta/10 pt-6 text-sm">
+      <footer className="grid gap-2 border-t border-tinta/10 pt-6 text-sm print:break-inside-avoid print:pt-4">
         <p className="font-medium">{plano.emergencia}</p>
         <p className="text-tinta/70">{plano.aviso}</p>
       </footer>
