@@ -1,5 +1,5 @@
 import Campo from "./Campo"
-import { tiposDePonto } from "../data/opcoes"
+import { fontesDeEnergia, tiposDePonto } from "../data/opcoes"
 
 const FormularioPonto = ({ formulario, ocupado, textoDoBotao, aoEnviar, children }) => {
   const enviar = (evento) => {
@@ -41,6 +41,23 @@ const FormularioPonto = ({ formulario, ocupado, textoDoBotao, aoEnviar, children
           aoMudar={formulario.setEndereco}
           erro={formulario.erros.endereco}
         />
+        <Campo
+          id="ponto-telefone"
+          rotulo="Telefone"
+          valor={formulario.telefone}
+          aoMudar={formulario.setTelefone}
+          erro={formulario.erros.telefone}
+          dica="Vai para o plano impresso das famílias."
+        />
+        <Campo
+          id="ponto-fonte"
+          rotulo="De onde vem a energia"
+          tipo="lista"
+          opcoes={fontesDeEnergia}
+          valor={formulario.fonte}
+          aoMudar={formulario.setFonte}
+          erro={formulario.erros.fonte}
+        />
       </div>
 
       <Campo
@@ -64,15 +81,26 @@ const FormularioPonto = ({ formulario, ocupado, textoDoBotao, aoEnviar, children
           dica="Quantos aparelhos dá para ligar ao mesmo tempo."
         />
 
-        <label className="flex min-h-11 cursor-pointer items-center gap-3 md:mt-7">
-          <input
-            type="checkbox"
-            checked={formulario.ativo}
-            onChange={(evento) => formulario.setAtivo(evento.target.checked)}
-            className="size-5 accent-tinta"
-          />
-          <span className="font-medium">O ponto está na rede agora</span>
-        </label>
+        <div className="grid gap-1 md:mt-7">
+          <label className="flex min-h-11 cursor-pointer items-center gap-3">
+            <input
+              type="checkbox"
+              checked={formulario.empresta}
+              onChange={(evento) => formulario.setEmpresta(evento.target.checked)}
+              className="size-5 accent-tinta"
+            />
+            <span className="font-medium">Tem bateria reserva para emprestar</span>
+          </label>
+          <label className="flex min-h-11 cursor-pointer items-center gap-3">
+            <input
+              type="checkbox"
+              checked={formulario.ativo}
+              onChange={(evento) => formulario.setAtivo(evento.target.checked)}
+              className="size-5 accent-tinta"
+            />
+            <span className="font-medium">O ponto está na rede agora</span>
+          </label>
+        </div>
       </div>
 
       <div className="flex flex-wrap items-center gap-4 border-t border-tinta/10 pt-6">

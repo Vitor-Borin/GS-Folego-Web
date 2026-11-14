@@ -14,7 +14,7 @@ import {
   rotuloDoTipo,
   situacaoCurta,
   situacaoDoPonto,
-  textoDasVagas,
+  textoDaOferta,
   textoDoTempo,
 } from "../utils/regras"
 
@@ -55,7 +55,7 @@ const PontoPage = () => {
           <CabecalhoPagina
             rotulo={`${rotuloDoTipo(ponto.tipo)} · ${ponto.bairro}`}
             titulo={ponto.nome}
-            texto={ponto.endereco}
+            texto={`${ponto.endereco} · ${ponto.telefone}`}
           >
             <Link to="/rede" className="botao botao-linha">
               <PiArrowLeft size={18} aria-hidden="true" />
@@ -94,7 +94,7 @@ const PontoPage = () => {
                   rotulo={`${rotuloDoTipo(ponto.tipo)} · ${ponto.bairro}`}
                   nome={ponto.nome}
                   situacao={situacaoDoPonto(ponto, agora)}
-                  vagas={textoDasVagas(ponto.vagas)}
+                  vagas={textoDaOferta(ponto)}
                   aceso={confirmadoHaPouco(ponto, agora)}
                 />
               </div>

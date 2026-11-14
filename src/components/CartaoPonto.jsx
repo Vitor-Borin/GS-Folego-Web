@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Link } from "react-router"
 import { PiCheckBold, PiPencilSimple, PiTrash } from "react-icons/pi"
-import { confirmadoHaPouco, rotuloDoTipo, situacaoCurta, situacaoDoPonto, textoDasVagas } from "../utils/regras"
+import { confirmadoHaPouco, rotuloDoTipo, situacaoCurta, situacaoDoPonto, textoDaOferta } from "../utils/regras"
 
 const CartaoPonto = ({ ponto, agora, ocupado, aoConfirmar, aoApagar }) => {
   const [querApagar, setQuerApagar] = useState(false)
@@ -35,7 +35,7 @@ const CartaoPonto = ({ ponto, agora, ocupado, aoConfirmar, aoApagar }) => {
         <div className="grid gap-4 border-t border-tinta/10 pt-4">
           <p className="grid gap-1">
             <span className="font-medium">{situacaoDoPonto(ponto, agora)}</span>
-            <span className="dado">{textoDasVagas(ponto.vagas)}</span>
+            <span className="dado">{textoDaOferta(ponto)}</span>
           </p>
 
           {!querApagar && (

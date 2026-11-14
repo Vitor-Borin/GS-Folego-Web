@@ -7,7 +7,7 @@ import FormularioPonto from "../components/FormularioPonto"
 import { pontoVazio } from "../data/opcoes"
 import useFormularioPonto from "../hooks/useFormularioPonto"
 import usePontos from "../hooks/usePontos"
-import { pontoRepetido, rotuloDoTipo, textoDasVagas } from "../utils/regras"
+import { pontoRepetido, rotuloDoTipo, textoDaOferta } from "../utils/regras"
 
 const NovoPontoPage = () => {
   const navigate = useNavigate()
@@ -43,8 +43,8 @@ const NovoPontoPage = () => {
       <div className="grid gap-10 lg:sticky lg:top-32">
         <CabecalhoPagina
           rotulo="Rede do bairro"
-          titulo="Oferecer uma tomada"
-          texto="Gerador, nobreak, placa solar ou a bateria do carro. Leva um minuto, e o ponto já aparece para o bairro."
+          titulo="Cadastrar um ponto"
+          texto="Gerador, placa solar, nobreak ou bateria reserva. Cadastre agora, antes do apagão: é assim que o ponto entra no plano das famílias do bairro."
           compacto
         />
 
@@ -55,7 +55,11 @@ const NovoPontoPage = () => {
               rotulo={`${tipoDaPrevia} · ${bairroDaPrevia}`}
               nome={nomeDaPrevia}
               situacao={formulario.ativo ? "Com energia, confirmado agora" : "Fora da rede no momento"}
-              vagas={textoDasVagas(formulario.vagas === "" ? 0 : formulario.vagas)}
+              vagas={textoDaOferta({
+                fonte: formulario.fonte,
+                vagas: formulario.vagas === "" ? 0 : formulario.vagas,
+                empresta: formulario.empresta,
+              })}
               aceso={formulario.ativo}
             />
           </div>

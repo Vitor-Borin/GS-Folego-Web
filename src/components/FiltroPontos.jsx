@@ -1,8 +1,9 @@
+import { PiBatteryCharging } from "react-icons/pi"
 import { tiposDePonto } from "../data/opcoes"
 
 const todosOsTipos = [{ valor: "todos", rotulo: "Todos" }].concat(tiposDePonto)
 
-const FiltroPontos = ({ busca, aoBuscar, tipo, aoEscolherTipo }) => {
+const FiltroPontos = ({ busca, aoBuscar, tipo, aoEscolherTipo, soEmprestam, aoAlternarEmprestimo }) => {
   return (
     <div className="grid gap-3 md:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] md:items-center">
       <div>
@@ -34,6 +35,19 @@ const FiltroPontos = ({ busca, aoBuscar, tipo, aoEscolherTipo }) => {
             </button>
           </li>
         ))}
+        <li>
+          <button
+            type="button"
+            aria-pressed={soEmprestam}
+            onClick={aoAlternarEmprestimo}
+            className={`flex min-h-11 cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors duration-200 ${
+              soEmprestam ? "bg-destaque" : "bg-white hover:bg-tinta/10"
+            }`}
+          >
+            <PiBatteryCharging size={18} aria-hidden="true" />
+            Empresta bateria
+          </button>
+        </li>
       </ul>
     </div>
   )

@@ -9,14 +9,15 @@ import ListaPontos from "../components/ListaPontos"
 import useEntradaDaLista from "../hooks/useEntradaDaLista"
 import useListaAnimada, { esquecerPosicoes, guardarPosicoes } from "../hooks/useListaAnimada"
 import usePontos from "../hooks/usePontos"
-import { contarConfirmados, filtrarPontos, ordenarPontos, somarVagas } from "../utils/regras"
+import { contarConfirmados, contarQueEmprestam, filtrarPontos, ordenarPontos, somarVagas } from "../utils/regras"
 
 const RedePage = () => {
   const { pontos, carregando, erro, ocupado, aviso, agora, confirmarPonto, apagarPonto } = usePontos()
   const [busca, setBusca] = useState("")
   const [tipo, setTipo] = useState("todos")
+  const [soEmprestam, setSoEmprestam] = useState(false)
 
-  const pontosVisiveis = ordenarPontos(filtrarPontos(pontos, busca, tipo), agora)
+  const pontosVisiveis = ordenarPontos(filtrarPontos(pontos, busca, tipo, soEmprestam), agora)
   const assinatura = pontosVisiveis.map((ponto) => ponto.id).join(",")
 
   useEntradaDaLista(!carregando && !erro)
@@ -30,6 +31,11 @@ const RedePage = () => {
   const aoEscolherTipo = (valor) => {
     guardarPosicoes()
     setTipo(valor)
+  }
+
+  const aoAlternarEmprestimo = () => {
+    guardarPosicoes()
+    setSoEmprestam(!soEmprestam)
   }
 
   const aoConfirmar = (ponto) => {
@@ -55,7 +61,7 @@ const RedePage = () => {
       <CabecalhoPagina
         rotulo="Rede do bairro"
         titulo="Pontos com energia"
-        texto="Padarias, condomínios, igrejas e casas que oferecem uma tomada quando a luz cai. Quem está no ponto confirma, e a confirmação vale por duas horas."
+        texto="Padarias, prédios, igrejas e casas que têm energia quando a luz cai: tomada, recarga ou bateria para emprestar. Quem está no ponto confirma, e a confirmação vale por duas horas."
       >
         <Link to="/rede/novo" className="botao botao-tinta">
           <PiPlus size={18} aria-hidden="true" />
@@ -75,13 +81,21 @@ const RedePage = () => {
 
       {!carregando && !erro && (
         <>
-          <dl className="grid grid-cols-3 gap-3">
+          <dl className="grid grid-cols-2 gap-3 md:grid-cols-4">
             <Indicador valor={pontos.length} rotulo="pontos na rede" />
             <Indicador valor={contarConfirmados(pontos, agora)} rotulo="com energia agora" destaque />
             <Indicador valor={somarVagas(pontos, agora)} rotulo="tomadas livres" />
+            <Indicador valor={contarQueEmprestam(pontos)} rotulo="emprestam bateria" />
           </dl>
 
-          <FiltroPontos busca={busca} aoBuscar={aoBuscar} tipo={tipo} aoEscolherTipo={aoEscolherTipo} />
+          <FiltroPontos
+            busca={busca}
+            aoBuscar={aoBuscar}
+            tipo={tipo}
+            aoEscolherTipo={aoEscolherTipo}
+            soEmprestam={soEmprestam}
+            aoAlternarEmprestimo={aoAlternarEmprestimo}
+          />
 
           {aviso !== "" && (
             <p role="alert" className="aviso">

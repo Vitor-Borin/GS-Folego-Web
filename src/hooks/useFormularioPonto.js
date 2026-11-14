@@ -5,8 +5,11 @@ const useFormularioPonto = (pontoInicial) => {
   const [tipo, setTipo] = useState(pontoInicial.tipo)
   const [bairro, setBairro] = useState(pontoInicial.bairro)
   const [endereco, setEndereco] = useState(pontoInicial.endereco)
+  const [telefone, setTelefone] = useState(pontoInicial.telefone)
+  const [fonte, setFonte] = useState(pontoInicial.fonte)
   const [descricao, setDescricao] = useState(pontoInicial.descricao)
   const [vagas, setVagas] = useState(String(pontoInicial.vagas))
+  const [empresta, setEmpresta] = useState(pontoInicial.empresta)
   const [ativo, setAtivo] = useState(pontoInicial.ativo)
   const [erros, setErros] = useState({})
 
@@ -34,6 +37,16 @@ const useFormularioPonto = (pontoInicial) => {
       valido = false
     }
 
+    if (telefone.trim().length < 8) {
+      novosErros.telefone = "Escreva um telefone com DDD."
+      valido = false
+    }
+
+    if (fonte === "") {
+      novosErros.fonte = "Escolha de onde vem a energia."
+      valido = false
+    }
+
     if (vagas.trim() === "" || isNaN(Number(vagas)) || Number(vagas) < 0 || Number(vagas) > 50) {
       novosErros.vagas = "Informe um número de 0 a 50."
       valido = false
@@ -55,8 +68,11 @@ const useFormularioPonto = (pontoInicial) => {
       tipo: tipo,
       bairro: bairro.trim(),
       endereco: endereco.trim(),
+      telefone: telefone.trim(),
+      fonte: fonte,
       descricao: descricao.trim(),
       vagas: Number(vagas),
+      empresta: empresta,
       ativo: ativo,
       atualizadoEm: new Date().toISOString(),
     }
@@ -71,10 +87,16 @@ const useFormularioPonto = (pontoInicial) => {
     setBairro,
     endereco,
     setEndereco,
+    telefone,
+    setTelefone,
+    fonte,
+    setFonte,
     descricao,
     setDescricao,
     vagas,
     setVagas,
+    empresta,
+    setEmpresta,
     ativo,
     setAtivo,
     erros,

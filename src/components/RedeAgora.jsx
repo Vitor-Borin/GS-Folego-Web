@@ -3,7 +3,7 @@ import { PiArrowRight } from "react-icons/pi"
 import CartaoResumo from "./CartaoResumo"
 import Estado from "./Estado"
 import { rede } from "../data/conteudo"
-import { confirmadoHaPouco, ordenarPontos, rotuloDoTipo, situacaoDoPonto, textoDasVagas } from "../utils/regras"
+import { confirmadoHaPouco, ordenarPontos, rotuloDoTipo, situacaoDoPonto, textoDaOferta } from "../utils/regras"
 
 const inclinacoes = ["md:-rotate-2", "md:translate-y-6 md:rotate-1", "md:-rotate-1"]
 
@@ -52,7 +52,7 @@ const RedeAgora = ({ pontos, carregando, erro, agora }) => {
                     rotulo={`${rotuloDoTipo(ponto.tipo)} · ${ponto.bairro}`}
                     nome={ponto.nome}
                     situacao={situacaoDoPonto(ponto, agora)}
-                    vagas={textoDasVagas(ponto.vagas)}
+                    vagas={textoDaOferta(ponto)}
                     aceso={confirmadoHaPouco(ponto, agora)}
                   />
                 </Link>
