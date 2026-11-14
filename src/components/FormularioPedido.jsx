@@ -1,5 +1,5 @@
 import Campo from "./Campo"
-import { prioridades } from "../data/opcoes"
+import { tiposDeAjuda } from "../data/opcoes"
 
 const FormularioPedido = ({ formulario, ocupado, aoEnviar }) => {
   const enviar = (evento) => {
@@ -10,12 +10,30 @@ const FormularioPedido = ({ formulario, ocupado, aoEnviar }) => {
   return (
     <form onSubmit={enviar} noValidate className="grid gap-3">
       <Campo
+        id="pedido-ajuda"
+        rotulo="Que ajuda você precisa?"
+        tipo="lista"
+        opcoes={tiposDeAjuda}
+        valor={formulario.ajuda}
+        aoMudar={formulario.setAjuda}
+        erro={formulario.erros.ajuda}
+      />
+      <Campo
+        id="pedido-minutos"
+        rotulo="Minutos de bateria que sobram"
+        tipo="numero"
+        valor={formulario.minutos}
+        aoMudar={formulario.setMinutos}
+        erro={formulario.erros.minutos}
+        dica="É o que define o lugar na fila."
+      />
+      <Campo
         id="pedido-titulo"
-        rotulo="Do que você precisa?"
+        rotulo="Resumo do pedido"
         valor={formulario.titulo}
         aoMudar={formulario.setTitulo}
         erro={formulario.erros.titulo}
-        dica="Em poucas palavras."
+        dica="Em poucas palavras, sem dado de saúde."
       />
       <Campo
         id="pedido-bairro"
@@ -23,15 +41,6 @@ const FormularioPedido = ({ formulario, ocupado, aoEnviar }) => {
         valor={formulario.bairro}
         aoMudar={formulario.setBairro}
         erro={formulario.erros.bairro}
-      />
-      <Campo
-        id="pedido-prioridade"
-        rotulo="Prioridade"
-        tipo="lista"
-        opcoes={prioridades}
-        valor={formulario.prioridade}
-        aoMudar={formulario.setPrioridade}
-        erro={formulario.erros.prioridade}
       />
       <Campo
         id="pedido-detalhe"

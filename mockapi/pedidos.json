@@ -1,29 +1,42 @@
 [
   {
     "id": "1",
-    "titulo": "Tomada para concentrador de oxigênio",
+    "titulo": "Nobreak do concentrador no fim",
     "bairro": "Bela Vista",
-    "detalhe": "Bateria com cerca de 40 minutos. Preciso de uma tomada por duas horas.",
-    "prioridade": "alta",
+    "detalhe": "Preciso de uma bateria carregada até a energia voltar.",
+    "ajuda": "emprestimo",
+    "minutos": 90,
     "status": "aberto",
     "minutosAtras": 12
   },
   {
     "id": "2",
-    "titulo": "Recarga de nobreak",
+    "titulo": "Duas baterias do respirador para recarregar",
     "bairro": "Cambuci",
-    "detalhe": "Nobreak de aspirador de secreção. Um vizinho já está a caminho.",
-    "prioridade": "media",
+    "detalhe": "Um vizinho já está levando as baterias até o posto de saúde.",
+    "ajuda": "recarga",
+    "minutos": 240,
     "status": "andamento",
     "minutosAtras": 48
   },
   {
     "id": "3",
-    "titulo": "Bateria de cadeira motorizada",
+    "titulo": "Bateria da cadeira motorizada",
     "bairro": "Liberdade",
-    "detalhe": "Resolvido na associação de moradores.",
-    "prioridade": "baixa",
+    "detalhe": "Recarregada na associação de moradores.",
+    "ajuda": "recarga",
+    "minutos": 300,
     "status": "resolvido",
     "minutosAtras": 300
+  },
+  {
+    "id": "4",
+    "titulo": "Aspirador sem bateria reserva",
+    "bairro": "Liberdade",
+    "detalhe": "A bateria interna está quase no fim.",
+    "ajuda": "tomada",
+    "minutos": 30,
+    "status": "aberto",
+    "minutosAtras": 8
   }
 ]

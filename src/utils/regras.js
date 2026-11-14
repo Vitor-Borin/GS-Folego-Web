@@ -1,4 +1,5 @@
-import { prioridades, statusDoPedido, tiposDePonto } from "../data/opcoes"
+import { estadosDaBateria, fontesDeEnergia, statusDoPedido, tiposDeAjuda, tiposDePonto } from "../data/opcoes"
+import { LIMITE_CRITICO_MIN } from "./autonomia"
 
 export const LIMITE_CONFIRMACAO_MIN = 120
 
@@ -36,6 +37,12 @@ export const rotuloDoTipo = (valor) => {
   return tipo ? tipo.rotulo : "Outro"
 }
 
+export const rotuloDaFonte = (valor) => {
+  const fonte = fontesDeEnergia.find((item) => item.valor === valor)
+
+  return fonte ? fonte.rotulo : "Energia"
+}
+
 export const situacaoDoPonto = (ponto, agora) => {
   if (!ponto.ativo) {
     return "Fora da rede no momento"
@@ -58,14 +65,25 @@ export const textoDasVagas = (vagas) => {
   return `${vagas} ${Number(vagas) === 1 ? "tomada livre" : "tomadas livres"}`
 }
 
-export const filtrarPontos = (pontos, busca, tipo) => {
+export const textoDaOferta = (ponto) => {
+  const partes = [rotuloDaFonte(ponto.fonte), textoDasVagas(ponto.vagas)]
+
+  if (ponto.empresta) {
+    partes.push("empresta bateria")
+  }
+
+  return partes.join(" · ")
+}
+
+export const filtrarPontos = (pontos, busca, tipo, soEmprestam) => {
   const termo = busca.trim().toLowerCase()
 
   return pontos.filter((ponto) => {
     const combinaComTipo = tipo === "todos" || ponto.tipo === tipo
+    const combinaComEmprestimo = !soEmprestam || ponto.empresta
     const texto = `${ponto.nome} ${ponto.bairro} ${ponto.endereco}`.toLowerCase()
 
-    return combinaComTipo && texto.includes(termo)
+    return combinaComTipo && combinaComEmprestimo && texto.includes(termo)
   })
 }
 
@@ -86,6 +104,10 @@ export const contarConfirmados = (pontos, agora) => {
   return pontos.filter((ponto) => confirmadoHaPouco(ponto, agora)).length
 }
 
+export const contarQueEmprestam = (pontos) => {
+  return pontos.filter((ponto) => ponto.empresta).length
+}
+
 export const somarVagas = (pontos, agora) => {
   return pontos.reduce((total, ponto) => {
     return confirmadoHaPouco(ponto, agora) ? total + Number(ponto.vagas) : total
@@ -103,19 +125,50 @@ export const pontoRepetido = (pontos, nome, bairro) => {
   return repetido !== undefined
 }
 
-export const rotuloDaPrioridade = (valor) => {
-  const prioridade = prioridades.find((item) => item.valor === valor)
+export const listarBairros = (pontos) => {
+  const nomes = pontos.map((ponto) => ponto.bairro)
 
-  return prioridade ? prioridade.rotulo : "Sem prioridade"
+  return nomes.filter((nome, indice) => nomes.indexOf(nome) === indice).toSorted()
 }
 
-const pesoDaPrioridade = (valor) => {
-  const prioridade = prioridades.find((item) => item.valor === valor)
+export const pontosDoBairro = (pontos, bairro) => {
+  return pontos
+    .filter((ponto) => ponto.bairro === bairro)
+    .toSorted((a, b) => {
+      const pesoA = a.empresta ? 1 : 0
+      const pesoB = b.empresta ? 1 : 0
 
-  return prioridade ? prioridade.peso : 0
+      if (pesoA !== pesoB) {
+        return pesoB - pesoA
+      }
+
+      return a.nome < b.nome ? -1 : 1
+    })
 }
 
-export const ordenarPedidos = (pedidos) => {
+export const rotuloDaAjuda = (valor) => {
+  const ajuda = tiposDeAjuda.find((item) => item.valor === valor)
+
+  return ajuda ? ajuda.rotulo : "Ajuda"
+}
+
+export const rotuloDoStatus = (valor) => {
+  const status = statusDoPedido.find((item) => item.valor === valor)
+
+  return status ? status.rotulo : "Sem status"
+}
+
+export const rotuloDoEstado = (valor) => {
+  const estado = estadosDaBateria.find((item) => item.valor === valor)
+
+  return estado ? estado.rotulo : ""
+}
+
+export const minutosRestantes = (pedido, agora) => {
+  return Math.max(0, Number(pedido.minutos) - minutosEntre(agora, pedido.criadoEm))
+}
+
+export const ordenarPedidos = (pedidos, agora) => {
   return pedidos.toSorted((a, b) => {
     const resolvidoA = a.status === "resolvido" ? 1 : 0
     const resolvidoB = b.status === "resolvido" ? 1 : 0
@@ -124,7 +177,7 @@ export const ordenarPedidos = (pedidos) => {
       return resolvidoA - resolvidoB
     }
 
-    const diferenca = pesoDaPrioridade(b.prioridade) - pesoDaPrioridade(a.prioridade)
+    const diferenca = minutosRestantes(a, agora) - minutosRestantes(b, agora)
 
     if (diferenca !== 0) {
       return diferenca
@@ -134,12 +187,16 @@ export const ordenarPedidos = (pedidos) => {
   })
 }
 
-export const rotuloDoStatus = (valor) => {
-  const status = statusDoPedido.find((item) => item.valor === valor)
-
-  return status ? status.rotulo : "Sem status"
-}
-
 export const contarPorStatus = (pedidos, status) => {
   return pedidos.filter((pedido) => pedido.status === status).length
+}
+
+export const contarNaFila = (pedidos) => {
+  return pedidos.filter((pedido) => pedido.status !== "resolvido").length
+}
+
+export const contarCriticos = (pedidos, agora) => {
+  return pedidos.filter((pedido) => {
+    return pedido.status !== "resolvido" && minutosRestantes(pedido, agora) < LIMITE_CRITICO_MIN
+  }).length
 }

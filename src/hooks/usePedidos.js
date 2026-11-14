@@ -22,6 +22,26 @@ const usePedidos = () => {
       })
   }, [])
 
+  const recarregar = () => {
+    setOcupado(true)
+    setAviso("")
+
+    return listarPedidos()
+      .then((dados) => {
+        setPedidos(dados)
+        setAgora(Date.now())
+        setOcupado(false)
+
+        return true
+      })
+      .catch(() => {
+        setAviso("Não foi possível atualizar a fila. Tente de novo.")
+        setOcupado(false)
+
+        return false
+      })
+  }
+
   const abrirPedido = (dados) => {
     setOcupado(true)
     setAviso("")
@@ -47,7 +67,8 @@ const usePedidos = () => {
       titulo: pedido.titulo,
       bairro: pedido.bairro,
       detalhe: pedido.detalhe,
-      prioridade: pedido.prioridade,
+      ajuda: pedido.ajuda,
+      minutos: pedido.minutos,
       status: status,
       criadoEm: pedido.criadoEm,
     }
@@ -58,6 +79,7 @@ const usePedidos = () => {
     return atualizarPedido(pedido.id, dados)
       .then((atualizado) => {
         setPedidos(pedidos.map((item) => (item.id === pedido.id ? atualizado : item)))
+        setAgora(Date.now())
         setOcupado(false)
 
         return true
@@ -89,7 +111,7 @@ const usePedidos = () => {
       })
   }
 
-  return { pedidos, carregando, erro, ocupado, aviso, agora, abrirPedido, mudarStatus, apagarPedido }
+  return { pedidos, carregando, erro, ocupado, aviso, agora, recarregar, abrirPedido, mudarStatus, apagarPedido }
 }
 
 export default usePedidos

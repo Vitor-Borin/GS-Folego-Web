@@ -6,10 +6,17 @@ export const tiposDePonto = [
   { valor: "servico", rotulo: "Serviço público" },
 ]
 
-export const prioridades = [
-  { valor: "alta", rotulo: "Alta", peso: 3 },
-  { valor: "media", rotulo: "Média", peso: 2 },
-  { valor: "baixa", rotulo: "Baixa", peso: 1 },
+export const fontesDeEnergia = [
+  { valor: "gerador", rotulo: "Gerador" },
+  { valor: "solar", rotulo: "Placa solar" },
+  { valor: "nobreak", rotulo: "Nobreak ou bateria" },
+  { valor: "carro", rotulo: "Bateria de carro" },
+]
+
+export const tiposDeAjuda = [
+  { valor: "emprestimo", rotulo: "Bateria emprestada" },
+  { valor: "recarga", rotulo: "Recarregar minha bateria" },
+  { valor: "tomada", rotulo: "Tomada no local" },
 ]
 
 export const statusDoPedido = [
@@ -39,4 +46,7 @@ export const pontoVazio = {
   descricao: "",
   vagas: 1,
   ativo: true,
+  fonte: "",
+  empresta: false,
+  telefone: "",
 }

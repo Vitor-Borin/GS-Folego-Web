@@ -50,6 +50,9 @@ const usePontos = () => {
       endereco: ponto.endereco,
       descricao: ponto.descricao,
       vagas: ponto.vagas,
+      fonte: ponto.fonte,
+      empresta: ponto.empresta,
+      telefone: ponto.telefone,
       ativo: true,
       atualizadoEm: new Date().toISOString(),
     }

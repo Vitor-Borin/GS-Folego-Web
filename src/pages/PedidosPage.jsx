@@ -1,3 +1,4 @@
+import { PiArrowsClockwise } from "react-icons/pi"
 import CabecalhoPagina from "../components/CabecalhoPagina"
 import CartaoPedido from "../components/CartaoPedido"
 import Estado from "../components/Estado"
@@ -7,14 +8,14 @@ import useEntradaDaLista from "../hooks/useEntradaDaLista"
 import useFormularioPedido from "../hooks/useFormularioPedido"
 import useListaAnimada, { esquecerPosicoes, guardarPosicoes } from "../hooks/useListaAnimada"
 import usePedidos from "../hooks/usePedidos"
-import { contarPorStatus, ordenarPedidos } from "../utils/regras"
+import { contarCriticos, contarNaFila, contarPorStatus, ordenarPedidos } from "../utils/regras"
 
 const PedidosPage = () => {
-  const { pedidos, carregando, erro, ocupado, aviso, agora, abrirPedido, mudarStatus, apagarPedido } =
+  const { pedidos, carregando, erro, ocupado, aviso, agora, recarregar, abrirPedido, mudarStatus, apagarPedido } =
     usePedidos()
   const formulario = useFormularioPedido()
 
-  const pedidosOrdenados = ordenarPedidos(pedidos)
+  const pedidosOrdenados = ordenarPedidos(pedidos, agora)
   const assinatura = pedidosOrdenados.map((pedido) => `${pedido.id}:${pedido.status}`).join(",")
 
   useEntradaDaLista(!carregando && !erro)
@@ -53,18 +54,32 @@ const PedidosPage = () => {
     })
   }
 
+  const aoAtualizar = () => {
+    guardarPosicoes()
+    recarregar().then((deuCerto) => {
+      if (!deuCerto) {
+        esquecerPosicoes()
+      }
+    })
+  }
+
   return (
     <div className="pagina">
       <CabecalhoPagina
-        rotulo="Rede do bairro"
-        titulo="Pedidos de ajuda"
-        texto="Quem precisa de uma tomada abre um pedido. Quem está por perto avisa que está a caminho."
-      />
+        rotulo="Durante o apagão"
+        titulo="Fila de pedidos"
+        texto="A fila anda pelo relógio: quem tem menos bateria fica em primeiro. Quem está por perto leva uma bateria carregada ou busca a vazia para recarregar."
+      >
+        <button type="button" disabled={ocupado || carregando} onClick={aoAtualizar} className="botao botao-linha">
+          <PiArrowsClockwise size={18} aria-hidden="true" />
+          Atualizar a fila
+        </button>
+      </CabecalhoPagina>
 
       {!carregando && !erro && (
         <dl className="grid grid-cols-3 gap-3">
-          <Indicador valor={contarPorStatus(pedidos, "aberto")} rotulo="abertos" destaque />
-          <Indicador valor={contarPorStatus(pedidos, "andamento")} rotulo="a caminho" />
+          <Indicador valor={contarNaFila(pedidos)} rotulo="na fila" destaque />
+          <Indicador valor={contarCriticos(pedidos, agora)} rotulo="com menos de 30 min" />
           <Indicador valor={contarPorStatus(pedidos, "resolvido")} rotulo="resolvidos" />
         </dl>
       )}
@@ -73,6 +88,7 @@ const PedidosPage = () => {
         <section className="folha grid gap-6 md:p-8 lg:sticky lg:top-28">
           <h2 className="subtitulo text-3xl">Abrir um pedido</h2>
           <FormularioPedido formulario={formulario} ocupado={ocupado} aoEnviar={enviar} />
+          <p className="dado border-t border-tinta/10 pt-4">Em emergência, ligue 192.</p>
         </section>
 
         <section className="grid content-start gap-4">
@@ -82,7 +98,7 @@ const PedidosPage = () => {
             <Estado
               tipo="erro"
               titulo="Não deu para carregar os pedidos"
-              texto="Confira a conexão e recarregue a página."
+              texto="Confira a conexão e recarregue a página. Em emergência, ligue 192."
             />
           )}
 
