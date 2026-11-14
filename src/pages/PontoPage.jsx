@@ -1,16 +1,30 @@
 import { useState } from "react"
 import { Link, useNavigate, useParams } from "react-router"
+import { PiArrowLeft } from "react-icons/pi"
 import CabecalhoPagina from "../components/CabecalhoPagina"
+import CartaoResumo from "../components/CartaoResumo"
 import EditorPonto from "../components/EditorPonto"
 import Estado from "../components/Estado"
+import Indicador from "../components/Indicador"
+import useEntradaDaLista from "../hooks/useEntradaDaLista"
 import usePonto from "../hooks/usePonto"
-import { confirmadoHaPouco, minutosEntre, rotuloDoTipo, textoDoTempo } from "../utils/regras"
+import {
+  confirmadoHaPouco,
+  minutosEntre,
+  rotuloDoTipo,
+  situacaoCurta,
+  situacaoDoPonto,
+  textoDasVagas,
+  textoDoTempo,
+} from "../utils/regras"
 
 const PontoPage = () => {
   const { id } = useParams()
   const navigate = useNavigate()
   const { ponto, carregando, erro, ocupado, aviso, agora, salvarPonto, apagarPonto } = usePonto(id)
   const [querApagar, setQuerApagar] = useState(false)
+
+  useEntradaDaLista(ponto !== null)
 
   const apagar = () => {
     apagarPonto().then((deuCerto) => {
@@ -21,7 +35,7 @@ const PontoPage = () => {
   }
 
   return (
-    <div className="mx-auto max-w-4xl px-4 pb-24 pt-32 md:px-8 md:pt-40">
+    <div className="pagina">
       {carregando && <Estado tipo="carregando" titulo="Buscando o ponto" />}
 
       {erro && (
@@ -38,64 +52,78 @@ const PontoPage = () => {
 
       {ponto !== null && (
         <>
-          <CabecalhoPagina rotulo={`${rotuloDoTipo(ponto.tipo)} · ${ponto.bairro}`} titulo={ponto.nome}>
+          <CabecalhoPagina
+            rotulo={`${rotuloDoTipo(ponto.tipo)} · ${ponto.bairro}`}
+            titulo={ponto.nome}
+            texto={ponto.endereco}
+          >
             <Link to="/rede" className="botao botao-linha">
+              <PiArrowLeft size={18} aria-hidden="true" />
               Voltar para a rede
             </Link>
           </CabecalhoPagina>
 
-          <dl className="grid gap-x-10 gap-y-4 border-b border-tinta/15 py-8 md:grid-cols-3">
-            <div className="grid gap-1">
-              <dt className="dado text-tinta/60">Situação</dt>
-              <dd className="font-semibold">
-                {!ponto.ativo && "Fora da rede no momento"}
-                {ponto.ativo && confirmadoHaPouco(ponto, agora) && "Confirmado há pouco"}
-                {ponto.ativo && !confirmadoHaPouco(ponto, agora) && "Aguardando confirmação"}
-              </dd>
-            </div>
-            <div className="grid gap-1">
-              <dt className="dado text-tinta/60">Última atualização</dt>
-              <dd className="font-semibold">{textoDoTempo(minutosEntre(agora, ponto.atualizadoEm))}</dd>
-            </div>
-            <div className="grid gap-1">
-              <dt className="dado text-tinta/60">Tomadas livres</dt>
-              <dd className="font-semibold">{ponto.vagas}</dd>
-            </div>
+          <dl className="grid gap-3 md:grid-cols-3">
+            <Indicador
+              valor={situacaoCurta(ponto, agora)}
+              rotulo="Situação"
+              destaque={confirmadoHaPouco(ponto, agora)}
+            />
+            <Indicador
+              valor={textoDoTempo(minutosEntre(agora, ponto.atualizadoEm))}
+              rotulo="Última confirmação"
+            />
+            <Indicador valor={ponto.vagas} rotulo="Tomadas livres" />
           </dl>
 
-          <section className="grid gap-6 pt-10">
-            <h2 className="subtitulo text-3xl">Editar ponto</h2>
-            <EditorPonto ponto={ponto} ocupado={ocupado} aoSalvar={salvarPonto} />
-            {aviso !== "" && (
-              <p role="alert" className="font-semibold text-perigo">
-                {aviso}
-              </p>
-            )}
-          </section>
+          <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,22rem)] lg:items-start">
+            <section className="folha grid gap-8">
+              <h2 className="subtitulo text-3xl">Editar ponto</h2>
+              <EditorPonto ponto={ponto} ocupado={ocupado} aoSalvar={salvarPonto} />
+              {aviso !== "" && (
+                <p role="alert" className="aviso">
+                  {aviso}
+                </p>
+              )}
+            </section>
 
-          <section className="mt-14 grid gap-4 border-t border-tinta pt-8">
-            <h2 className="subtitulo text-3xl">Apagar ponto</h2>
-            <p className="max-w-prose text-tinta/70">
-              O ponto sai da rede e não aparece mais para ninguém. Não dá para desfazer.
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {!querApagar && (
-                <button type="button" onClick={() => setQuerApagar(true)} className="botao botao-perigo">
-                  Apagar este ponto
-                </button>
-              )}
-              {querApagar && (
-                <>
-                  <button type="button" disabled={ocupado} onClick={apagar} className="botao botao-perigo">
-                    Apagar de vez
-                  </button>
-                  <button type="button" onClick={() => setQuerApagar(false)} className="botao botao-linha">
-                    Cancelar
-                  </button>
-                </>
-              )}
-            </div>
-          </section>
+            <aside className="grid gap-4 lg:sticky lg:top-28">
+              <div className="grid gap-3">
+                <p className="dado">Como aparece na rede</p>
+                <CartaoResumo
+                  rotulo={`${rotuloDoTipo(ponto.tipo)} · ${ponto.bairro}`}
+                  nome={ponto.nome}
+                  situacao={situacaoDoPonto(ponto, agora)}
+                  vagas={textoDasVagas(ponto.vagas)}
+                  aceso={confirmadoHaPouco(ponto, agora)}
+                />
+              </div>
+
+              <section className="grid gap-4 rounded-[2rem] border border-perigo/25 p-6">
+                <h2 className="subtitulo text-2xl">Apagar ponto</h2>
+                <p className="text-tinta/70">
+                  O ponto sai da rede e não aparece mais para ninguém. Não dá para desfazer.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {!querApagar && (
+                    <button type="button" onClick={() => setQuerApagar(true)} className="botao botao-perigo">
+                      Apagar este ponto
+                    </button>
+                  )}
+                  {querApagar && (
+                    <>
+                      <button type="button" disabled={ocupado} onClick={apagar} className="botao botao-perigo">
+                        Apagar de vez
+                      </button>
+                      <button type="button" onClick={() => setQuerApagar(false)} className="botao botao-linha">
+                        Cancelar
+                      </button>
+                    </>
+                  )}
+                </div>
+              </section>
+            </aside>
+          </div>
         </>
       )}
     </div>

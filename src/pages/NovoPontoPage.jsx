@@ -1,11 +1,13 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router"
+import { PiArrowLeft } from "react-icons/pi"
 import CabecalhoPagina from "../components/CabecalhoPagina"
+import CartaoResumo from "../components/CartaoResumo"
 import FormularioPonto from "../components/FormularioPonto"
 import { pontoVazio } from "../data/opcoes"
 import useFormularioPonto from "../hooks/useFormularioPonto"
 import usePontos from "../hooks/usePontos"
-import { pontoRepetido } from "../utils/regras"
+import { pontoRepetido, rotuloDoTipo, textoDasVagas } from "../utils/regras"
 
 const NovoPontoPage = () => {
   const navigate = useNavigate()
@@ -32,15 +34,40 @@ const NovoPontoPage = () => {
     })
   }
 
+  const tipoDaPrevia = formulario.tipo === "" ? "Tipo" : rotuloDoTipo(formulario.tipo)
+  const bairroDaPrevia = formulario.bairro.trim() === "" ? "Bairro" : formulario.bairro
+  const nomeDaPrevia = formulario.nome.trim() === "" ? "Nome do ponto" : formulario.nome
+
   return (
-    <div className="mx-auto max-w-4xl px-4 pb-24 pt-32 md:px-8 md:pt-40">
-      <CabecalhoPagina rotulo="Rede do bairro" titulo="Novo ponto">
-        <Link to="/rede" className="botao botao-linha">
+    <div className="pagina lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:items-start lg:gap-16">
+      <div className="grid gap-10 lg:sticky lg:top-32">
+        <CabecalhoPagina
+          rotulo="Rede do bairro"
+          titulo="Oferecer uma tomada"
+          texto="Gerador, nobreak, placa solar ou a bateria do carro. Leva um minuto, e o ponto já aparece para o bairro."
+          compacto
+        />
+
+        <div className="grid max-w-sm gap-3">
+          <p className="dado">Assim o ponto aparece na rede</p>
+          <div className="md:-rotate-2">
+            <CartaoResumo
+              rotulo={`${tipoDaPrevia} · ${bairroDaPrevia}`}
+              nome={nomeDaPrevia}
+              situacao={formulario.ativo ? "Com energia, confirmado agora" : "Fora da rede no momento"}
+              vagas={textoDasVagas(formulario.vagas === "" ? 0 : formulario.vagas)}
+              aceso={formulario.ativo}
+            />
+          </div>
+        </div>
+
+        <Link to="/rede" className="botao botao-linha justify-self-start">
+          <PiArrowLeft size={18} aria-hidden="true" />
           Voltar para a rede
         </Link>
-      </CabecalhoPagina>
+      </div>
 
-      <div className="pt-10">
+      <section className="folha">
         <FormularioPonto
           formulario={formulario}
           ocupado={ocupado}
@@ -48,17 +75,17 @@ const NovoPontoPage = () => {
           aoEnviar={enviar}
         >
           {repetido && (
-            <p role="alert" className="font-semibold text-perigo">
+            <p role="alert" className="font-medium text-perigo">
               Já existe um ponto com esse nome nesse bairro.
             </p>
           )}
           {aviso !== "" && (
-            <p role="alert" className="font-semibold text-perigo">
+            <p role="alert" className="font-medium text-perigo">
               {aviso}
             </p>
           )}
         </FormularioPonto>
-      </div>
+      </section>
     </div>
   )
 }

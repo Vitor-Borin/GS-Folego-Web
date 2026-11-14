@@ -26,7 +26,7 @@ const EditorPonto = ({ ponto, ocupado, aoSalvar }) => {
       aoEnviar={enviar}
     >
       {salvo && (
-        <p role="status" className="font-semibold">
+        <p role="status" className="etiqueta">
           Alterações salvas.
         </p>
       )}

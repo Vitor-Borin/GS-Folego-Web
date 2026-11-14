@@ -2,6 +2,8 @@ import CabecalhoPagina from "../components/CabecalhoPagina"
 import CartaoPedido from "../components/CartaoPedido"
 import Estado from "../components/Estado"
 import FormularioPedido from "../components/FormularioPedido"
+import Indicador from "../components/Indicador"
+import useEntradaDaLista from "../hooks/useEntradaDaLista"
 import useFormularioPedido from "../hooks/useFormularioPedido"
 import useListaAnimada, { esquecerPosicoes, guardarPosicoes } from "../hooks/useListaAnimada"
 import usePedidos from "../hooks/usePedidos"
@@ -15,6 +17,7 @@ const PedidosPage = () => {
   const pedidosOrdenados = ordenarPedidos(pedidos)
   const assinatura = pedidosOrdenados.map((pedido) => `${pedido.id}:${pedido.status}`).join(",")
 
+  useEntradaDaLista(!carregando && !erro)
   useListaAnimada(assinatura)
 
   const enviar = () => {
@@ -51,16 +54,28 @@ const PedidosPage = () => {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 pb-24 pt-32 md:px-8 md:pt-40">
-      <CabecalhoPagina rotulo="Rede do bairro" titulo="Pedidos" />
+    <div className="pagina">
+      <CabecalhoPagina
+        rotulo="Rede do bairro"
+        titulo="Pedidos de ajuda"
+        texto="Quem precisa de uma tomada abre um pedido. Quem está por perto avisa que está a caminho."
+      />
 
-      <div className="grid gap-12 pt-10 md:grid-cols-[minmax(0,22rem)_minmax(0,1fr)]">
-        <section className="grid content-start gap-5 md:sticky md:top-28 md:self-start">
+      {!carregando && !erro && (
+        <dl className="grid grid-cols-3 gap-3">
+          <Indicador valor={contarPorStatus(pedidos, "aberto")} rotulo="abertos" destaque />
+          <Indicador valor={contarPorStatus(pedidos, "andamento")} rotulo="a caminho" />
+          <Indicador valor={contarPorStatus(pedidos, "resolvido")} rotulo="resolvidos" />
+        </dl>
+      )}
+
+      <div className="grid gap-4 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:items-start">
+        <section className="folha grid gap-6 md:p-8 lg:sticky lg:top-28">
           <h2 className="subtitulo text-3xl">Abrir um pedido</h2>
           <FormularioPedido formulario={formulario} ocupado={ocupado} aoEnviar={enviar} />
         </section>
 
-        <section className="grid content-start gap-2">
+        <section className="grid content-start gap-4">
           {carregando && <Estado tipo="carregando" titulo="Buscando os pedidos" />}
 
           {erro && (
@@ -73,13 +88,8 @@ const PedidosPage = () => {
 
           {!carregando && !erro && (
             <>
-              <p className="dado border-b border-tinta/15 pb-4 text-tinta/70">
-                {contarPorStatus(pedidos, "aberto")} abertos · {contarPorStatus(pedidos, "andamento")} a
-                caminho · {contarPorStatus(pedidos, "resolvido")} resolvidos
-              </p>
-
               {aviso !== "" && (
-                <p role="alert" className="border border-perigo px-4 py-3 font-semibold text-perigo">
+                <p role="alert" className="aviso">
                   {aviso}
                 </p>
               )}
@@ -93,7 +103,7 @@ const PedidosPage = () => {
               )}
 
               {pedidosOrdenados.length > 0 && (
-                <ul>
+                <ul className="grid gap-4">
                   {pedidosOrdenados.map((pedido) => (
                     <CartaoPedido
                       key={pedido.id}

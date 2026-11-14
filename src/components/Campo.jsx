@@ -2,8 +2,8 @@ const Campo = ({ id, rotulo, tipo = "texto", valor, aoMudar, erro, dica, opcoes 
   const idDaAjuda = `${id}-ajuda`
 
   return (
-    <div className="grid gap-1.5">
-      <label htmlFor={id} className="text-sm font-semibold">
+    <div className="grid content-start gap-1.5">
+      <label htmlFor={id} className="text-sm font-medium">
         {rotulo}
       </label>
 
@@ -49,7 +49,7 @@ const Campo = ({ id, rotulo, tipo = "texto", valor, aoMudar, erro, dica, opcoes 
         </select>
       )}
 
-      <p id={idDaAjuda} className={`min-h-5 text-sm ${erro ? "font-semibold text-perigo" : "text-tinta/60"}`}>
+      <p id={idDaAjuda} className={`min-h-5 text-sm ${erro ? "font-medium text-perigo" : "text-tinta/60"}`}>
         {erro ? erro : dica}
       </p>
     </div>

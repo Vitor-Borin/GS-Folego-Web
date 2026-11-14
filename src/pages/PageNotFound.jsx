@@ -1,22 +1,29 @@
 import { Link } from "react-router"
+import { PiArrowRight } from "react-icons/pi"
+import useEntradaPagina from "../hooks/useEntradaPagina"
 
 const PageNotFound = () => {
+  useEntradaPagina()
+
   return (
-    <div className="grid min-h-svh content-center gap-8 bg-tinta px-4 py-32 text-papel md:px-8">
-      <p className="dado text-papel/60">Erro 404</p>
-      <h1 className="titulo text-[clamp(4rem,18vw,16rem)]">Rua sem saída</h1>
-      <p className="max-w-md text-lg text-papel/80">
-        Essa página não existe ou mudou de endereço. A rede continua no mesmo lugar.
-      </p>
-      <div className="flex flex-wrap gap-3">
-        <Link to="/" className="botao botao-destaque">
-          Voltar para o início
-        </Link>
-        <Link to="/rede" className="botao border border-papel/40 hover:bg-papel hover:text-tinta">
-          Abrir a rede
-        </Link>
+    <section className="px-2 pb-2 pt-24 md:px-5 md:pb-5 md:pt-28">
+      <div className="mx-auto grid min-h-[76svh] max-w-[96rem] content-center justify-items-center gap-8 rounded-[2rem] bg-destaque px-5 py-20 text-center md:rounded-[3rem]">
+        <p className="rounded-full bg-tinta px-3 py-1 text-sm font-medium text-white">Erro 404</p>
+        <h1 className="js-titulo-pagina titulo text-[clamp(3rem,10vw,9rem)]">Rua sem saída.</h1>
+        <p className="max-w-md text-lg">
+          Essa página não existe ou mudou de endereço. A rede continua no mesmo lugar.
+        </p>
+        <div className="flex flex-wrap justify-center gap-3">
+          <Link to="/" className="botao botao-tinta">
+            Voltar para o início
+            <PiArrowRight size={18} aria-hidden="true" />
+          </Link>
+          <Link to="/rede" className="botao botao-claro">
+            Abrir a rede
+          </Link>
+        </div>
       </div>
-    </div>
+    </section>
   )
 }
 

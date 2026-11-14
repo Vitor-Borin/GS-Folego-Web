@@ -1,8 +1,9 @@
 import { Link } from "react-router"
 import { PiArrowRight } from "react-icons/pi"
+import CartaoResumo from "./CartaoResumo"
 import Estado from "./Estado"
 import { rede } from "../data/conteudo"
-import { confirmadoHaPouco, minutosEntre, ordenarPontos, rotuloDoTipo, textoDoTempo } from "../utils/regras"
+import { confirmadoHaPouco, ordenarPontos, rotuloDoTipo, situacaoDoPonto, textoDasVagas } from "../utils/regras"
 
 const inclinacoes = ["md:-rotate-2", "md:translate-y-6 md:rotate-1", "md:-rotate-1"]
 
@@ -46,28 +47,14 @@ const RedeAgora = ({ pontos, carregando, erro, agora }) => {
           <ul className="grid gap-5 md:grid-cols-3">
             {recentes.map((ponto, indice) => (
               <li key={ponto.id} className={`transition-transform duration-300 hover:rotate-0 ${inclinacoes[indice]}`}>
-                <Link to={`/rede/${ponto.id}`} className="cartao grid gap-8 p-6">
-                  <span className="flex items-center justify-between gap-3">
-                    <span className="dado">
-                      {rotuloDoTipo(ponto.tipo)} · {ponto.bairro}
-                    </span>
-                    <span
-                      aria-hidden="true"
-                      className={`block size-2.5 rounded-full ${
-                        confirmadoHaPouco(ponto, agora) ? "bg-destaque" : "bg-tinta/20"
-                      }`}
-                    />
-                  </span>
-                  <span className="subtitulo text-2xl md:text-3xl">{ponto.nome}</span>
-                  <span className="grid gap-1 border-t border-tinta/10 pt-4">
-                    <span className="font-medium">
-                      {confirmadoHaPouco(ponto, agora) ? "Com energia, confirmado" : "Última confirmação"}{" "}
-                      {textoDoTempo(minutosEntre(agora, ponto.atualizadoEm))}
-                    </span>
-                    <span className="dado">
-                      {ponto.vagas} {Number(ponto.vagas) === 1 ? "tomada livre" : "tomadas livres"}
-                    </span>
-                  </span>
+                <Link to={`/rede/${ponto.id}`} className="block rounded-2xl">
+                  <CartaoResumo
+                    rotulo={`${rotuloDoTipo(ponto.tipo)} · ${ponto.bairro}`}
+                    nome={ponto.nome}
+                    situacao={situacaoDoPonto(ponto, agora)}
+                    vagas={textoDasVagas(ponto.vagas)}
+                    aceso={confirmadoHaPouco(ponto, agora)}
+                  />
                 </Link>
               </li>
             ))}

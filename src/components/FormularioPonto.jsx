@@ -71,11 +71,11 @@ const FormularioPonto = ({ formulario, ocupado, textoDoBotao, aoEnviar, children
             onChange={(evento) => formulario.setAtivo(evento.target.checked)}
             className="size-5 accent-tinta"
           />
-          <span className="font-semibold">O ponto está na rede agora</span>
+          <span className="font-medium">O ponto está na rede agora</span>
         </label>
       </div>
 
-      <div className="flex flex-wrap items-center gap-4 border-t border-tinta/15 pt-6">
+      <div className="flex flex-wrap items-center gap-4 border-t border-tinta/10 pt-6">
         <button type="submit" disabled={ocupado} className="botao botao-tinta">
           {ocupado ? "Salvando" : textoDoBotao}
         </button>

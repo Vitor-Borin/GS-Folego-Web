@@ -1,11 +1,14 @@
 import { useState } from "react"
 import { Link } from "react-router"
+import { PiPlus } from "react-icons/pi"
 import CabecalhoPagina from "../components/CabecalhoPagina"
 import Estado from "../components/Estado"
 import FiltroPontos from "../components/FiltroPontos"
+import Indicador from "../components/Indicador"
 import ListaPontos from "../components/ListaPontos"
-import usePontos from "../hooks/usePontos"
+import useEntradaDaLista from "../hooks/useEntradaDaLista"
 import useListaAnimada, { esquecerPosicoes, guardarPosicoes } from "../hooks/useListaAnimada"
+import usePontos from "../hooks/usePontos"
 import { contarConfirmados, filtrarPontos, ordenarPontos, somarVagas } from "../utils/regras"
 
 const RedePage = () => {
@@ -16,6 +19,7 @@ const RedePage = () => {
   const pontosVisiveis = ordenarPontos(filtrarPontos(pontos, busca, tipo), agora)
   const assinatura = pontosVisiveis.map((ponto) => ponto.id).join(",")
 
+  useEntradaDaLista(!carregando && !erro)
   useListaAnimada(assinatura)
 
   const aoBuscar = (texto) => {
@@ -47,40 +51,40 @@ const RedePage = () => {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 pb-24 pt-32 md:px-8 md:pt-40">
-      <CabecalhoPagina rotulo="Rede do bairro" titulo="Pontos">
+    <div className="pagina">
+      <CabecalhoPagina
+        rotulo="Rede do bairro"
+        titulo="Pontos com energia"
+        texto="Padarias, condomínios, igrejas e casas que oferecem uma tomada quando a luz cai. Quem está no ponto confirma, e a confirmação vale por duas horas."
+      >
         <Link to="/rede/novo" className="botao botao-tinta">
+          <PiPlus size={18} aria-hidden="true" />
           Cadastrar ponto
         </Link>
       </CabecalhoPagina>
 
-      {carregando && (
-        <div className="pt-8">
-          <Estado tipo="carregando" titulo="Buscando os pontos da rede" />
-        </div>
-      )}
+      {carregando && <Estado tipo="carregando" titulo="Buscando os pontos da rede" />}
 
       {erro && (
-        <div className="pt-8">
-          <Estado
-            tipo="erro"
-            titulo="Não deu para carregar a rede"
-            texto="Confira a conexão e recarregue a página. Se você está testando no computador, veja se a API local está ligada."
-          />
-        </div>
+        <Estado
+          tipo="erro"
+          titulo="Não deu para carregar a rede"
+          texto="Confira a conexão e recarregue a página. Se você está testando no computador, veja se a API local está ligada."
+        />
       )}
 
       {!carregando && !erro && (
         <>
-          <p className="dado border-b border-tinta/15 py-4 text-tinta/70">
-            {pontos.length} pontos · {contarConfirmados(pontos, agora)} confirmados nas últimas 2 horas ·{" "}
-            {somarVagas(pontos, agora)} tomadas livres
-          </p>
+          <dl className="grid grid-cols-3 gap-3">
+            <Indicador valor={pontos.length} rotulo="pontos na rede" />
+            <Indicador valor={contarConfirmados(pontos, agora)} rotulo="com energia agora" destaque />
+            <Indicador valor={somarVagas(pontos, agora)} rotulo="tomadas livres" />
+          </dl>
 
           <FiltroPontos busca={busca} aoBuscar={aoBuscar} tipo={tipo} aoEscolherTipo={aoEscolherTipo} />
 
           {aviso !== "" && (
-            <p role="alert" className="mb-4 border border-perigo px-4 py-3 font-semibold text-perigo">
+            <p role="alert" className="aviso">
               {aviso}
             </p>
           )}

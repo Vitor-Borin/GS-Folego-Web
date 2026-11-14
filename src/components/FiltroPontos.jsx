@@ -14,7 +14,7 @@ const FiltroPontos = ({ busca, aoBuscar, tipo, aoEscolherTipo }) => {
           type="search"
           value={busca}
           onChange={(evento) => aoBuscar(evento.target.value)}
-          placeholder="Buscar por nome, bairro ou endereço"
+          placeholder="Buscar ponto, bairro ou rua"
           className="campo rounded-full bg-white px-5"
         />
       </div>
