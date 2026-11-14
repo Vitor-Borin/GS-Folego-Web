@@ -72,7 +72,19 @@
   }
 
   .campo {
-    @apply w-full rounded-xl border border-tinta/20 bg-white px-4 py-3 text-base text-tinta transition-colors duration-200 placeholder:text-tinta/40 focus:border-tinta;
+    @apply w-full rounded-xl border border-transparent bg-papel px-4 py-3 text-base text-tinta transition-colors duration-200 placeholder:text-tinta/40 focus:border-tinta focus:bg-white aria-invalid:border-perigo;
+  }
+
+  .pagina {
+    @apply mx-auto grid max-w-6xl gap-10 px-4 pb-24 pt-32 md:px-10 md:pb-36 md:pt-44;
+  }
+
+  .folha {
+    @apply rounded-[2rem] bg-white p-6 md:p-10;
+  }
+
+  .aviso {
+    @apply rounded-2xl bg-perigo/10 px-4 py-3 font-medium text-perigo;
   }
 
   .etiqueta {

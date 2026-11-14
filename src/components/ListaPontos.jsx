@@ -13,7 +13,7 @@ const ListaPontos = ({ pontos, agora, ocupado, aoConfirmar, aoApagar }) => {
   }
 
   return (
-    <ul>
+    <ul className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
       {pontos.map((ponto) => (
         <CartaoPonto
           key={ponto.id}

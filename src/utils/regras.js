@@ -1,4 +1,4 @@
-import { prioridades, tiposDePonto } from "../data/opcoes"
+import { prioridades, statusDoPedido, tiposDePonto } from "../data/opcoes"
 
 export const LIMITE_CONFIRMACAO_MIN = 120
 
@@ -34,6 +34,28 @@ export const rotuloDoTipo = (valor) => {
   const tipo = tiposDePonto.find((item) => item.valor === valor)
 
   return tipo ? tipo.rotulo : "Outro"
+}
+
+export const situacaoDoPonto = (ponto, agora) => {
+  if (!ponto.ativo) {
+    return "Fora da rede no momento"
+  }
+
+  const tempo = textoDoTempo(minutosEntre(agora, ponto.atualizadoEm))
+
+  return confirmadoHaPouco(ponto, agora) ? `Com energia, confirmado ${tempo}` : `Última confirmação ${tempo}`
+}
+
+export const situacaoCurta = (ponto, agora) => {
+  if (!ponto.ativo) {
+    return "Fora da rede"
+  }
+
+  return confirmadoHaPouco(ponto, agora) ? "Com energia" : "Aguardando"
+}
+
+export const textoDasVagas = (vagas) => {
+  return `${vagas} ${Number(vagas) === 1 ? "tomada livre" : "tomadas livres"}`
 }
 
 export const filtrarPontos = (pontos, busca, tipo) => {
@@ -110,6 +132,12 @@ export const ordenarPedidos = (pedidos) => {
 
     return new Date(a.criadoEm).getTime() - new Date(b.criadoEm).getTime()
   })
+}
+
+export const rotuloDoStatus = (valor) => {
+  const status = statusDoPedido.find((item) => item.valor === valor)
+
+  return status ? status.rotulo : "Sem status"
 }
 
 export const contarPorStatus = (pedidos, status) => {
