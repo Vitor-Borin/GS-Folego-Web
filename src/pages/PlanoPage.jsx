@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Link } from "react-router"
 import { PiPrinter } from "react-icons/pi"
 import CabecalhoPagina from "../components/CabecalhoPagina"
 import Campo from "../components/Campo"
@@ -69,7 +70,19 @@ const PlanoPage = () => {
               </p>
             )}
 
-            {!carregando && !erro && (
+            {!carregando && !erro && bairros.length === 0 && (
+              <div className="grid justify-items-start gap-4">
+                <p className="text-tinta/70">
+                  Ainda não há ponto cadastrado na rede. O plano já mostra a conta da bateria, e os telefones aparecem
+                  quando o primeiro ponto entrar.
+                </p>
+                <Link to="/rede/novo" className="botao botao-linha">
+                  Cadastrar um ponto
+                </Link>
+              </div>
+            )}
+
+            {!carregando && !erro && bairros.length > 0 && (
               <Campo
                 id="plano-bairro"
                 rotulo="Bairro"
@@ -83,7 +96,13 @@ const PlanoPage = () => {
           </div>
         </section>
 
-        <FolhaDoPlano minutos={minutos} estado={estado} bairro={bairro} pontos={pontosDoBairro(pontos, bairro)} />
+        <FolhaDoPlano
+          minutos={minutos}
+          estado={estado}
+          bairro={bairro}
+          pontos={pontosDoBairro(pontos, bairro)}
+          redeVazia={!carregando && !erro && pontos.length === 0}
+        />
       </div>
     </div>
   )

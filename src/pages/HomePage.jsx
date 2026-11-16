@@ -13,7 +13,7 @@ import Simulador from "../components/Simulador"
 import usePontos from "../hooks/usePontos"
 import useRevelar from "../hooks/useRevelar"
 import useTopoDaPagina from "../hooks/useTopoDaPagina"
-import { contarConfirmados } from "../utils/regras"
+import { contarConfirmados, resumoDaRede } from "../utils/regras"
 
 const HomePage = () => {
   const { pontos, carregando, erro, agora } = usePontos()
@@ -23,7 +23,12 @@ const HomePage = () => {
 
   return (
     <>
-      <Constelacao pontosComEnergia={contarConfirmados(pontos, agora)} carregando={carregando} erro={erro} />
+      <Constelacao
+        resumo={resumoDaRede(pontos, agora)}
+        temEnergia={contarConfirmados(pontos, agora) > 0}
+        carregando={carregando}
+        erro={erro}
+      />
       <Manifesto />
       <Apagao />
       <Citacao />

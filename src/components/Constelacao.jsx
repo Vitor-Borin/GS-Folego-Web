@@ -7,7 +7,7 @@ import { montarConstelacao } from "../utils/desenho"
 
 const estrelas = montarConstelacao(fotos)
 
-const Constelacao = ({ pontosComEnergia, carregando, erro }) => {
+const Constelacao = ({ resumo, temEnergia, carregando, erro }) => {
   useConstelacao()
 
   return (
@@ -41,10 +41,13 @@ const Constelacao = ({ pontosComEnergia, carregando, erro }) => {
             role="status"
             className="js-ceu-apoio mb-7 inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-1.5 text-sm"
           >
-            <span aria-hidden="true" className="block size-2 rounded-full bg-destaque" />
+            <span
+              aria-hidden="true"
+              className={`block size-2 rounded-full ${temEnergia ? "bg-destaque" : "bg-tinta/25"}`}
+            />
             {carregando && "Lendo a rede"}
             {erro && "Rede fora do ar"}
-            {!carregando && !erro && `${pontosComEnergia} pontos com energia agora`}
+            {!carregando && !erro && resumo}
           </p>
 
           <h1 className="titulo text-[clamp(2.4rem,5.4vw,5.25rem)]">

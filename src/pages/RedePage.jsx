@@ -105,6 +105,7 @@ const RedePage = () => {
 
           <ListaPontos
             pontos={pontosVisiveis}
+            redeVazia={pontos.length === 0}
             agora={agora}
             ocupado={ocupado}
             aoConfirmar={aoConfirmar}

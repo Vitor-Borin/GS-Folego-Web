@@ -9,7 +9,7 @@ const coresDoEstado = {
   critico: "bg-perigo text-white",
 }
 
-const FolhaDoPlano = ({ minutos, estado, bairro, pontos }) => {
+const FolhaDoPlano = ({ minutos, estado, bairro, pontos, redeVazia }) => {
   const folga = minutos - LIMITE_ALERTA_MIN
 
   return (
@@ -64,7 +64,11 @@ const FolhaDoPlano = ({ minutos, estado, bairro, pontos }) => {
         </h2>
 
         {bairro === "" && (
-          <p className="rounded-2xl bg-papel p-5 text-tinta/70">Escolha o bairro para ver os pontos e os telefones.</p>
+          <p className="rounded-2xl bg-papel p-5 text-tinta/70">
+            {redeVazia
+              ? "Ainda não há ponto cadastrado na rede."
+              : "Escolha o bairro para ver os pontos e os telefones."}
+          </p>
         )}
 
         {bairro !== "" && pontos.length === 0 && (

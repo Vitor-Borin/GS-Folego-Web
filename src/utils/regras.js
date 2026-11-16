@@ -104,6 +104,20 @@ export const contarConfirmados = (pontos, agora) => {
   return pontos.filter((ponto) => confirmadoHaPouco(ponto, agora)).length
 }
 
+export const resumoDaRede = (pontos, agora) => {
+  const confirmados = contarConfirmados(pontos, agora)
+
+  if (pontos.length === 0) {
+    return "Nenhum ponto cadastrado ainda"
+  }
+
+  if (confirmados === 0) {
+    return pontos.length === 1 ? "1 ponto na rede, sem confirmação agora" : `${pontos.length} pontos na rede, sem confirmação agora`
+  }
+
+  return confirmados === 1 ? "1 ponto com energia agora" : `${confirmados} pontos com energia agora`
+}
+
 export const contarQueEmprestam = (pontos) => {
   return pontos.filter((ponto) => ponto.empresta).length
 }
@@ -166,6 +180,12 @@ export const rotuloDoEstado = (valor) => {
 
 export const minutosRestantes = (pedido, agora) => {
   return Math.max(0, Number(pedido.minutos) - minutosEntre(agora, pedido.criadoEm))
+}
+
+export const LIMITE_PEDIDO_MIN = 1440
+
+export const pedidoAntigo = (pedido, agora) => {
+  return pedido.status !== "resolvido" && minutosEntre(agora, pedido.criadoEm) > LIMITE_PEDIDO_MIN
 }
 
 export const ordenarPedidos = (pedidos, agora) => {
