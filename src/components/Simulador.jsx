@@ -73,7 +73,7 @@ const Simulador = () => {
             </ul>
 
             <p className="grid gap-2">
-              <span className="text-lg">A bateria dura</span>
+              <span className="text-lg">A bateria dura cerca de</span>
               <span className="titulo text-[clamp(4.5rem,10vw,9rem)] tabular-nums">{textoDaDuracao(minutos)}</span>
             </p>
 

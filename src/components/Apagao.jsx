@@ -22,7 +22,7 @@ const Apagao = () => {
             <figure className="js-revelar grid content-between gap-8 rounded-3xl bg-white/[0.06] p-5 md:p-8">
               <figcaption className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
                 <span className="text-lg font-medium">{apagao.tituloDoGrafico}</span>
-                <span className="text-sm text-white/60">Dezembro de 2025</span>
+                <span className="text-sm text-white/60">Dezembro de 2025 · estimativa do modelo</span>
               </figcaption>
 
               <div className="js-grafico grid gap-3">
@@ -56,7 +56,7 @@ const Apagao = () => {
                     <span className="absolute -left-1.5 -top-1.5 block size-3 rounded-full bg-white ring-4 ring-white/25" />
                     <p className="absolute bottom-3 left-3 w-max rounded-xl bg-white px-3 py-2 text-sm leading-tight text-tinta">
                       <strong className="block font-medium">12 horas: a bateria acabou</strong>
-                      {porCento(semLuzEm12Horas)} ainda sem luz
+                      cerca de {porCento(semLuzEm12Horas)} ainda sem luz
                     </p>
                   </div>
                 </div>

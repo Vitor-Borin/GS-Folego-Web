@@ -16,7 +16,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <PageNotFound />,
+    errorElement: <PageNotFound quebrou />,
     children: [
       { index: true, element: <HomePage /> },
       { path: "rede", element: <RedePage /> },

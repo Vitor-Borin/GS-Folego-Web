@@ -1,4 +1,4 @@
-import { PiBellRingingFill, PiCheckBold, PiLightningSlash } from "react-icons/pi"
+import { PiBellRingingFill, PiLightningSlash, PiPersonSimpleWalk } from "react-icons/pi"
 import { calcularAutonomia, textoDaDuracao } from "../utils/autonomia"
 
 const bateriaGrande = textoDaDuracao(calcularAutonomia(1200, 290))
@@ -14,9 +14,9 @@ const PassoVisual = ({ tipo }) => {
               <PiLightningSlash size={18} />
               Sem energia da rua
             </span>
-            <span>Aparelho 01</span>
+            <span>Protótipo</span>
           </p>
-          <p className="grid gap-1 rounded-2xl bg-destaque px-5 py-4 font-mono text-tinta">
+          <p className="grid gap-1 rounded-2xl bg-calma px-5 py-4 font-mono text-white">
             <span className="text-sm">RESERVA</span>
             <span className="text-5xl font-medium tabular-nums">{bateriaGrande}</span>
           </p>
@@ -57,7 +57,7 @@ const PassoVisual = ({ tipo }) => {
               <PiBellRingingFill size={16} />
               Alerta
             </span>
-            <span className="dado">Bela Vista</span>
+            <span className="dado">Exemplo · Bela Vista</span>
           </p>
           <p className="subtitulo text-2xl md:text-3xl">Bateria carregada para o nobreak</p>
           <p className="flex items-baseline justify-between gap-4 border-t border-tinta/10 pt-5">
@@ -70,7 +70,7 @@ const PassoVisual = ({ tipo }) => {
       {tipo === "ponto" && (
         <div className="grid w-full max-w-sm rotate-2 gap-5 rounded-3xl bg-papel p-5 md:p-6">
           <p className="flex items-center justify-between gap-3">
-            <span className="dado">Condomínio · Bela Vista</span>
+            <span className="dado">Exemplo · Condomínio · Bela Vista</span>
             <span className="block size-2.5 rounded-full bg-destaque" />
           </p>
           <p className="subtitulo text-2xl md:text-3xl">Condomínio Mirante</p>
@@ -79,8 +79,8 @@ const PassoVisual = ({ tipo }) => {
             <span className="dado">Gerador · empresta bateria</span>
           </p>
           <span className="botao botao-tinta justify-self-start">
-            <PiCheckBold size={16} />
-            Levo a bateria
+            <PiPersonSimpleWalk size={18} />
+            Estou a caminho
           </span>
         </div>
       )}

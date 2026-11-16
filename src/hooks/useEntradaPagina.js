@@ -14,7 +14,13 @@ const useEntradaPagina = () => {
         smartWrap: true,
       })
 
-      gsap.from(letras.chars, { yPercent: 120, duration: 0.9, ease: "expo.out", stagger: 0.02 })
+      gsap.from(letras.chars, {
+        yPercent: 120,
+        duration: 0.9,
+        ease: "expo.out",
+        stagger: 0.02,
+        onComplete: () => letras.revert(),
+      })
     })
 
     return () => mm.revert()

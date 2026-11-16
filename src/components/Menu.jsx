@@ -7,11 +7,14 @@ import useMenuRetratil from "../hooks/useMenuRetratil"
 
 const Menu = () => {
   const [aberto, setAberto] = useState(false)
-
-  useMenuRetratil()
+  const escondido = useMenuRetratil()
 
   return (
-    <header className="js-menu fixed inset-x-3 top-3 z-50 md:inset-x-6 md:top-5 print:hidden">
+    <header
+      className={`fixed inset-x-3 top-3 z-50 transition-transform duration-500 ease-out motion-reduce:transition-none md:inset-x-6 md:top-5 print:hidden ${
+        escondido ? "-translate-y-[170%]" : ""
+      }`}
+    >
       <nav aria-label="Principal" className="flex items-center justify-between gap-3">
         <Link
           to="/"

@@ -1,31 +1,20 @@
-import { useEffect } from "react"
-import { gsap } from "../gsap"
+import { useEffect, useState } from "react"
 
 const useMenuRetratil = () => {
+  const [escondido, setEscondido] = useState(false)
+
   useEffect(() => {
     let ultimaPosicao = window.scrollY
-    let escondido = false
 
     const aoRolar = () => {
       const posicao = window.scrollY
       const diferenca = posicao - ultimaPosicao
 
-      if (Math.abs(diferenca) < 6) {
+      if (diferenca > -6 && diferenca < 6) {
         return
       }
 
-      const esconder = diferenca > 0 && posicao > 200
-
-      if (esconder !== escondido) {
-        escondido = esconder
-        gsap.to(".js-menu", {
-          yPercent: esconder ? -170 : 0,
-          duration: 0.45,
-          ease: "power3.out",
-          overwrite: true,
-        })
-      }
-
+      setEscondido(diferenca > 0 && posicao > 200)
       ultimaPosicao = posicao
     }
 
@@ -35,6 +24,8 @@ const useMenuRetratil = () => {
       window.removeEventListener("scroll", aoRolar)
     }
   }, [])
+
+  return escondido
 }
 
 export default useMenuRetratil
