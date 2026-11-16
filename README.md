@@ -193,7 +193,9 @@ Feito na Vercel. O arquivo `vercel.json` reescreve todas as rotas para `/index.h
 
 ## Acessibilidade e uso no celular
 
-- Todas as páginas funcionam a partir de 375 px de largura, sem rolagem lateral.
+- O site foi conferido em 21 tamanhos de tela, de 320 px (celular pequeno) a 1920 px (monitor), passando por tablet em pé e deitado, notebook de tela baixa (1280 × 600 e 1366 × 625) e celular deitado. Nenhuma página tem rolagem lateral.
+- O que gruda no topo ao rolar (os cartões do "Como funciona" e os painéis laterais das páginas internas) só gruda quando cabe inteiro na altura da tela. Para isso o `src/index.css` cria duas variantes de altura, `tela-media:` e `tela-alta:`, porque o Tailwind só traz as de largura (`md:`, `lg:`).
+- Texto digitado pelo usuário (nome do ponto, bairro, endereço, pedido) quebra a linha mesmo sem espaços: um nome comprido não sai do cartão nem da tela.
 - Quem pede menos movimento no sistema (`prefers-reduced-motion`) vê a página sem as animações de rolagem.
 - Formulários com rótulo em cada campo e mensagem de erro por campo. Os estados de carregando, erro e vazio aparecem em toda tela que busca dados.
 - A folha do plano tem estilo próprio de impressão e cabe em uma página A4 com até quatro pontos no bairro.
