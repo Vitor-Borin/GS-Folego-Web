@@ -12,6 +12,7 @@ const useEntradaPagina = () => {
         type: "chars",
         mask: "chars",
         smartWrap: true,
+        aria: "none",
       })
 
       gsap.from(letras.chars, {
