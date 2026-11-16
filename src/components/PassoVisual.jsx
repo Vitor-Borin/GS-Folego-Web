@@ -45,7 +45,7 @@ const PassoVisual = ({ tipo }) => {
           </p>
           <p className="flex items-baseline justify-between gap-4 border-t border-tinta/10 pt-5">
             <span className="dado">Tempo de bateria</span>
-            <span className="titulo text-6xl tabular-nums">{nobreakComum}</span>
+            <span className="titulo whitespace-nowrap text-6xl tabular-nums">{nobreakComum}</span>
           </p>
         </div>
       )}

@@ -13,7 +13,7 @@ const Constelacao = ({ resumo, temEnergia, carregando, erro }) => {
   return (
     <section className="js-ceu relative z-0 h-[200svh]">
       <div className="sticky top-0 h-svh overflow-hidden">
-        <div aria-hidden="true" className="absolute inset-0">
+        <div aria-hidden="true" className="absolute inset-0 [--faixa:max(2.5rem,calc(50svh_-_15rem))]">
           {estrelas.map((estrela) => (
             <div
               key={estrela.id}
@@ -22,20 +22,26 @@ const Constelacao = ({ resumo, temEnergia, carregando, erro }) => {
                 "--x": `${estrela.esquerda}%`,
                 "--y": `${estrela.topo}%`,
                 "--x-celular": `${estrela.esquerdaNoCelular}%`,
-                "--y-celular": `${estrela.topoNoCelular}%`,
+                "--y-celular": estrela.acimaNoCelular
+                  ? `calc(var(--faixa) * ${estrela.faixaNoCelular})`
+                  : `calc(100% - var(--faixa) * ${estrela.faixaNoCelular})`,
                 width: `max(${estrela.largura}vw, ${estrela.larguraMinima}px)`,
                 opacity: estrela.opacidade,
                 zIndex: Math.round(estrela.profundidade * 10),
               }}
             >
               <div className="js-foto-paralaxe">
-                <img src={estrela.src} alt="" className="js-foto-imagem block w-full rounded-md" />
+                <img
+                  src={estrela.src}
+                  alt=""
+                  className="js-foto-imagem block w-full rounded-md max-md:aspect-[4/3] max-md:object-cover"
+                />
               </div>
             </div>
           ))}
         </div>
 
-        <div className="js-ceu-conteudo relative z-20 flex h-full flex-col items-center justify-center px-4 text-center">
+        <div className="js-ceu-conteudo relative z-20 flex h-full flex-col items-center justify-center px-4 pt-16 text-center tela-media:pt-0">
           <p
             role="status"
             className="js-ceu-apoio mb-7 inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-1.5 text-sm"
@@ -49,7 +55,7 @@ const Constelacao = ({ resumo, temEnergia, carregando, erro }) => {
             {!carregando && !erro && resumo}
           </p>
 
-          <h1 className="titulo text-[clamp(2.4rem,5.4vw,5.25rem)]">
+          <h1 className="titulo text-[clamp(2.4rem,min(5.4vw,11svh),5.25rem)]">
             {projeto.linhasDoTitulo.map((linha) => (
               <span key={linha} className="block overflow-hidden pb-[0.12em]">
                 <span className="js-ceu-linha block">{linha}</span>

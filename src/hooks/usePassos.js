@@ -5,7 +5,7 @@ const usePassos = () => {
   useEffect(() => {
     const mm = gsap.matchMedia()
 
-    mm.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
+    mm.add("(min-width: 768px) and (min-height: 36rem) and (prefers-reduced-motion: no-preference)", () => {
       const itens = gsap.utils.toArray(".js-passo")
       const cartoes = gsap.utils.toArray(".js-passo-cartao")
       const ultimo = itens.length - 1

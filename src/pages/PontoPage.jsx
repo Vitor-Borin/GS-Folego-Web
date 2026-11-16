@@ -87,7 +87,7 @@ const PontoPage = () => {
               )}
             </section>
 
-            <aside className="grid gap-4 lg:sticky lg:top-28">
+            <aside className="grid gap-4 lg:top-28 lg:tela-alta:sticky">
               <div className="grid gap-3">
                 <p className="dado">Como aparece na rede</p>
                 <CartaoResumo

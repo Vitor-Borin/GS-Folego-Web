@@ -17,8 +17,6 @@ export const montarConstelacao = (fotos) => {
     const raioHorizontal = 27 + profundidade * 24
     const raioVertical = 26 + profundidade * 23
 
-    const inicioDaFaixa = Math.sin(angulo) < 0 ? 9 : 74
-
     return {
       id: indice,
       src: foto.src,
@@ -26,7 +24,8 @@ export const montarConstelacao = (fotos) => {
       esquerda: arredondar(50 + Math.cos(angulo) * raioHorizontal),
       topo: arredondar(50 + Math.sin(angulo) * raioVertical),
       esquerdaNoCelular: arredondar(6 + pseudoAleatorio(indice + 71) * 88),
-      topoNoCelular: arredondar(inicioDaFaixa + pseudoAleatorio(indice + 91) * 17),
+      acimaNoCelular: Math.sin(angulo) < 0,
+      faixaNoCelular: arredondar(0.12 + pseudoAleatorio(indice + 91) * 0.76),
       largura: arredondar(2.6 + profundidade * profundidade * 6.4),
       larguraMinima: Math.round(28 + profundidade * 56),
       opacidade: arredondar(0.28 + profundidade * 0.72),

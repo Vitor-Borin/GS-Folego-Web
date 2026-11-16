@@ -44,8 +44,9 @@ const useConstelacao = (estrelas) => {
 
         const direcao = () => {
           const noCelular = window.innerWidth < 768
+          const faixa = estrela.acimaNoCelular ? 10 : 90
           const esquerda = noCelular ? estrela.esquerdaNoCelular : estrela.esquerda
-          const topo = noCelular ? estrela.topoNoCelular : estrela.topo
+          const topo = noCelular ? faixa : estrela.topo
           const distanciaX = ((esquerda - 50) / 100) * window.innerWidth
           const distanciaY = ((topo - 50) / 100) * window.innerHeight
           const distancia = Math.sqrt(distanciaX * distanciaX + distanciaY * distanciaY) || 1

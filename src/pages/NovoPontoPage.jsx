@@ -40,7 +40,7 @@ const NovoPontoPage = () => {
 
   return (
     <div className="pagina lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:items-start lg:gap-16">
-      <div className="grid gap-10 lg:sticky lg:top-32">
+      <div className="grid gap-10 lg:top-32 lg:tela-alta:sticky">
         <CabecalhoPagina
           rotulo="Rede do bairro"
           titulo="Cadastrar um ponto"

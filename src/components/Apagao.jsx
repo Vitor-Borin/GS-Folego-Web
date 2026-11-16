@@ -54,7 +54,7 @@ const Apagao = () => {
 
                   <div className="js-marco absolute left-[10%]" style={{ top: `${(1 - semLuzEm12Horas) * 100}%` }}>
                     <span className="absolute -left-1.5 -top-1.5 block size-3 rounded-full bg-white ring-4 ring-white/25" />
-                    <p className="absolute bottom-3 left-3 w-max rounded-xl bg-white px-3 py-2 text-sm leading-tight text-tinta">
+                    <p className="absolute bottom-3 left-3 w-max max-w-[56vw] rounded-xl bg-white px-3 py-2 text-sm leading-tight text-tinta md:max-w-none">
                       <strong className="block font-medium">12 horas: a bateria acabou</strong>
                       cerca de {porCento(semLuzEm12Horas)} ainda sem luz
                     </p>

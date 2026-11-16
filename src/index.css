@@ -11,6 +11,18 @@
   --font-texto: "Host Grotesk", "Segoe UI", sans-serif;
 }
 
+@custom-variant tela-media {
+  @media (min-height: 36rem) {
+    @slot;
+  }
+}
+
+@custom-variant tela-alta {
+  @media (min-height: 52rem) {
+    @slot;
+  }
+}
+
 @layer base {
   body {
     @apply bg-papel font-texto text-tinta antialiased print:bg-white;
@@ -114,5 +126,5 @@
 }
 
 .logo-grade {
-  --celula: min(6.2vw, 7.2svh, 3.6rem);
+  --celula: min(6.2vw, 6.6svh, 3.6rem);
 }

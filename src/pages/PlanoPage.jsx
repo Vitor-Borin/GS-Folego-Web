@@ -37,7 +37,7 @@ const PlanoPage = () => {
       </div>
 
       <div className="grid gap-4 lg:grid-cols-[minmax(0,24rem)_minmax(0,1fr)] lg:items-start print:block">
-        <section className="folha grid gap-8 md:p-8 lg:sticky lg:top-28 print:hidden">
+        <section className="folha grid gap-8 md:p-8 lg:top-28 lg:tela-alta:sticky print:hidden">
           <div className="grid gap-8">
             <h2 className="subtitulo text-2xl">1. A sua bateria</h2>
             <ControleDeslizante

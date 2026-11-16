@@ -11,7 +11,7 @@ const LogoDeFotos = () => {
 
   return (
     <section className="js-logo relative grid h-svh place-items-center overflow-hidden bg-papel px-4">
-      <div className="grid justify-items-center gap-10">
+      <div className="grid justify-items-center gap-[min(2.5rem,5svh)]">
         <div
           role="img"
           aria-label={`Fotos do bairro formando o logo do ${projeto.nome}: uma casa com uma janela acesa`}
@@ -36,7 +36,7 @@ const LogoDeFotos = () => {
         </div>
 
         <div className="js-logo-nome grid justify-items-center gap-3 text-center">
-          <p className="titulo text-[clamp(3rem,7vw,6rem)]">{projeto.nome}</p>
+          <p className="titulo text-[clamp(3rem,min(7vw,13svh),6rem)]">{projeto.nome}</p>
           <p className="max-w-md text-lg text-tinta/70">{assinatura.frase}</p>
         </div>
       </div>

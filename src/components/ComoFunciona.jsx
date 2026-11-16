@@ -15,11 +15,11 @@ const ComoFunciona = () => {
       <div className="mx-auto grid max-w-6xl gap-12 md:gap-16">
         <CabecalhoDeSecao etiqueta={comoFunciona.etiqueta} linhas={comoFunciona.linhas} />
 
-        <ol className="grid gap-4">
+        <ol className="grid gap-4 md:tela-media:auto-rows-fr">
           {comoFunciona.passos.map((passo, indice) => (
-            <li key={passo.titulo} className={`js-passo md:sticky ${paradas[indice]}`}>
+            <li key={passo.titulo} className={`js-passo md:tela-media:sticky ${paradas[indice]}`}>
               <article
-                className={`js-passo-cartao grid origin-top gap-10 overflow-hidden rounded-[2rem] p-6 md:h-[min(32rem,calc(100svh-11rem))] md:grid-cols-2 md:gap-12 md:p-10 ${cores[indice]}`}
+                className={`js-passo-cartao grid h-full origin-top gap-10 overflow-hidden rounded-[2rem] p-6 md:grid-cols-2 md:gap-12 md:p-10 md:tela-media:min-h-[min(32rem,calc(100svh-11rem))] ${cores[indice]}`}
               >
                 <div className="grid content-between gap-10">
                   <p className="flex items-center gap-3 text-sm">

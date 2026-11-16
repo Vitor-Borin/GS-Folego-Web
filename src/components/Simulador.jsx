@@ -62,7 +62,7 @@ const Simulador = () => {
               {estadosDaBateria.map((item) => (
                 <li
                   key={item.valor}
-                  className={`grid gap-0.5 rounded-2xl px-2 py-2 transition-colors duration-500 ${
+                  className={`grid gap-0.5 rounded-2xl px-1 py-2 transition-colors duration-500 sm:px-2 ${
                     item.valor === estado ? "bg-white text-tinta" : "bg-current/10"
                   }`}
                 >
