@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "api:local": "node mockapi/servidor-local.mjs mockapi 4010"
+    "api:local": "node mockapi/servidor-local.mjs mockapi 4010",
+    "api:semear": "node mockapi/semear.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",

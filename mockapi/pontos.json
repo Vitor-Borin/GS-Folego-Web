@@ -57,10 +57,10 @@
   },
   {
     "id": "5",
-    "nome": "UBS Cambuci",
+    "nome": "Unidade de saúde (exemplo)",
     "tipo": "servico",
     "bairro": "Cambuci",
-    "endereco": "Avenida Lacerda Franco, altura do 700",
+    "endereco": "Endereço de exemplo, Cambuci",
     "telefone": "(11) 90000-0005",
     "fonte": "gerador",
     "descricao": "Gerador da unidade. Recarrega baterias no horário de atendimento.",
