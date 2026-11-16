@@ -17,7 +17,7 @@ const Constelacao = ({ resumo, temEnergia, carregando, erro }) => {
           {estrelas.map((estrela) => (
             <div
               key={estrela.id}
-              className="js-foto absolute left-[var(--x-celular)] top-[var(--y-celular)] -translate-x-1/2 -translate-y-1/2 md:left-[var(--x)] md:top-[var(--y)]"
+              className="js-foto absolute left-[var(--x-celular)] top-[var(--y-celular)] -translate-x-1/2 -translate-y-1/2 md:tela-media:left-[var(--x)] md:tela-media:top-[var(--y)]"
               style={{
                 "--x": `${estrela.esquerda}%`,
                 "--y": `${estrela.topo}%`,
@@ -55,7 +55,7 @@ const Constelacao = ({ resumo, temEnergia, carregando, erro }) => {
             {!carregando && !erro && resumo}
           </p>
 
-          <h1 className="titulo text-[clamp(2.4rem,min(5.4vw,11svh),5.25rem)]">
+          <h1 className="titulo text-balance text-[clamp(2.4rem,min(5.4vw,11svh),5.25rem)]">
             {projeto.linhasDoTitulo.map((linha) => (
               <span key={linha} className="block overflow-hidden pb-[0.12em]">
                 <span className="js-ceu-linha block">{linha}</span>

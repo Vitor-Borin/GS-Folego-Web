@@ -32,7 +32,9 @@ const FolhaDoPlano = ({ energia, consumo, minutos, estado, bairro, pontos, redeV
             <span>A bateria dura cerca de</span>
             <span className="rounded-full bg-white px-3 py-1 text-tinta">{rotuloDoEstado(estado)}</span>
           </p>
-          <p className="titulo text-6xl tabular-nums md:text-7xl print:text-4xl">{textoDaDuracao(minutos)}</p>
+          <p className="titulo text-6xl tabular-nums md:text-7xl lg:text-5xl xl:text-7xl print:text-4xl">
+            {textoDaDuracao(minutos)}
+          </p>
         </div>
 
         <div className="grid content-between gap-6 rounded-3xl bg-papel p-6 print:gap-2 print:p-4">

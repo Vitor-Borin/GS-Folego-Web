@@ -10,7 +10,7 @@ const CartaoPonto = ({ ponto, agora, ocupado, aoConfirmar, aoApagar }) => {
 
   return (
     <li data-flip-id={`ponto-${ponto.id}`} className="js-cartao js-entrada">
-      <article className="cartao grid h-full content-between gap-8 p-6">
+      <article className="cartao grid h-full content-between gap-8 p-5 sm:p-6">
         <div className="grid gap-4">
           <p className="flex items-center justify-between gap-3">
             <span className="dado">
@@ -44,23 +44,25 @@ const CartaoPonto = ({ ponto, agora, ocupado, aoConfirmar, aoApagar }) => {
                 type="button"
                 disabled={ocupado}
                 onClick={() => aoConfirmar(ponto)}
-                className="botao botao-tinta"
+                className="botao botao-tinta px-4"
               >
                 <PiCheckBold size={16} aria-hidden="true" />
                 Confirmar agora
               </button>
-              <Link to={`/rede/${ponto.id}`} className="botao botao-linha px-3.5" aria-label={`Editar ${ponto.nome}`}>
-                <PiPencilSimple size={18} aria-hidden="true" />
-              </Link>
-              <button
-                type="button"
-                disabled={ocupado}
-                onClick={() => setQuerApagar(true)}
-                className="botao botao-linha px-3.5"
-                aria-label={`Apagar ${ponto.nome}`}
-              >
-                <PiTrash size={18} aria-hidden="true" />
-              </button>
+              <span className="flex gap-2">
+                <Link to={`/rede/${ponto.id}`} className="botao botao-linha px-3.5" aria-label={`Editar ${ponto.nome}`}>
+                  <PiPencilSimple size={18} aria-hidden="true" />
+                </Link>
+                <button
+                  type="button"
+                  disabled={ocupado}
+                  onClick={() => setQuerApagar(true)}
+                  className="botao botao-linha px-3.5"
+                  aria-label={`Apagar ${ponto.nome}`}
+                >
+                  <PiTrash size={18} aria-hidden="true" />
+                </button>
+              </span>
             </div>
           )}
 

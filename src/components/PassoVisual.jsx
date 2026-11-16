@@ -43,9 +43,9 @@ const PassoVisual = ({ tipo }) => {
             <span>×</span>
             <span className="rounded-full bg-papel px-3 py-1">60</span>
           </p>
-          <p className="flex items-baseline justify-between gap-4 border-t border-tinta/10 pt-5">
+          <p className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-t border-tinta/10 pt-5">
             <span className="dado">Tempo de bateria</span>
-            <span className="titulo whitespace-nowrap text-6xl tabular-nums">{nobreakComum}</span>
+            <span className="titulo text-6xl tabular-nums">{nobreakComum}</span>
           </p>
         </div>
       )}
@@ -60,7 +60,7 @@ const PassoVisual = ({ tipo }) => {
             <span className="dado">Exemplo · Bela Vista</span>
           </p>
           <p className="subtitulo text-2xl md:text-3xl">Bateria carregada para o nobreak</p>
-          <p className="flex items-baseline justify-between gap-4 border-t border-tinta/10 pt-5">
+          <p className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-t border-tinta/10 pt-5">
             <span className="dado">Bateria restante</span>
             <span className="titulo text-5xl tabular-nums">1h47</span>
           </p>

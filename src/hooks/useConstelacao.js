@@ -43,7 +43,7 @@ const useConstelacao = (estrelas) => {
         const profundidade = estrela.profundidade
 
         const direcao = () => {
-          const noCelular = window.innerWidth < 768
+          const noCelular = window.innerWidth < 768 || window.innerHeight < 576
           const faixa = estrela.acimaNoCelular ? 10 : 90
           const esquerda = noCelular ? estrela.esquerdaNoCelular : estrela.esquerda
           const topo = noCelular ? faixa : estrela.topo

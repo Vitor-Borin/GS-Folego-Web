@@ -39,8 +39,8 @@ const NovoPontoPage = () => {
   const nomeDaPrevia = formulario.nome.trim() === "" ? "Nome do ponto" : formulario.nome
 
   return (
-    <div className="pagina lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:items-start lg:gap-16">
-      <div className="grid gap-10 lg:top-32 lg:tela-alta:sticky">
+    <div className="pagina xl:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] xl:items-start xl:gap-16">
+      <div className="grid gap-10 xl:top-32 xl:tela-alta:sticky">
         <CabecalhoPagina
           rotulo="Rede do bairro"
           titulo="Cadastrar um ponto"

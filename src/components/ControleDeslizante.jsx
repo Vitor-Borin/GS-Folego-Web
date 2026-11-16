@@ -33,7 +33,10 @@ const ControleDeslizante = ({ id, rotulo, valor, unidade, minimo, maximo, passo,
                 valor === exemplo.valor ? "border-tinta bg-tinta text-white" : "border-tinta/20 hover:border-tinta"
               }`}
             >
-              {exemplo.rotulo} · {exemplo.valor.toLocaleString("pt-BR")} {unidade}
+              {exemplo.rotulo} ·{" "}
+              <span className="whitespace-nowrap">
+                {exemplo.valor.toLocaleString("pt-BR")} {unidade}
+              </span>
             </button>
           </li>
         ))}
