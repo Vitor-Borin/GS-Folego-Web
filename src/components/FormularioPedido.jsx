@@ -1,7 +1,7 @@
 import Campo from "./Campo"
 import { tiposDeAjuda } from "../data/opcoes"
 
-const FormularioPedido = ({ formulario, ocupado, aoEnviar }) => {
+const FormularioPedido = ({ formulario, ocupado, travado, aoEnviar }) => {
   const enviar = (evento) => {
     evento.preventDefault()
     aoEnviar()
@@ -33,7 +33,7 @@ const FormularioPedido = ({ formulario, ocupado, aoEnviar }) => {
         valor={formulario.titulo}
         aoMudar={formulario.setTitulo}
         erro={formulario.erros.titulo}
-        dica="Em poucas palavras, sem dado de saúde."
+        dica="Em poucas palavras. Não escreva doença nem diagnóstico."
       />
       <Campo
         id="pedido-bairro"
@@ -51,7 +51,7 @@ const FormularioPedido = ({ formulario, ocupado, aoEnviar }) => {
         erro={formulario.erros.detalhe}
         dica={`${formulario.detalhe.length} de 200 letras`}
       />
-      <button type="submit" disabled={ocupado} className="botao botao-tinta justify-self-start">
+      <button type="submit" disabled={ocupado || travado} className="botao botao-tinta justify-self-start">
         {ocupado ? "Enviando" : "Abrir pedido"}
       </button>
     </form>

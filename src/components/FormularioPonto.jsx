@@ -1,7 +1,7 @@
 import Campo from "./Campo"
 import { fontesDeEnergia, tiposDePonto } from "../data/opcoes"
 
-const FormularioPonto = ({ formulario, ocupado, textoDoBotao, aoEnviar, children }) => {
+const FormularioPonto = ({ formulario, ocupado, travado, textoDoBotao, aoEnviar, children }) => {
   const enviar = (evento) => {
     evento.preventDefault()
     aoEnviar()
@@ -47,7 +47,7 @@ const FormularioPonto = ({ formulario, ocupado, textoDoBotao, aoEnviar, children
           valor={formulario.telefone}
           aoMudar={formulario.setTelefone}
           erro={formulario.erros.telefone}
-          dica="Vai para o plano impresso das famílias."
+          dica="Com DDD. Vai para o plano impresso das famílias."
         />
         <Campo
           id="ponto-fonte"
@@ -57,6 +57,7 @@ const FormularioPonto = ({ formulario, ocupado, textoDoBotao, aoEnviar, children
           valor={formulario.fonte}
           aoMudar={formulario.setFonte}
           erro={formulario.erros.fonte}
+          dica="Gerador só funciona em área aberta."
         />
       </div>
 
@@ -104,7 +105,7 @@ const FormularioPonto = ({ formulario, ocupado, textoDoBotao, aoEnviar, children
       </div>
 
       <div className="flex flex-wrap items-center gap-4 border-t border-tinta/10 pt-6">
-        <button type="submit" disabled={ocupado} className="botao botao-tinta">
+        <button type="submit" disabled={ocupado || travado} className="botao botao-tinta">
           {ocupado ? "Salvando" : textoDoBotao}
         </button>
         {children}

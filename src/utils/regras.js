@@ -9,6 +9,24 @@ export const minutosEntre = (agora, dataIso) => {
   return Math.max(0, minutos)
 }
 
+export const soAlgarismos = (texto) => {
+  if (texto === "") {
+    return false
+  }
+
+  for (let posicao = 0; posicao < texto.length; posicao = posicao + 1) {
+    if (!"0123456789".includes(texto[posicao])) {
+      return false
+    }
+  }
+
+  return true
+}
+
+export const algarismosDoTelefone = (telefone) => {
+  return telefone.replaceAll("(", "").replaceAll(")", "").replaceAll("-", "").replaceAll(" ", "")
+}
+
 export const textoDoTempo = (minutos) => {
   if (minutos < 1) {
     return "agora"
@@ -112,7 +130,7 @@ export const resumoDaRede = (pontos, agora) => {
   }
 
   if (confirmados === 0) {
-    return pontos.length === 1 ? "1 ponto na rede, sem confirmação agora" : `${pontos.length} pontos na rede, sem confirmação agora`
+    return pontos.length === 1 ? "1 ponto cadastrado, sem confirmação agora" : `${pontos.length} pontos cadastrados, sem confirmação agora`
   }
 
   return confirmados === 1 ? "1 ponto com energia agora" : `${confirmados} pontos com energia agora`
@@ -131,23 +149,27 @@ export const somarVagas = (pontos, agora) => {
 export const pontoRepetido = (pontos, nome, bairro) => {
   const repetido = pontos.find((ponto) => {
     const mesmoNome = ponto.nome.trim().toLowerCase() === nome.trim().toLowerCase()
-    const mesmoBairro = ponto.bairro.trim().toLowerCase() === bairro.trim().toLowerCase()
 
-    return mesmoNome && mesmoBairro
+    return mesmoNome && mesmoBairro(ponto.bairro, bairro)
   })
 
   return repetido !== undefined
 }
 
-export const listarBairros = (pontos) => {
-  const nomes = pontos.map((ponto) => ponto.bairro)
+export const mesmoBairro = (bairroA, bairroB) => {
+  return bairroA.trim().toLowerCase() === bairroB.trim().toLowerCase()
+}
 
-  return nomes.filter((nome, indice) => nomes.indexOf(nome) === indice).toSorted()
+export const listarBairros = (pontos) => {
+  const nomes = pontos.map((ponto) => ponto.bairro.trim())
+  const chaves = nomes.map((nome) => nome.toLowerCase())
+
+  return nomes.filter((nome, indice) => chaves.indexOf(nome.toLowerCase()) === indice).toSorted()
 }
 
 export const pontosDoBairro = (pontos, bairro) => {
   return pontos
-    .filter((ponto) => ponto.bairro === bairro && ponto.ativo)
+    .filter((ponto) => mesmoBairro(ponto.bairro, bairro) && ponto.ativo)
     .toSorted((a, b) => {
       const pesoA = a.empresta ? 1 : 0
       const pesoB = b.empresta ? 1 : 0

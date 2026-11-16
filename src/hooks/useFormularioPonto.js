@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { algarismosDoTelefone, soAlgarismos } from "../utils/regras"
 
 const useFormularioPonto = (pontoInicial) => {
   const [nome, setNome] = useState(pontoInicial.nome)
@@ -17,8 +18,8 @@ const useFormularioPonto = (pontoInicial) => {
     const novosErros = {}
     let valido = true
 
-    if (nome.trim().length < 3) {
-      novosErros.nome = "Escreva o nome do ponto, com pelo menos 3 letras."
+    if (nome.trim().length < 3 || nome.trim().length > 60) {
+      novosErros.nome = "Escreva o nome do ponto, de 3 a 60 letras."
       valido = false
     }
 
@@ -27,18 +28,20 @@ const useFormularioPonto = (pontoInicial) => {
       valido = false
     }
 
-    if (bairro.trim() === "") {
-      novosErros.bairro = "Escreva o bairro."
+    if (bairro.trim() === "" || bairro.trim().length > 40) {
+      novosErros.bairro = "Escreva o bairro, com até 40 letras."
       valido = false
     }
 
-    if (endereco.trim() === "") {
-      novosErros.endereco = "Escreva o endereço ou um ponto de referência."
+    if (endereco.trim() === "" || endereco.trim().length > 80) {
+      novosErros.endereco = "Escreva o endereço ou um ponto de referência, com até 80 letras."
       valido = false
     }
 
-    if (telefone.trim().length < 8) {
-      novosErros.telefone = "Escreva um telefone com DDD."
+    const numeros = algarismosDoTelefone(telefone)
+
+    if (!soAlgarismos(numeros) || numeros.length < 10 || numeros.length > 11) {
+      novosErros.telefone = "Escreva o telefone com DDD: 10 ou 11 números."
       valido = false
     }
 
@@ -47,8 +50,8 @@ const useFormularioPonto = (pontoInicial) => {
       valido = false
     }
 
-    if (vagas.trim() === "" || isNaN(Number(vagas)) || Number(vagas) < 0 || Number(vagas) > 50) {
-      novosErros.vagas = "Informe um número de 0 a 50."
+    if (!soAlgarismos(vagas.trim()) || Number(vagas) > 50) {
+      novosErros.vagas = "Informe um número inteiro de 0 a 50."
       valido = false
     }
 
@@ -63,6 +66,8 @@ const useFormularioPonto = (pontoInicial) => {
   }
 
   const montarDados = () => {
+    const confirmadoEm = pontoInicial.atualizadoEm ? pontoInicial.atualizadoEm : new Date().toISOString()
+
     return {
       nome: nome.trim(),
       tipo: tipo,
@@ -74,7 +79,7 @@ const useFormularioPonto = (pontoInicial) => {
       vagas: Number(vagas),
       empresta: empresta,
       ativo: ativo,
-      atualizadoEm: new Date().toISOString(),
+      atualizadoEm: confirmadoEm,
     }
   }
 

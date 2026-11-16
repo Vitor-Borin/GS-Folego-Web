@@ -11,7 +11,7 @@ import { pontoRepetido, rotuloDoTipo, textoDaOferta } from "../utils/regras"
 
 const NovoPontoPage = () => {
   const navigate = useNavigate()
-  const { pontos, ocupado, aviso, adicionarPonto } = usePontos()
+  const { pontos, carregando, erro, ocupado, aviso, adicionarPonto } = usePontos()
   const formulario = useFormularioPonto(pontoVazio)
   const [repetido, setRepetido] = useState(false)
 
@@ -75,9 +75,15 @@ const NovoPontoPage = () => {
         <FormularioPonto
           formulario={formulario}
           ocupado={ocupado}
+          travado={carregando || erro}
           textoDoBotao="Cadastrar ponto"
           aoEnviar={enviar}
         >
+          {erro && (
+            <p role="alert" className="font-medium text-perigo">
+              Não deu para ler a rede. Confira a conexão e recarregue a página antes de cadastrar.
+            </p>
+          )}
           {repetido && (
             <p role="alert" className="font-medium text-perigo">
               Já existe um ponto com esse nome nesse bairro.

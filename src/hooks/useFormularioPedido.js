@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { soAlgarismos } from "../utils/regras"
 
 const useFormularioPedido = () => {
   const [ajuda, setAjuda] = useState("")
@@ -17,18 +18,18 @@ const useFormularioPedido = () => {
       valido = false
     }
 
-    if (minutos.trim() === "" || isNaN(Number(minutos)) || Number(minutos) < 0 || Number(minutos) > 1440) {
-      novosErros.minutos = "Informe os minutos de bateria, de 0 a 1440."
+    if (!soAlgarismos(minutos.trim()) || Number(minutos) > 1440) {
+      novosErros.minutos = "Informe os minutos de bateria: número inteiro, de 0 a 1440."
       valido = false
     }
 
-    if (titulo.trim().length < 5) {
-      novosErros.titulo = "Diga em poucas palavras do que você precisa."
+    if (titulo.trim().length < 5 || titulo.trim().length > 80) {
+      novosErros.titulo = "Diga do que você precisa, de 5 a 80 letras."
       valido = false
     }
 
-    if (bairro.trim() === "") {
-      novosErros.bairro = "Escreva o bairro."
+    if (bairro.trim() === "" || bairro.trim().length > 40) {
+      novosErros.bairro = "Escreva o bairro, com até 40 letras."
       valido = false
     }
 

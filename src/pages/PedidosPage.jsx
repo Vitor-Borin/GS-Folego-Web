@@ -89,7 +89,12 @@ const PedidosPage = () => {
       <div className="grid gap-4 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:items-start">
         <section className="folha grid gap-6 md:p-8 lg:sticky lg:top-28">
           <h2 className="subtitulo text-3xl">Abrir um pedido</h2>
-          <FormularioPedido formulario={formulario} ocupado={ocupado} aoEnviar={enviar} />
+          <FormularioPedido
+            formulario={formulario}
+            ocupado={ocupado}
+            travado={carregando || erro}
+            aoEnviar={enviar}
+          />
           <p className="dado border-t border-tinta/10 pt-4">Em emergência, ligue 192.</p>
         </section>
 
@@ -102,7 +107,7 @@ const PedidosPage = () => {
             <Estado
               tipo="erro"
               titulo="Não deu para carregar os pedidos"
-              texto="Confira a conexão e recarregue a página. Em emergência, ligue 192."
+              texto="Confira a conexão e use o botão Atualizar a fila. Em emergência, ligue 192."
             />
           )}
 

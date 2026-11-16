@@ -30,6 +30,7 @@ const usePedidos = () => {
       .then((dados) => {
         setPedidos(dados)
         setAgora(Date.now())
+        setErro(false)
         setOcupado(false)
 
         return true
