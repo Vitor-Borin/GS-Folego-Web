@@ -72,7 +72,7 @@ const FolhaDoPlano = ({ minutos, estado, bairro, pontos, redeVazia }) => {
         )}
 
         {bairro !== "" && pontos.length === 0 && (
-          <p className="rounded-2xl bg-papel p-5 text-tinta/70">Ainda não há ponto cadastrado nesse bairro.</p>
+          <p className="rounded-2xl bg-papel p-5 text-tinta/70">Nenhum ponto desse bairro está na rede agora.</p>
         )}
 
         {pontos.length > 0 && (

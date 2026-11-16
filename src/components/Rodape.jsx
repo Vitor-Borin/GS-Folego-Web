@@ -28,7 +28,7 @@ const Rodape = () => {
                   {pessoa.nome}
                   {pessoa.rm !== "" && <span className="ml-2 text-sm text-white/60">{pessoa.rm}</span>}
                 </span>
-                <span className="text-sm text-white/60">{pessoa.parte}</span>
+                {pessoa.parte !== "" && <span className="text-sm text-white/60">{pessoa.parte}</span>}
               </li>
             ))}
           </ul>

@@ -147,7 +147,7 @@ export const listarBairros = (pontos) => {
 
 export const pontosDoBairro = (pontos, bairro) => {
   return pontos
-    .filter((ponto) => ponto.bairro === bairro)
+    .filter((ponto) => ponto.bairro === bairro && ponto.ativo)
     .toSorted((a, b) => {
       const pesoA = a.empresta ? 1 : 0
       const pesoB = b.empresta ? 1 : 0
