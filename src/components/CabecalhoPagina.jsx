@@ -5,7 +5,7 @@ const CabecalhoPagina = ({ rotulo, titulo, texto, compacto, children }) => {
 
   return (
     <header className="grid gap-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
-      <div className="grid justify-items-start gap-5">
+      <div className="grid min-w-0 justify-items-start gap-5 wrap-anywhere">
         <p className="etiqueta">{rotulo}</p>
         <h1
           className={`js-titulo-pagina titulo ${

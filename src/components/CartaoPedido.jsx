@@ -73,12 +73,12 @@ const CartaoPedido = ({ pedido, agora, ocupado, aoMudarStatus, aoApagar }) => {
                 {rotuloDoStatus(pedido.status)}
               </span>
               <span className="text-sm font-medium">{rotuloDaAjuda(pedido.ajuda)}</span>
-              <span className="dado">
+              <span className="dado wrap-anywhere">
                 {pedido.bairro} · aberto {tempo}
               </span>
             </p>
-            <h3 className={`subtitulo text-2xl ${resolvido ? "line-through" : ""}`}>{pedido.titulo}</h3>
-            {pedido.detalhe !== "" && <p className="max-w-prose text-tinta/70">{pedido.detalhe}</p>}
+            <h3 className={`subtitulo text-2xl wrap-anywhere ${resolvido ? "line-through" : ""}`}>{pedido.titulo}</h3>
+            {pedido.detalhe !== "" && <p className="max-w-prose text-tinta/70 wrap-anywhere">{pedido.detalhe}</p>}
           </div>
 
           <div className="flex flex-wrap items-center gap-2">

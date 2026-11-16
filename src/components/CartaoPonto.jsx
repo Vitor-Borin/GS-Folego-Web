@@ -13,7 +13,7 @@ const CartaoPonto = ({ ponto, agora, ocupado, aoConfirmar, aoApagar }) => {
       <article className="cartao grid h-full content-between gap-8 p-5 sm:p-6">
         <div className="grid gap-4">
           <p className="flex items-center justify-between gap-3">
-            <span className="dado">
+            <span className="dado wrap-anywhere">
               {rotuloDoTipo(ponto.tipo)} · {ponto.bairro}
             </span>
             <span
@@ -24,12 +24,12 @@ const CartaoPonto = ({ ponto, agora, ocupado, aoConfirmar, aoApagar }) => {
               {situacaoCurta(ponto, agora)}
             </span>
           </p>
-          <h2 className="subtitulo text-2xl md:text-3xl">
+          <h2 className="subtitulo text-2xl wrap-anywhere md:text-3xl">
             <Link to={`/rede/${ponto.id}`} className="hover:underline">
               {ponto.nome}
             </Link>
           </h2>
-          <p className="text-tinta/70">{ponto.endereco}</p>
+          <p className="text-tinta/70 wrap-anywhere">{ponto.endereco}</p>
         </div>
 
         <div className="grid gap-4 border-t border-tinta/10 pt-4">

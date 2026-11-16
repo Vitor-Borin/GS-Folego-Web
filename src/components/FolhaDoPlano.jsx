@@ -19,7 +19,7 @@ const FolhaDoPlano = ({ energia, consumo, minutos, estado, bairro, pontos, redeV
           <Marca />
           Plano de apagão
         </p>
-        <p className="dado">
+        <p className="dado wrap-anywhere">
           {projeto.nome} · {bairro === "" ? "bairro a escolher" : bairro}
         </p>
       </header>
@@ -68,7 +68,7 @@ const FolhaDoPlano = ({ energia, consumo, minutos, estado, bairro, pontos, redeV
       </section>
 
       <section className="grid gap-4 print:order-last print:gap-2">
-        <h2 className="subtitulo text-2xl">
+        <h2 className="subtitulo text-2xl wrap-anywhere">
           {bairro === "" ? "Pontos de energia do bairro" : `Pontos de energia em ${bairro}`}
         </h2>
 
@@ -91,7 +91,7 @@ const FolhaDoPlano = ({ energia, consumo, minutos, estado, bairro, pontos, redeV
                 key={ponto.id}
                 className="grid gap-3 rounded-2xl bg-papel p-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-center print:break-inside-avoid print:grid-cols-[minmax(0,1fr)_auto] print:items-center print:px-4 print:py-2"
               >
-                <span className="grid gap-1">
+                <span className="grid gap-1 wrap-anywhere">
                   <span className="text-lg font-medium">{ponto.nome}</span>
                   <span className="text-tinta/70">{ponto.endereco}</span>
                   <span className="dado">
