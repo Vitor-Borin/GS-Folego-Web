@@ -22,6 +22,27 @@ const usePontos = () => {
       })
   }, [])
 
+  const recarregar = () => {
+    setOcupado(true)
+    setAviso("")
+
+    return listarPontos()
+      .then((dados) => {
+        setPontos(dados)
+        setAgora(Date.now())
+        setErro(false)
+        setOcupado(false)
+
+        return true
+      })
+      .catch(() => {
+        setAviso("Não foi possível atualizar a rede. Tente de novo.")
+        setOcupado(false)
+
+        return false
+      })
+  }
+
   const adicionarPonto = (dados) => {
     setOcupado(true)
     setAviso("")
@@ -95,7 +116,7 @@ const usePontos = () => {
       })
   }
 
-  return { pontos, carregando, erro, ocupado, aviso, agora, adicionarPonto, confirmarPonto, apagarPonto }
+  return { pontos, carregando, erro, ocupado, aviso, agora, recarregar, adicionarPonto, confirmarPonto, apagarPonto }
 }
 
 export default usePontos

@@ -1,6 +1,6 @@
 import Marca from "./Marca"
 import { plano, projeto } from "../data/conteudo"
-import { LIMITE_ALERTA_MIN, textoDaDuracao } from "../utils/autonomia"
+import { folgaParaPedir, textoDaDuracao } from "../utils/autonomia"
 import { rotuloDaFonte, rotuloDoEstado, rotuloDoTipo } from "../utils/regras"
 
 const coresDoEstado = {
@@ -9,8 +9,8 @@ const coresDoEstado = {
   critico: "bg-perigo text-white",
 }
 
-const FolhaDoPlano = ({ minutos, estado, bairro, pontos, redeVazia }) => {
-  const folga = minutos - LIMITE_ALERTA_MIN
+const FolhaDoPlano = ({ energia, consumo, minutos, estado, bairro, pontos, redeVazia }) => {
+  const folga = folgaParaPedir(minutos)
 
   return (
     <article className="folha grid gap-8 [print-color-adjust:exact] print:gap-4 print:rounded-none print:p-0">
@@ -36,14 +36,19 @@ const FolhaDoPlano = ({ minutos, estado, bairro, pontos, redeVazia }) => {
         </div>
 
         <div className="grid content-between gap-6 rounded-3xl bg-papel p-6 print:gap-2 print:p-4">
-          <p className="text-sm font-medium">Peça ajuda</p>
-          <p className="titulo text-4xl md:text-5xl print:text-3xl">{folga > 0 ? `${textoDaDuracao(folga)} depois` : "na hora"}</p>
+          <p className="text-sm font-medium">{folga > 0 ? "Peça ajuda em até" : "Peça ajuda"}</p>
+          <p className="titulo text-4xl md:text-5xl print:text-3xl">{folga > 0 ? textoDaDuracao(folga) : "na hora"}</p>
           <p className="text-sm text-tinta/70">
             {folga > 0
-              ? "Contando da queda de luz. É quando a bateria chega a duas horas."
-              : "A bateria dura menos de duas horas. Não espere."}
+              ? "Contando da queda de luz: é quando a bateria chega a duas horas. Se puder, peça antes."
+              : "A conta dá duas horas de bateria ou menos. Peça assim que a luz cair."}
           </p>
         </div>
+
+        <p className="dado md:col-span-2 print:col-span-2">
+          Conta feita com bateria de {energia.toLocaleString("pt-BR")} Wh e aparelho de {consumo} W. É uma
+          estimativa: bateria usada dura menos.
+        </p>
       </section>
 
       <section className="grid gap-4 print:gap-3">
@@ -62,7 +67,7 @@ const FolhaDoPlano = ({ minutos, estado, bairro, pontos, redeVazia }) => {
 
       <section className="grid gap-4 print:order-last print:gap-3">
         <h2 className="subtitulo text-2xl">
-          {bairro === "" ? "Pontos com energia do bairro" : `Pontos com energia em ${bairro}`}
+          {bairro === "" ? "Pontos de energia do bairro" : `Pontos de energia em ${bairro}`}
         </h2>
 
         {bairro === "" && (

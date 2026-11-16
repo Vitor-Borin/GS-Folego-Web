@@ -29,6 +29,10 @@ export const estadoDaBateria = (minutos) => {
   return "reserva"
 }
 
+export const folgaParaPedir = (minutos) => {
+  return Math.max(0, minutos - LIMITE_ALERTA_MIN)
+}
+
 export const textoDaDuracao = (minutos) => {
   if (minutos < 60) {
     return `${minutos} min`

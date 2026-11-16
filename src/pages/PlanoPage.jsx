@@ -24,9 +24,14 @@ const PlanoPage = () => {
     <div className="pagina print:block print:p-0">
       <div className="print:hidden">
         <CabecalhoPagina rotulo={plano.rotulo} titulo={plano.titulo} texto={plano.texto}>
-          <button type="button" onClick={() => window.print()} className="botao botao-tinta">
+          <button
+            type="button"
+            disabled={bairros.length > 0 && bairro === ""}
+            onClick={() => window.print()}
+            className="botao botao-tinta"
+          >
             <PiPrinter size={18} aria-hidden="true" />
-            Imprimir o plano
+            {bairros.length > 0 && bairro === "" ? "Escolha o bairro para imprimir" : "Imprimir o plano"}
           </button>
         </CabecalhoPagina>
       </div>
@@ -97,6 +102,8 @@ const PlanoPage = () => {
         </section>
 
         <FolhaDoPlano
+          energia={energia}
+          consumo={consumo}
           minutos={minutos}
           estado={estado}
           bairro={bairro}
