@@ -8,7 +8,7 @@ import { montarConstelacao } from "../utils/desenho"
 const estrelas = montarConstelacao(fotos)
 
 const Constelacao = ({ resumo, temEnergia, carregando, erro }) => {
-  useConstelacao()
+  useConstelacao(estrelas)
 
   return (
     <section className="js-ceu relative z-0 h-[200svh]">
@@ -18,7 +18,6 @@ const Constelacao = ({ resumo, temEnergia, carregando, erro }) => {
             <div
               key={estrela.id}
               className="js-foto absolute left-[var(--x-celular)] top-[var(--y-celular)] -translate-x-1/2 -translate-y-1/2 md:left-[var(--x)] md:top-[var(--y)]"
-              data-profundidade={estrela.profundidade}
               style={{
                 "--x": `${estrela.esquerda}%`,
                 "--y": `${estrela.topo}%`,
@@ -29,7 +28,7 @@ const Constelacao = ({ resumo, temEnergia, carregando, erro }) => {
                 zIndex: Math.round(estrela.profundidade * 10),
               }}
             >
-              <div className="js-foto-paralaxe" data-profundidade={estrela.profundidade}>
+              <div className="js-foto-paralaxe">
                 <img src={estrela.src} alt="" className="js-foto-imagem block w-full rounded-md" />
               </div>
             </div>

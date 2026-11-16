@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { gsap } from "../gsap"
 import { pseudoAleatorio } from "../utils/desenho"
 
-const useConstelacao = () => {
+const useConstelacao = (estrelas) => {
   useEffect(() => {
     const mm = gsap.matchMedia()
 
@@ -38,21 +38,26 @@ const useConstelacao = () => {
         },
       })
 
-      fotos.forEach((foto) => {
-        const profundidade = Number(foto.dataset.profundidade)
+      fotos.forEach((foto, indice) => {
+        const estrela = estrelas[indice]
+        const profundidade = estrela.profundidade
 
-        const caixa = foto.getBoundingClientRect()
-        const distanciaX = caixa.left + caixa.width / 2 - window.innerWidth / 2
-        const distanciaY = caixa.top + caixa.height / 2 - window.innerHeight / 2
-        const distancia = Math.sqrt(distanciaX * distanciaX + distanciaY * distanciaY) || 1
-        const direcaoX = distanciaX / distancia
-        const direcaoY = distanciaY / distancia
+        const direcao = () => {
+          const noCelular = window.innerWidth < 768
+          const esquerda = noCelular ? estrela.esquerdaNoCelular : estrela.esquerda
+          const topo = noCelular ? estrela.topoNoCelular : estrela.topo
+          const distanciaX = ((esquerda - 50) / 100) * window.innerWidth
+          const distanciaY = ((topo - 50) / 100) * window.innerHeight
+          const distancia = Math.sqrt(distanciaX * distanciaX + distanciaY * distanciaY) || 1
+
+          return { x: distanciaX / distancia, y: distanciaY / distancia }
+        }
 
         voo.to(
           foto,
           {
-            x: () => direcaoX * window.innerWidth * (0.5 + profundidade * 0.45),
-            y: () => direcaoY * window.innerHeight * (0.6 + profundidade * 0.5),
+            x: () => direcao().x * window.innerWidth * (0.5 + profundidade * 0.45),
+            y: () => direcao().y * window.innerHeight * (0.6 + profundidade * 0.5),
             scale: 1.8 + profundidade * 2.4,
             opacity: 1,
             ease: "power2.in",
@@ -75,7 +80,7 @@ const useConstelacao = () => {
         const vertical = evento.clientY / window.innerHeight - 0.5
 
         camadas.forEach((camada, indice) => {
-          const forca = 10 + Number(camada.dataset.profundidade) * 44
+          const forca = 10 + estrelas[indice].profundidade * 44
 
           moverNaHorizontal[indice](-horizontal * forca)
           moverNaVertical[indice](-vertical * forca)
@@ -90,7 +95,7 @@ const useConstelacao = () => {
     })
 
     return () => mm.revert()
-  }, [])
+  }, [estrelas])
 }
 
 export default useConstelacao

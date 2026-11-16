@@ -1,9 +1,9 @@
 [
   {
     "id": "1",
-    "titulo": "Nobreak do concentrador no fim",
+    "titulo": "Preciso de uma bateria carregada",
     "bairro": "Bela Vista",
-    "detalhe": "Preciso de uma bateria carregada até a energia voltar.",
+    "detalhe": "A bateria da casa está no fim. Preciso de outra até a energia voltar.",
     "ajuda": "emprestimo",
     "minutos": 90,
     "status": "aberto",
@@ -11,9 +11,9 @@
   },
   {
     "id": "2",
-    "titulo": "Duas baterias do respirador para recarregar",
+    "titulo": "Duas baterias para recarregar",
     "bairro": "Cambuci",
-    "detalhe": "Um vizinho já está levando as baterias até o posto de saúde.",
+    "detalhe": "Um vizinho já está levando as baterias até o ponto.",
     "ajuda": "recarga",
     "minutos": 240,
     "status": "andamento",
@@ -21,7 +21,7 @@
   },
   {
     "id": "3",
-    "titulo": "Bateria da cadeira motorizada",
+    "titulo": "Bateria para recarregar",
     "bairro": "Liberdade",
     "detalhe": "Recarregada na associação de moradores.",
     "ajuda": "recarga",
@@ -31,9 +31,9 @@
   },
   {
     "id": "4",
-    "titulo": "Aspirador sem bateria reserva",
+    "titulo": "Tomada por uma hora",
     "bairro": "Liberdade",
-    "detalhe": "A bateria interna está quase no fim.",
+    "detalhe": "A bateria está quase no fim e não tenho reserva.",
     "ajuda": "tomada",
     "minutos": 30,
     "status": "aberto",
