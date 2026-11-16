@@ -31,7 +31,8 @@ Global Solution 2026.2 (CitizenTech) · FIAP · Engenharia de Software, 1º ano 
 
 - Projeto acadêmico. **Todos os pontos, telefones e pedidos são simulados.** Nenhum dado de paciente foi usado.
 - O Fôlego não é aparelho médico e não substitui o SAMU, a distribuidora de energia nem a equipe de saúde. **Em emergência, ligue 192.**
-- A conta da bateria é uma estimativa com margem. O consumo de 290 W vem de concentradores domésticos citados em fontes: o número certo está no manual de cada aparelho.
+- A conta da bateria é uma estimativa: bateria usada dura menos. Os 290 W são uma referência para concentrador de oxigênio doméstico, e o número certo está no manual de cada aparelho.
+- O aparelho que percebe a queda de luz (parte de Edge Computing) é um protótipo simulado. No site, quem abre o pedido é a pessoa.
 - O projeto não sabe quais aparelhos aceitam ser ligados numa bateria emprestada. Isso se confirma no manual e com a equipe de saúde.
 
 ## O que a aplicação faz
@@ -40,7 +41,7 @@ Global Solution 2026.2 (CitizenTech) · FIAP · Engenharia de Software, 1º ano 
 |---|---|---|---|
 | `/` | Início | Conta o problema, mostra os quatro passos, tem o simulador de bateria e os três pontos mais recentes da rede | GET `pontos` |
 | `/plano` | Meu plano | Ajustar a bateria e o consumo do aparelho, escolher o bairro e imprimir a folha do plano | GET `pontos` |
-| `/rede` | Rede | Ver os pontos, buscar, filtrar por tipo e por quem empresta bateria, confirmar "com energia agora" e apagar | GET, PUT e DELETE `pontos` |
+| `/rede` | Rede | Ver os pontos, atualizar a lista, buscar, filtrar por tipo e por quem empresta bateria, confirmar "com energia agora" e apagar | GET, PUT e DELETE `pontos` |
 | `/rede/novo` | Cadastrar ponto | Cadastrar um ponto, com prévia de como ele aparece na rede | POST `pontos` |
 | `/rede/:id` | Ponto | Ver, editar e apagar um ponto | GET por id, PUT e DELETE `pontos` |
 | `/pedidos` | Fila de pedidos | Abrir um pedido, dizer "estou a caminho", marcar como resolvido, reabrir, apagar e atualizar a fila | GET, POST, PUT e DELETE `pedidos` |
@@ -61,12 +62,13 @@ Ficam em `src/utils`, fora dos componentes.
 
 - **Tempo de bateria:** minutos = energia (Wh) × 0,85 ÷ consumo (W) × 60. O 0,85 é a perda estimada no inversor.
 - **Estados da bateria:** Reserva (2 h ou mais), Alerta (menos de 2 h, hora de pedir ajuda) e Crítico (menos de 30 min). São os mesmos limites do aparelho, do programa em Python e do relatório de Matemática.
-- **Confirmação do ponto vale por 2 horas.** Depois disso o ponto deixa de contar como "com energia agora" e as tomadas dele saem da soma, até alguém confirmar de novo.
-- **Ponto repetido não entra:** mesmo nome no mesmo bairro é recusado no cadastro.
+- **Confirmação do ponto vale por 2 horas.** Depois disso o ponto deixa de contar como "com energia agora" e as tomadas dele saem da soma, até alguém confirmar de novo. Cadastrar e confirmar renovam a confirmação; editar os dados do ponto não renova.
+- **Ponto repetido não entra:** mesmo nome no mesmo bairro é recusado no cadastro. O bairro é comparado sem diferença de maiúsculas e de espaços.
+- **Validação:** telefone com DDD (10 ou 11 números), tomadas de 0 a 50 e minutos de 0 a 1440, sempre números inteiros, e limite de letras nos textos.
 - **A fila anda pelo relógio:** o tempo que resta num pedido é o que a pessoa informou menos o tempo que já passou. Quem tem menos tempo fica em primeiro e, no empate, o pedido mais antigo. Resolvidos vão para o fim.
 - **Pedido sem solução há mais de um dia sai da fila** e aparece numa lista à parte, porque o relógio dele já não vale.
-- **O pedido não guarda dado de saúde:** só o tipo de ajuda, os minutos de bateria, um resumo e o bairro.
-- **O plano impresso** lista só os pontos do bairro que estão na rede, com quem empresta bateria em primeiro lugar.
+- **O pedido não tem campo para doença nem diagnóstico:** só o tipo de ajuda, os minutos de bateria, um resumo, um detalhe e o bairro. O formulário orienta a não contar o motivo.
+- **O plano impresso** dá o prazo para pedir ajuda (o tempo até a bateria chegar a duas horas) e lista só os pontos do bairro que estão na rede, com quem empresta bateria em primeiro lugar.
 - **A bateria vazia só sai de casa depois que a carregada estiver funcionando no aparelho.**
 
 ## Tecnologias
@@ -139,7 +141,7 @@ Dois recursos na MockAPI, os dois com criar, consultar, atualizar e excluir.
 | Campo | Tipo | Exemplo |
 |---|---|---|
 | `id` | texto (gerado pela API) | `"1"` |
-| `titulo` | texto | `"Nobreak do concentrador no fim"` |
+| `titulo` | texto | `"Preciso de uma bateria carregada"` |
 | `bairro` | texto | `"Bela Vista"` |
 | `detalhe` | texto, até 200 letras | |
 | `ajuda` | texto | `emprestimo`, `recarga` ou `tomada` |
@@ -180,7 +182,7 @@ mockapi/          dados de exemplo, API local de teste e script de carga
 | No mínimo 8 componentes reutilizáveis | 31 em `src/components`. Exemplos usados em mais de uma página: `Campo`, `Estado`, `Indicador`, `CabecalhoPagina`, `CartaoResumo`, `ControleDeslizante`, `FormularioPonto` |
 | `useState` e `useEffect` | Em todos os hooks de dados, por exemplo `src/hooks/usePontos.js` |
 | No mínimo 2 custom hooks | Dados: `usePontos`, `usePonto`, `usePedidos`. Lógica: `useAutonomia`, `useFormularioPonto`, `useFormularioPedido`. Os outros hooks da pasta cuidam das animações |
-| Lógica e dados separados da apresentação | `src/services` (API), `src/utils` (regras) e `src/hooks` (estado). Os componentes só recebem props |
+| Lógica e dados separados da apresentação | `src/services` (API), `src/utils` (regras) e `src/hooks` (estado). Só `src/services/api.js` faz `fetch`. Os componentes recebem os dados por props ou chamam um hook; nenhum fala com a API |
 | API externa com CRUD completo | `src/services/api.js` tem GET, POST, PUT e DELETE, usados nos dois recursos |
 | Funcionalidades ligadas ao tema | Plano de apagão, rede de pontos e fila pelo tempo de bateria |
 | Uso de IA documentado | `AI.md` |
