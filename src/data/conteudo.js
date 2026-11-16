@@ -2,7 +2,6 @@ export const projeto = {
   nome: "Fôlego",
   linhasDoTitulo: ["Quando a luz cai,", "a ajuda mora ao lado."],
   apoio: "O plano de apagão do bairro, para quem depende de energia elétrica para respirar.",
-  cidade: "São Paulo, SP",
   edicao: "Global Solution 2026.2",
 }
 
@@ -10,7 +9,7 @@ export const manifesto = {
   etiqueta: "O problema",
   pedacos: [
     { id: "a", texto: "Em dezembro de 2025, um ciclone deixou" },
-    { id: "b", foto: 34 },
+    { id: "b", foto: 12 },
     { id: "c", texto: "2,2 milhões de imóveis da Grande São Paulo sem luz ao mesmo tempo. Cinco dias depois," },
     { id: "d", foto: 22 },
     { id: "e", texto: "158 mil continuavam no escuro. A bateria de um respirador de casa dura, no melhor relato," },
@@ -23,7 +22,7 @@ export const manifesto = {
 export const apagao = {
   etiqueta: "A conta",
   linhas: ["A luz volta devagar.", "A bateria não espera."],
-  texto: "Ligamos os dois números divulgados do apagão de dezembro de 2025 com uma curva. Ela mostra quantos imóveis ainda estavam sem luz em cada dia.",
+  texto: "Ligamos os dois números divulgados do apagão de dezembro de 2025 com uma curva. Ela estima quantos imóveis ainda estavam sem luz em cada dia.",
   tituloDoGrafico: "Imóveis sem luz depois do pico",
   dias: ["Pico", "Dia 1", "Dia 2", "Dia 3", "Dia 4", "Dia 5"],
   tituloDasBaterias: "Quando a bateria acaba, quantas casas ainda estão no escuro?",
@@ -54,17 +53,17 @@ export const comoFunciona = {
     },
     {
       titulo: "A luz cai",
-      texto: "Um aparelho pequeno, ligado na mesma tomada do respirador, percebe na hora e começa a contar o tempo. Ele apita sem precisar de internet.",
+      texto: "Um aparelho pequeno, ligado na mesma tomada do respirador, percebe a queda e começa a contar o tempo. Ele apita sem precisar de internet. Hoje é um protótipo simulado.",
       visual: "visor",
     },
     {
       titulo: "A fila anda pelo relógio",
-      texto: "Com menos de duas horas de bateria, o pedido entra na fila do bairro. Quem tem menos tempo fica em primeiro.",
+      texto: "Com menos de duas horas de bateria, é hora de abrir o pedido. Ele entra na fila do bairro, e quem tem menos tempo fica em primeiro.",
       visual: "pedido",
     },
     {
       titulo: "A bateria vai até a casa",
-      texto: "Quem ajuda leva uma bateria carregada e traz a vazia para recarregar no ponto. A pessoa que respira por aparelho não precisa sair de casa.",
+      texto: "Quem ajuda leva uma bateria carregada e traz a vazia para recarregar no ponto. A ideia é que a pessoa que respira por aparelho não precise sair de casa.",
       visual: "ponto",
     },
   ],
@@ -74,11 +73,11 @@ export const simulador = {
   etiqueta: "Faça a conta",
   linhas: ["Quanto tempo a sua", "bateria aguenta?"],
   texto: "É a mesma fórmula que roda no aparelho, no programa em Python e no relatório de Matemática.",
-  nota: "Os 290 W são de concentradores domésticos citados em fontes. Confira o manual do seu aparelho.",
+  nota: "Os 290 W são uma referência para concentrador de oxigênio doméstico. O número certo está no manual do seu aparelho.",
   mensagens: {
-    reserva: "Com duas horas ou mais, dá tempo de a bateria reserva chegar com folga.",
-    alerta: "Menos de duas horas. É a hora de pedir ajuda: o pedido entra na fila do bairro.",
-    critico: "Menos de trinta minutos. O alarme fica contínuo. Em emergência, ligue 192.",
+    reserva: "Duas horas ou mais na conta. Combine a ajuda mesmo assim: é uma estimativa.",
+    alerta: "Menos de duas horas. É a hora de abrir o pedido na fila do bairro.",
+    critico: "Menos de trinta minutos. No protótipo do aparelho, o alarme fica contínuo. Sem ajuda a caminho, ligue 192.",
   },
 }
 
@@ -90,10 +89,10 @@ export const plano = {
     "Anote a hora em que a luz caiu. O relógio da bateria começa aí.",
     "Ligue para um ponto desta lista ou abra um pedido no site, se houver sinal no celular.",
     "Combine quem traz a bateria carregada. A vazia só sai de casa depois que a carregada estiver funcionando no aparelho.",
-    "Com menos de 30 minutos de bateria e sem ajuda a caminho, ligue 192.",
+    "Se a pessoa passar mal, ligue 192 na hora. Faça o mesmo com menos de 30 minutos de bateria e sem ajuda a caminho.",
   ],
   emergencia: "Em emergência, ligue 192.",
-  aviso: "Gerador só em área aberta: a fumaça em lugar fechado mata. Este plano organiza a ajuda entre vizinhos e não substitui o SAMU nem a distribuidora. Projeto acadêmico, com dados simulados.",
+  aviso: "Gerador só em área aberta: o gás do escapamento não tem cheiro e mata em lugar fechado. Este plano organiza a ajuda entre vizinhos e não substitui o SAMU nem a distribuidora. Projeto acadêmico, com dados simulados.",
 }
 
 export const assinatura = {
@@ -130,7 +129,7 @@ export const quemFaz = {
 
 export const rede = {
   titulo: "A rede agora",
-  texto: "Estes pontos estão cadastrados neste momento. Qualquer pessoa do bairro pode confirmar um ponto ou abrir um pedido.",
+  texto: "Estes pontos estão cadastrados neste momento. Quem está no ponto confirma que há energia, e qualquer pessoa do bairro pode abrir um pedido.",
 }
 
 export const porDentro = {
@@ -146,11 +145,11 @@ export const porDentro = {
     { nome: "Pitch", faz: "A história contada em três minutos." },
   ],
   ods: [
-    { numero: "3", nome: "Saúde e bem-estar", faz: "Evita que o aparelho pare por falta de energia." },
-    { numero: "7", nome: "Energia limpa e acessível", faz: "Energia confiável para quem não pode ficar sem ela." },
-    { numero: "10", nome: "Redução das desigualdades", faz: "Quem não pode comprar um gerador passa a ter uma rede." },
-    { numero: "11", nome: "Cidades e comunidades sustentáveis", faz: "Menos pessoas afetadas quando o desastre vem." },
-    { numero: "13", nome: "Ação contra a mudança global do clima", faz: "Bairros mais preparados para eventos extremos." },
+    { numero: "3", nome: "Saúde e bem-estar", faz: "Ajuda a família a conseguir energia antes de a bateria do aparelho acabar." },
+    { numero: "7", nome: "Energia limpa e acessível", faz: "Aproxima a energia de reserva de quem não pode ficar sem ela." },
+    { numero: "10", nome: "Redução das desigualdades", faz: "Quem não pode comprar um gerador passa a contar com uma rede." },
+    { numero: "11", nome: "Cidades e comunidades sustentáveis", faz: "Busca reduzir o número de pessoas afetadas quando o desastre vem." },
+    { numero: "13", nome: "Ação contra a mudança global do clima", faz: "Prepara o bairro para eventos extremos, como os que causaram os apagões." },
   ],
 }
 
@@ -164,11 +163,11 @@ export const perguntas = {
     },
     {
       pergunta: "A pessoa precisa ir até o ponto de energia?",
-      resposta: "Quase nunca. O mais comum é a bateria andar: alguém traz uma carregada e leva a vazia para recarregar. Ir até o ponto é só para quem consegue se deslocar.",
+      resposta: "A ideia é que não: quem anda é a bateria. Alguém traz uma carregada e leva a vazia para recarregar. Ir até o ponto é só para quem consegue se deslocar.",
     },
     {
       pergunta: "Trocar a bateria tem risco?",
-      resposta: "Tem, e por isso a troca é combinada antes do apagão. Ninguém abre o aparelho: a bateria emprestada tem tomada comum, e ele é ligado nela como na parede. Confira no manual ou com a equipe de saúde se essa bateria aguenta o aparelho e se ele pode ficar alguns segundos desligado. E a bateria vazia só sai de casa depois que a carregada estiver funcionando.",
+      resposta: "Tem, e por isso a troca é combinada antes do apagão. Primeiro confira no manual ou com a equipe de saúde se o aparelho pode ser ligado numa bateria emprestada, se ela aguenta o consumo dele e se ele pode ficar alguns segundos desligado. Ninguém abre o aparelho: a bateria emprestada tem tomada comum. E a bateria vazia só sai de casa depois que a carregada estiver funcionando.",
     },
     {
       pergunta: "O Fôlego substitui o SAMU ou a distribuidora?",
@@ -180,15 +179,15 @@ export const perguntas = {
     },
     {
       pergunta: "O vizinho fica sabendo do problema de saúde de quem pede ajuda?",
-      resposta: "Não. O pedido mostra só o necessário, como “preciso de uma bateria carregada”. Dado de saúde é sensível e fica de fora.",
+      resposta: "Não. O pedido não tem campo para doença nem diagnóstico: mostra só o necessário, como “preciso de uma bateria carregada”. Quem escreve o resumo é orientado a não contar o motivo.",
     },
     {
       pergunta: "Como o aparelho sabe quanto tempo falta?",
-      resposta: "Ele percebe que a luz caiu e passa a contar o tempo. A duração da bateria vem da conta do simulador desta página, com margem de segurança.",
+      resposta: "Ele percebe que a luz caiu e passa a contar o tempo. A duração da bateria vem da mesma conta do simulador desta página, que é uma estimativa.",
     },
     {
       pergunta: "Posso ligar um gerador dentro de casa?",
-      resposta: "Não. Gerador só em área aberta: a fumaça em lugar fechado mata.",
+      resposta: "Não. Gerador só em área aberta: o gás do escapamento não tem cheiro e mata em lugar fechado.",
     },
   ],
 }
