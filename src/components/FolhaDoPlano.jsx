@@ -13,7 +13,7 @@ const FolhaDoPlano = ({ minutos, estado, bairro, pontos, redeVazia }) => {
   const folga = minutos - LIMITE_ALERTA_MIN
 
   return (
-    <article className="folha grid gap-8 [print-color-adjust:exact] print:gap-5 print:rounded-none print:p-0">
+    <article className="folha grid gap-8 [print-color-adjust:exact] print:gap-4 print:rounded-none print:p-0">
       <header className="flex flex-wrap items-center justify-between gap-3 border-b border-tinta/10 pb-6 print:pb-4">
         <p className="flex items-center gap-2 text-xl font-medium">
           <Marca />
@@ -25,17 +25,19 @@ const FolhaDoPlano = ({ minutos, estado, bairro, pontos, redeVazia }) => {
       </header>
 
       <section className="grid gap-3 md:grid-cols-2 print:grid-cols-2">
-        <div className={`grid content-between gap-6 rounded-3xl p-6 transition-colors duration-500 ${coresDoEstado[estado]}`}>
+        <div
+          className={`grid content-between gap-6 rounded-3xl p-6 transition-colors duration-500 print:gap-3 print:p-4 ${coresDoEstado[estado]}`}
+        >
           <p className="flex items-center justify-between gap-3 text-sm font-medium">
             <span>A bateria dura cerca de</span>
             <span className="rounded-full bg-white px-3 py-1 text-tinta">{rotuloDoEstado(estado)}</span>
           </p>
-          <p className="titulo text-6xl tabular-nums md:text-7xl">{textoDaDuracao(minutos)}</p>
+          <p className="titulo text-6xl tabular-nums md:text-7xl print:text-5xl">{textoDaDuracao(minutos)}</p>
         </div>
 
-        <div className="grid content-between gap-6 rounded-3xl bg-papel p-6">
+        <div className="grid content-between gap-6 rounded-3xl bg-papel p-6 print:gap-2 print:p-4">
           <p className="text-sm font-medium">Peça ajuda</p>
-          <p className="titulo text-4xl md:text-5xl">{folga > 0 ? `${textoDaDuracao(folga)} depois` : "na hora"}</p>
+          <p className="titulo text-4xl md:text-5xl print:text-3xl">{folga > 0 ? `${textoDaDuracao(folga)} depois` : "na hora"}</p>
           <p className="text-sm text-tinta/70">
             {folga > 0
               ? "Contando da queda de luz. É quando a bateria chega a duas horas."
@@ -58,7 +60,7 @@ const FolhaDoPlano = ({ minutos, estado, bairro, pontos, redeVazia }) => {
         </ol>
       </section>
 
-      <section className="grid gap-4 print:gap-3">
+      <section className="grid gap-4 print:order-last print:gap-3">
         <h2 className="subtitulo text-2xl">
           {bairro === "" ? "Pontos com energia do bairro" : `Pontos com energia em ${bairro}`}
         </h2>
@@ -80,7 +82,7 @@ const FolhaDoPlano = ({ minutos, estado, bairro, pontos, redeVazia }) => {
             {pontos.map((ponto) => (
               <li
                 key={ponto.id}
-                className="grid gap-3 rounded-2xl bg-papel p-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-center print:break-inside-avoid print:grid-cols-[minmax(0,1fr)_auto] print:items-center print:p-4"
+                className="grid gap-3 rounded-2xl bg-papel p-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-center print:break-inside-avoid print:grid-cols-[minmax(0,1fr)_auto] print:items-center print:px-4 print:py-3"
               >
                 <span className="grid gap-1">
                   <span className="text-lg font-medium">{ponto.nome}</span>
