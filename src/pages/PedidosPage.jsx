@@ -8,7 +8,7 @@ import useEntradaDaLista from "../hooks/useEntradaDaLista"
 import useFormularioPedido from "../hooks/useFormularioPedido"
 import useListaAnimada, { esquecerPosicoes, guardarPosicoes } from "../hooks/useListaAnimada"
 import usePedidos from "../hooks/usePedidos"
-import { contarCriticos, contarNaFila, contarPorStatus, ordenarPedidos } from "../utils/regras"
+import { contarCriticos, contarNaFila, contarPorStatus, ordenarPedidos, pedidoAntigo } from "../utils/regras"
 
 const PedidosPage = () => {
   const { pedidos, carregando, erro, ocupado, aviso, agora, recarregar, abrirPedido, mudarStatus, apagarPedido } =
@@ -16,6 +16,8 @@ const PedidosPage = () => {
   const formulario = useFormularioPedido()
 
   const pedidosOrdenados = ordenarPedidos(pedidos, agora)
+  const fila = pedidosOrdenados.filter((pedido) => !pedidoAntigo(pedido, agora))
+  const antigos = pedidosOrdenados.filter((pedido) => pedidoAntigo(pedido, agora))
   const assinatura = pedidosOrdenados.map((pedido) => `${pedido.id}:${pedido.status}`).join(",")
 
   useEntradaDaLista(!carregando && !erro)
@@ -78,8 +80,8 @@ const PedidosPage = () => {
 
       {!carregando && !erro && (
         <dl className="grid grid-cols-3 gap-3">
-          <Indicador valor={contarNaFila(pedidos)} rotulo="na fila" destaque />
-          <Indicador valor={contarCriticos(pedidos, agora)} rotulo="com menos de 30 min" />
+          <Indicador valor={contarNaFila(fila)} rotulo="na fila" destaque />
+          <Indicador valor={contarCriticos(fila, agora)} rotulo="com menos de 30 min" />
           <Indicador valor={contarPorStatus(pedidos, "resolvido")} rotulo="resolvidos" />
         </dl>
       )}
@@ -92,6 +94,8 @@ const PedidosPage = () => {
         </section>
 
         <section className="grid content-start gap-4">
+          <h2 className="sr-only">Pedidos na fila</h2>
+
           {carregando && <Estado tipo="carregando" titulo="Buscando os pedidos" />}
 
           {erro && (
@@ -110,17 +114,17 @@ const PedidosPage = () => {
                 </p>
               )}
 
-              {pedidosOrdenados.length === 0 && (
+              {fila.length === 0 && (
                 <Estado
                   tipo="vazio"
-                  titulo="Nenhum pedido por enquanto"
+                  titulo="Nenhum pedido na fila agora"
                   texto="Quando alguém do bairro precisar de ajuda, o pedido aparece aqui."
                 />
               )}
 
-              {pedidosOrdenados.length > 0 && (
+              {fila.length > 0 && (
                 <ul className="grid gap-4">
-                  {pedidosOrdenados.map((pedido) => (
+                  {fila.map((pedido) => (
                     <CartaoPedido
                       key={pedido.id}
                       pedido={pedido}
@@ -131,6 +135,30 @@ const PedidosPage = () => {
                     />
                   ))}
                 </ul>
+              )}
+
+              {antigos.length > 0 && (
+                <>
+                  <div className="mt-8 grid gap-2">
+                    <h2 className="subtitulo text-2xl">Sem resposta há mais de um dia</h2>
+                    <p className="max-w-prose text-tinta/70">
+                      Estes pedidos saíram da fila porque o relógio deles já não vale. Marque como resolvido ou apague.
+                    </p>
+                  </div>
+
+                  <ul className="grid gap-4">
+                    {antigos.map((pedido) => (
+                      <CartaoPedido
+                        key={pedido.id}
+                        pedido={pedido}
+                        agora={agora}
+                        ocupado={ocupado}
+                        aoMudarStatus={aoMudarStatus}
+                        aoApagar={aoApagar}
+                      />
+                    ))}
+                  </ul>
+                </>
               )}
             </>
           )}

@@ -4,6 +4,7 @@ import { estadoDaBateria, textoDaDuracao } from "../utils/autonomia"
 import {
   minutosEntre,
   minutosRestantes,
+  pedidoAntigo,
   rotuloDaAjuda,
   rotuloDoEstado,
   rotuloDoStatus,
@@ -26,9 +27,23 @@ const CartaoPedido = ({ pedido, agora, ocupado, aoMudarStatus, aoApagar }) => {
   const [querApagar, setQuerApagar] = useState(false)
 
   const resolvido = pedido.status === "resolvido"
+  const antigo = pedidoAntigo(pedido, agora)
   const restante = minutosRestantes(pedido, agora)
   const estado = estadoDaBateria(restante)
   const tempo = textoDoTempo(minutosEntre(agora, pedido.criadoEm))
+
+  let corDoQuadro = coresDoRelogio[estado]
+  let rotuloDoQuadro = rotuloDoEstado(estado)
+
+  if (antigo) {
+    corDoQuadro = "bg-papel text-tinta/70"
+    rotuloDoQuadro = "Sem resposta"
+  }
+
+  if (resolvido) {
+    corDoQuadro = "bg-papel text-tinta/70"
+    rotuloDoQuadro = "Resolvido"
+  }
 
   return (
     <li data-flip-id={`pedido-${pedido.id}`} className="js-cartao js-entrada">
@@ -38,13 +53,12 @@ const CartaoPedido = ({ pedido, agora, ocupado, aoMudarStatus, aoApagar }) => {
         }`}
       >
         <div
-          className={`flex items-end justify-between gap-3 rounded-2xl p-4 md:grid md:content-between md:justify-normal ${
-            resolvido ? "bg-papel text-tinta/70" : coresDoRelogio[estado]
-          }`}
+          className={`flex items-end justify-between gap-3 rounded-2xl p-4 md:grid md:content-between md:justify-normal ${corDoQuadro}`}
         >
-          <span className="text-sm font-medium">{resolvido ? "Resolvido" : rotuloDoEstado(estado)}</span>
+          <span className="text-sm font-medium">{rotuloDoQuadro}</span>
           {resolvido && <PiCheckBold size={36} aria-hidden="true" />}
-          {!resolvido && (
+          {antigo && <span className="titulo text-2xl">{tempo}</span>}
+          {!resolvido && !antigo && (
             <span className="grid justify-items-end md:justify-items-start">
               <span className="titulo text-4xl tabular-nums">{textoDaDuracao(restante)}</span>
               <span className="text-xs opacity-80">de bateria</span>
@@ -63,12 +77,12 @@ const CartaoPedido = ({ pedido, agora, ocupado, aoMudarStatus, aoApagar }) => {
                 {pedido.bairro} · aberto {tempo}
               </span>
             </p>
-            <h2 className={`subtitulo text-2xl ${resolvido ? "line-through" : ""}`}>{pedido.titulo}</h2>
+            <h3 className={`subtitulo text-2xl ${resolvido ? "line-through" : ""}`}>{pedido.titulo}</h3>
             {pedido.detalhe !== "" && <p className="max-w-prose text-tinta/70">{pedido.detalhe}</p>}
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
-            {!querApagar && pedido.status === "aberto" && (
+            {!querApagar && !antigo && pedido.status === "aberto" && (
               <button
                 type="button"
                 disabled={ocupado}
@@ -80,7 +94,7 @@ const CartaoPedido = ({ pedido, agora, ocupado, aoMudarStatus, aoApagar }) => {
               </button>
             )}
 
-            {!querApagar && pedido.status === "andamento" && (
+            {!querApagar && (antigo || pedido.status === "andamento") && (
               <button
                 type="button"
                 disabled={ocupado}
