@@ -161,34 +161,42 @@ export const perguntas = {
   linhas: ["O que todo mundo", "pergunta primeiro."],
   itens: [
     {
+      curta: "E se a internet cair junto?",
       pergunta: "E se a internet cair junto com a luz?",
       resposta: "Por isso o plano é feito antes e fica impresso em casa, com os pontos e os telefones. O aparelho apita sem internet. O site ajuda enquanto houver sinal.",
     },
     {
+      curta: "Precisa ir até o ponto?",
       pergunta: "A pessoa precisa ir até o ponto de energia?",
       resposta: "A ideia é que não: quem anda é a bateria. Alguém traz uma carregada e leva a vazia para recarregar. Ir até o ponto é só para quem consegue se deslocar.",
     },
     {
+      curta: "Trocar a bateria tem risco?",
       pergunta: "Trocar a bateria tem risco?",
       resposta: "Tem, e por isso a troca é combinada antes do apagão. Primeiro confira no manual ou com a equipe de saúde se o aparelho pode ser ligado numa bateria emprestada, se ela aguenta o consumo dele e se ele pode ficar alguns segundos desligado. Ninguém abre o aparelho: a bateria emprestada tem tomada comum. E a bateria vazia só sai de casa depois que a carregada estiver funcionando.",
     },
     {
+      curta: "Substitui o SAMU?",
       pergunta: "O Fôlego substitui o SAMU ou a distribuidora?",
       resposta: "Não. Ele organiza a ajuda entre vizinhos enquanto a energia não volta. Em emergência, ligue 192.",
     },
     {
+      curta: "Os dados são reais?",
       pergunta: "Os pontos e os pedidos desta página são reais?",
       resposta: "Não. É um projeto acadêmico e todos os dados são simulados. Nenhum dado de paciente foi usado.",
     },
     {
+      curta: "O vizinho fica sabendo da doença?",
       pergunta: "O vizinho fica sabendo do problema de saúde de quem pede ajuda?",
       resposta: "Não. O pedido não tem campo para doença nem diagnóstico: mostra só o necessário, como “preciso de uma bateria carregada”. Quem escreve o resumo é orientado a não contar o motivo.",
     },
     {
+      curta: "Como o aparelho conta o tempo?",
       pergunta: "Como o aparelho sabe quanto tempo falta?",
       resposta: "Ele percebe que a luz caiu e passa a contar o tempo. A duração da bateria vem da mesma conta do simulador desta página, que é uma estimativa.",
     },
     {
+      curta: "Gerador dentro de casa?",
       pergunta: "Posso ligar um gerador dentro de casa?",
       resposta: "Não. Gerador só em área aberta: o gás do escapamento não tem cheiro e mata em lugar fechado.",
     },
