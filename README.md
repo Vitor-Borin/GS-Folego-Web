@@ -15,7 +15,7 @@ Global Solution 2026.2 (CitizenTech) · FIAP · Engenharia de Software, 1º ano 
 | Como funciona | Antes do apagão, a família monta e imprime o plano (quanto a bateria dura, quando pedir ajuda, pontos do bairro com telefone). Durante, um aparelho na tomada percebe a queda de luz e conta o tempo, o pedido entra numa fila ordenada pelo tempo de bateria que resta, e uma bateria carregada vai até a casa |
 | O que cada parte faz | **Edge Computing:** dispositivo com ESP32 que percebe a queda de luz, conta o tempo e decide sozinho. **Python:** central que simula o apagão e monta a fila. **Matemática:** modelo da bateria descarregando e da cidade voltando a ter luz. **Front-end e Web (este repositório):** o plano, a rede de pontos e a fila de pedidos. **Experiência:** a jornada de quem cuida. **Pitch:** a história em três minutos |
 | Link do repositório | https://github.com/Vitor-Borin/GS-Folego-Web |
-| Link do deploy | **[PREENCHER: link da Vercel]** |
+| Link do deploy | https://gs-folego.vercel.app |
 | Indicador de impacto | Famílias com plano pronto, tempo entre o pedido e a chegada da bateria carregada, pontos ativos e baterias reserva por bairro |
 | ODS conectados | 3 (saúde e bem-estar), 7 (energia limpa e acessível), 10 (redução das desigualdades), 11 (cidades e comunidades sustentáveis) e 13 (ação contra a mudança global do clima) |
 
@@ -24,8 +24,8 @@ Global Solution 2026.2 (CitizenTech) · FIAP · Engenharia de Software, 1º ano 
 | Nome | RM | Parte |
 |---|---|---|
 | Vitor Borin | RM573194 | Front-end Design e Web Development |
-| Ryan Maick | RM573051 | **[PREENCHER: parte]** |
-| Robert Josino | RM571622 | **[PREENCHER: parte]** |
+| Robert Josino | RM571622 | Edge Computing & Computer Systems e Computational Thinking with Python |
+| Ryan Maick | RM573051 | Software & Total Experience Design e Differentiated Problem Solving |
 
 ## Avisos
 
@@ -86,7 +86,7 @@ Tabelas de descarga em potência constante usadas para ajustar o expoente da bat
 3. Abra um ponto, mude o telefone e salve (PUT). Depois use **Apagar este ponto** (DELETE).
 4. Em `/pedidos`, abra um pedido com 20 minutos de bateria (POST). Ele entra no topo da fila, em vermelho.
 5. Clique em **Estou a caminho** e depois em **Marcar como resolvido** (PUT). Apague com a lixeira (DELETE).
-6. Em `/plano`, escolha "Bateria grande" e um bairro e use **Imprimir o plano**.
+6. Em `/plano`, escolha "Bateria de lítio grande" e um bairro e use **Imprimir o plano**.
 
 ## Regras de negócio
 
@@ -212,7 +212,7 @@ mockapi/          dados de exemplo, API local de teste e script de carga
 |---|---|
 | React com Vite | `package.json`, `vite.config.js` |
 | Tailwind CSS | `src/index.css` e as classes em todos os componentes |
-| No mínimo 8 componentes reutilizáveis | 31 em `src/components`. Exemplos usados em mais de uma página: `Campo`, `Estado`, `Indicador`, `CabecalhoPagina`, `CartaoResumo`, `ControleDeslizante`, `FormularioPonto` |
+| No mínimo 8 componentes reutilizáveis | 33 em `src/components`. Exemplos usados em mais de uma página: `Campo`, `Estado`, `Indicador`, `CabecalhoPagina`, `CartaoResumo`, `ControleDeslizante`, `FormularioPonto` |
 | `useState` e `useEffect` | Em todos os hooks de dados, por exemplo `src/hooks/usePontos.js` |
 | No mínimo 2 custom hooks | Dados: `usePontos`, `usePonto`, `usePedidos`. Lógica: `useAutonomia`, `useFormularioPonto`, `useFormularioPedido`. Os outros hooks da pasta cuidam das animações |
 | Lógica e dados separados da apresentação | `src/services` (API), `src/utils` (regras) e `src/hooks` (estado). Só `src/services/api.js` faz `fetch`. Os componentes recebem os dados por props ou chamam um hook; nenhum fala com a API |
@@ -222,7 +222,9 @@ mockapi/          dados de exemplo, API local de teste e script de carga
 
 ## Deploy
 
-Feito na Vercel. O arquivo `vercel.json` reescreve todas as rotas para `/index.html`, para que um link direto como `/rede/3` abra certo. A variável `VITE_API_URL` também precisa estar cadastrada no projeto da Vercel.
+Feito na Vercel: https://gs-folego.vercel.app
+
+O arquivo `vercel.json` reescreve todas as rotas para `/index.html`, para que um link direto como `/rede/3` abra certo. A variável `VITE_API_URL` também precisa estar cadastrada no projeto da Vercel.
 
 ## Acessibilidade e uso no celular
 
