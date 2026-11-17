@@ -31,7 +31,8 @@ Global Solution 2026.2 (CitizenTech) · FIAP · Engenharia de Software, 1º ano 
 
 - Projeto acadêmico. **Todos os pontos, telefones e pedidos são simulados.** Nenhum dado de paciente foi usado.
 - O Fôlego não é aparelho médico e não substitui o SAMU, a distribuidora de energia nem a equipe de saúde. **Em emergência, ligue 192.**
-- A conta da bateria mostra o melhor caso. Bateria usada dura menos, e um nobreak pequeno ligado a um aparelho de muita potência dura bem menos do que a divisão simples indica: pela ficha de uma bateria de 12 V e 7 Ah (Ritar RT1270), ela não sustenta 290 W nem por cinco minutos. O número certo de cada aparelho está na etiqueta ou no manual.
+- Os manuais de nobreak comum (APC, TS Shara, Intelbras) avisam que ele não foi feito para equipamento de sustentação da vida nem para motor, e alguns desligam a saída quando a carga é muito baixa. O site calcula o tempo, mas a escolha da fonte reserva de cada aparelho é da equipe de saúde.
+- A conta da bateria vale para bateria nova, a 25 °C. Para bateria de chumbo, como a do nobreak, ela já desconta o que a bateria perde quando o aparelho puxa muita potência. Bateria usada dura menos, e no frio também. O número certo de cada aparelho está na etiqueta ou no manual.
 - Os valores de exemplo do simulador vêm de manuais e fichas de modelos comuns, listados em "Fontes dos exemplos do simulador".
 - O aparelho que percebe a queda de luz (parte de Edge Computing) é um protótipo simulado. No site, quem abre o pedido é a pessoa.
 - O projeto não sabe quais aparelhos aceitam ser ligados numa bateria emprestada. Isso se confirma no manual e com a equipe de saúde.
@@ -49,9 +50,22 @@ Global Solution 2026.2 (CitizenTech) · FIAP · Engenharia de Software, 1º ano 
 | Nobreak comum | 84 Wh | SMS Station II 600 VA: uma bateria de 12 V e 7 Ah. [Catálogo](https://content.voltimum.com/br/3263/catalogo-23003-station_ii.pdf) |
 | Nobreak de 1.200 VA | 120 Wh | SMS Station II 1200 VA: duas baterias de 12 V e 5 Ah (mesmo catálogo). |
 | Estação portátil | 512 Wh | EcoFlow RIVER 2 Max. [Página do produto](https://br.ecoflow.com/products/river-2-max-portable-power-station) |
-| Bateria grande | 1.200 Wh | Valor de exemplo do grupo, sem modelo de referência. |
+| Bateria de lítio grande | 1.200 Wh | Valor de exemplo do grupo, sem modelo de referência. |
 
-Cada valor é de um modelo específico e serve só de exemplo. A ficha da bateria de nobreak citada nos avisos é a [Ritar RT1270](https://images.thdstatic.com/catalog/pdfImages/0b/0bfc2654-b742-47e0-b673-29f251c2342d.pdf).
+Cada valor é de um modelo específico e serve só de exemplo.
+
+### Fontes da fórmula da bateria
+
+Tabelas de descarga em potência constante usadas para ajustar o expoente da bateria de chumbo:
+
+- Moura, manual técnico da linha VRLA MVA (12MVA-5, 12MVA-7, 12MVA-9 e 12MVA-100): [manual](https://www.moura.com.br/assets/pdf/produtos/estacionarias/vrla/MANUAL_TECNICO_MOURA_VRLA_MVA_V5_18_DEZEMBRO_2024_ANATEL.pdf)
+- CSB GP1272 (12 V, 7,2 Ah): [ficha](https://csb-battery.com/wp-content/uploads/2026/03/CSB-Datasheet-GP1272-01312026.pdf)
+- Long WP7.2-12 e WP5-12: [ficha de 7,2 Ah](https://baterias.com/fichastecnicas/data-sheet-battery-long-wp7_2-12-72ah-12v-en.pdf) e [ficha de 5 Ah](https://baterias.com/fichastecnicas/data-sheet-battery-long-wp5-12-5ah-12v-en.pdf)
+- Ritar RT1270 (12 V, 7 Ah): [ficha](https://images.thdstatic.com/catalog/pdfImages/0b/0bfc2654-b742-47e0-b673-29f251c2342d.pdf)
+- Victron Energy, expoente de Peukert padrão de 1,25 para baterias de chumbo: [manual](https://www.victronenergy.com/media/pg/BMV-700/en/battery-capacity-and-peukert-exponent.html)
+- Rendimento de 85% do nobreak em modo bateria: catálogo SMS Station II, citado na tabela acima.
+- Autonomia publicada pela APC para os nobreaks BZ400, BZ600 e BZ700 (bateria de 12 V e 7 Ah), usada para conferir a fórmula, e os avisos sobre motor e sustentação da vida: [manual](https://ckm-content.se.com/ckmContent/sfc/servlet.shepherd/document/download/0698V00000mKZCnQAO)
+- Conta de tempo de uso das estações portáteis de lítio (capacidade × 0,85 ÷ potência), que é a fórmula com k = 1: [EcoFlow](https://www.ecoflow.com/us/blog/battery-run-time-calculator), [Jackery](https://uk.jackery.com/blogs/all/what-is-a-watthour) e [Anker](https://www.ankersolix.com/blogs/portable-power-station/how-long-will-a-power-station-last)
 
 ## O que a aplicação faz
 
@@ -78,7 +92,8 @@ Cada valor é de um modelo específico e serve só de exemplo. A ficha da bateri
 
 Ficam em `src/utils`, fora dos componentes.
 
-- **Tempo de bateria:** minutos = energia (Wh) × 0,85 ÷ consumo (W) × 60. O 0,85 é a perda estimada no inversor.
+- **Tempo de bateria:** horas = 20 × (energia × 0,85 ÷ (consumo × 20)) elevado a k, e minutos = horas × 60, arredondado. O 0,85 é o rendimento do inversor e 20 são as horas do regime em que a capacidade da bateria é medida. O expoente k é 1,3 para bateria de chumbo (nobreak) e 1 para bateria de lítio (estação portátil). Com k = 1 a conta vira energia × 0,85 ÷ consumo.
+- **Por que o expoente:** bateria de chumbo entrega menos energia quanto mais rápido é descarregada (lei de Peukert). O 1,3 foi ajustado com as tabelas de descarga de dez fichas de fabricantes (lista em "Fontes da fórmula da bateria"): de 15 minutos para cima, a conta nunca passa do que as fichas dizem.
 - **Estados da bateria:** Reserva (2 h ou mais), Alerta (menos de 2 h, hora de pedir ajuda) e Crítico (menos de 30 min). São os mesmos limites do aparelho, do programa em Python e do relatório de Matemática.
 - **Confirmação do ponto vale por 2 horas.** Depois disso o ponto deixa de contar como "com energia agora" e as tomadas dele saem da soma, até alguém confirmar de novo. Cadastrar e confirmar renovam a confirmação; editar os dados do ponto não renova.
 - **Ponto repetido não entra:** mesmo nome no mesmo bairro é recusado no cadastro. O bairro é comparado sem diferença de maiúsculas e de espaços.
