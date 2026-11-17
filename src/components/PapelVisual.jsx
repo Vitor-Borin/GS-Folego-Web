@@ -12,7 +12,7 @@ const PapelVisual = ({ tipo }) => {
         <div className="cartao grid gap-4 rounded-3xl md:p-6">
           <p className="dado flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
             <span>Plano de apagão</span>
-            <span>Exemplo · Bela Vista</span>
+            <span>Exemplo · Parque Arariba</span>
           </p>
           <div className="grid gap-3 min-[400px]:grid-cols-2">
             <p className="grid content-between gap-2 rounded-2xl bg-perigo p-4 text-white">
@@ -40,10 +40,10 @@ const PapelVisual = ({ tipo }) => {
       {tipo === "ponto" && (
         <div className="cartao grid gap-4 rounded-3xl md:p-6">
           <p className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
-            <span className="dado">Exemplo · Comércio · Bela Vista</span>
+            <span className="dado">Exemplo · Comércio · Parque Arariba</span>
             <span className="etiqueta">Com energia</span>
           </p>
-          <p className="subtitulo text-2xl md:text-3xl">Padaria Estrela do Bixiga</p>
+          <p className="subtitulo text-2xl md:text-3xl">Padaria Estrela do Arariba</p>
           <p className="grid gap-1 border-t border-tinta/10 pt-4">
             <span className="font-medium">Com energia, confirmado há 19 min</span>
             <span className="dado">Gerador · 3 tomadas livres · empresta bateria</span>
