@@ -64,7 +64,7 @@ const PassoVisual = ({ tipo }) => {
               <PiBellRingingFill size={16} />
               Alerta
             </span>
-            <span className="dado">Exemplo · Bela Vista</span>
+            <span className="dado">Exemplo · Parque Arariba</span>
           </p>
           <p className="subtitulo text-2xl md:text-3xl">Bateria carregada para o nobreak</p>
           <p className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-t border-tinta/10 pt-5">
@@ -77,7 +77,7 @@ const PassoVisual = ({ tipo }) => {
       {tipo === "ponto" && (
         <div className="grid w-full max-w-sm rotate-2 gap-5 rounded-3xl bg-papel p-5 md:p-6">
           <p className="flex items-center justify-between gap-3">
-            <span className="dado">Exemplo · Condomínio · Bela Vista</span>
+            <span className="dado">Exemplo · Condomínio · Parque Arariba</span>
             <span className="block size-2.5 rounded-full bg-destaque" />
           </p>
           <p className="subtitulo text-2xl md:text-3xl">Condomínio Mirante</p>
