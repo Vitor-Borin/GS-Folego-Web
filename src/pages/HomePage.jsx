@@ -1,4 +1,5 @@
 import Apagao from "../components/Apagao"
+import Bairro from "../components/Bairro"
 import ChamadaFinal from "../components/ChamadaFinal"
 import Citacao from "../components/Citacao"
 import ComoFunciona from "../components/ComoFunciona"
@@ -31,6 +32,7 @@ const HomePage = () => {
       />
       <Manifesto />
       <Apagao />
+      <Bairro />
       <Citacao />
       <ComoFunciona />
       <Simulador />
