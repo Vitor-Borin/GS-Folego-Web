@@ -24,6 +24,7 @@ export const apagao = {
   linhas: ["A luz volta devagar.", "A bateria não espera."],
   texto: "Ligamos os dois números divulgados do apagão de dezembro de 2025 com uma curva. Ela estima quantos imóveis ainda estavam sem luz em cada dia.",
   tituloDoGrafico: "Imóveis sem luz depois do pico",
+  faixa: { titulo: "As três baterias acabam aqui", texto: "nas primeiras 12 horas" },
   dias: ["Pico", "Dia 1", "Dia 2", "Dia 3", "Dia 4", "Dia 5"],
   tituloDasBaterias: "Quando a bateria acaba, quantas casas ainda estão no escuro?",
   baterias: [

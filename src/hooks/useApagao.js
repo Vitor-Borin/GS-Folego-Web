@@ -22,7 +22,8 @@ const useApagao = () => {
           { clipPath: "inset(0% 0% 0% 0%)", ease: "none", duration: 1 },
           0
         )
-        .from(".js-marco", { autoAlpha: 0, x: -16, ease: "power2.out", duration: 0.2 }, 0.12)
+        .from(".js-faixa", { scaleX: 0, ease: "power2.out", duration: 0.15 }, 0.05)
+        .from(".js-marco", { autoAlpha: 0, y: 12, ease: "power2.out", duration: 0.2 }, 0.14)
 
       gsap.from(".js-barra", {
         scaleX: 0,
