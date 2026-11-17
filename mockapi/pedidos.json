@@ -2,7 +2,7 @@
   {
     "id": "1",
     "titulo": "Preciso de uma bateria carregada",
-    "bairro": "Bela Vista",
+    "bairro": "Parque Arariba",
     "detalhe": "A bateria da casa está no fim. Preciso de outra até a energia voltar.",
     "ajuda": "emprestimo",
     "minutos": 90,
@@ -12,7 +12,7 @@
   {
     "id": "2",
     "titulo": "Duas baterias para recarregar",
-    "bairro": "Cambuci",
+    "bairro": "Jardim Rosana",
     "detalhe": "Um vizinho já está levando as baterias até o ponto.",
     "ajuda": "recarga",
     "minutos": 240,
@@ -22,7 +22,7 @@
   {
     "id": "3",
     "titulo": "Bateria para recarregar",
-    "bairro": "Liberdade",
+    "bairro": "Jardim Iracema",
     "detalhe": "Recarregada na associação de moradores.",
     "ajuda": "recarga",
     "minutos": 300,
@@ -32,7 +32,7 @@
   {
     "id": "4",
     "titulo": "Tomada por uma hora",
-    "bairro": "Liberdade",
+    "bairro": "Jardim Iracema",
     "detalhe": "A bateria está quase no fim e não tenho reserva.",
     "ajuda": "tomada",
     "minutos": 30,
