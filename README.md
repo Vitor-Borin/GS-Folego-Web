@@ -31,9 +31,27 @@ Global Solution 2026.2 (CitizenTech) · FIAP · Engenharia de Software, 1º ano 
 
 - Projeto acadêmico. **Todos os pontos, telefones e pedidos são simulados.** Nenhum dado de paciente foi usado.
 - O Fôlego não é aparelho médico e não substitui o SAMU, a distribuidora de energia nem a equipe de saúde. **Em emergência, ligue 192.**
-- A conta da bateria é uma estimativa: bateria usada dura menos. Os 290 W são uma referência para concentrador de oxigênio doméstico, e o número certo está no manual de cada aparelho.
+- A conta da bateria mostra o melhor caso. Bateria usada dura menos, e um nobreak pequeno ligado a um aparelho de muita potência dura bem menos do que a divisão simples indica: pela ficha de uma bateria de 12 V e 7 Ah (Ritar RT1270), ela não sustenta 290 W nem por cinco minutos. O número certo de cada aparelho está na etiqueta ou no manual.
+- Os valores de exemplo do simulador vêm de manuais e fichas de modelos comuns, listados em "Fontes dos exemplos do simulador".
 - O aparelho que percebe a queda de luz (parte de Edge Computing) é um protótipo simulado. No site, quem abre o pedido é a pessoa.
 - O projeto não sabe quais aparelhos aceitam ser ligados numa bateria emprestada. Isso se confirma no manual e com a equipe de saúde.
+
+### Fontes dos exemplos do simulador
+
+| Exemplo | Valor | De onde vem |
+|---|---|---|
+| Concentrador de oxigênio | 290 W | CAIRE VisionAire 5: "290 W (todas as taxas de fluxo)". [Ficha](https://files.caireinc.com/CutSheets-Lit/ML-CONC0082-6.pdf) |
+| Concentrador portátil | 62 W | Inogen One G5 no ajuste mais alto (61,5 W). [Ficha](https://cdn.hjm.aws.inera.se/5024f94d-9651-4e0f-9616-3fdd569793e1/29d87cb7-68a9-48d5-8ad7-ca3b83f8a9b0/SE_InogenOne-G5_datasheet_2021-05-01_tcm584-580462.pdf) |
+| CPAP | 20 W | ResMed AirSense 10 sem umidificador, no ajuste mais alto (1,66 A em 12 V). [Guia de baterias](https://cdn.shopify.com/s/files/1/2790/7304/files/ResMed_Battery_Guide_Converter.pdf) |
+| CPAP com umidificador | 53 W | ResMed AirSense 10: consumo típico de 53 W. [Manual](https://manualslib.mx/manual/850907/Resmed-Airsense10.html?page=21) |
+| Ventilador domiciliar | 90 W | ResMed Astral: entrada de 90 W contínuos. [Manual](https://manualslib.mx/manual/213586/Resmed-Astral-Serie.html?page=75) |
+| Bomba de dieta | 9 W | Fresenius Kabi Amika: "máximo de 9 W". Valor conferido no manual do fabricante. |
+| Nobreak comum | 84 Wh | SMS Station II 600 VA: uma bateria de 12 V e 7 Ah. [Catálogo](https://content.voltimum.com/br/3263/catalogo-23003-station_ii.pdf) |
+| Nobreak de 1.200 VA | 120 Wh | SMS Station II 1200 VA: duas baterias de 12 V e 5 Ah (mesmo catálogo). |
+| Estação portátil | 512 Wh | EcoFlow RIVER 2 Max. [Página do produto](https://br.ecoflow.com/products/river-2-max-portable-power-station) |
+| Bateria grande | 1.200 Wh | Valor de exemplo do grupo, sem modelo de referência. |
+
+Cada valor é de um modelo específico e serve só de exemplo. A ficha da bateria de nobreak citada nos avisos é a [Ritar RT1270](https://images.thdstatic.com/catalog/pdfImages/0b/0bfc2654-b742-47e0-b673-29f251c2342d.pdf).
 
 ## O que a aplicação faz
 
