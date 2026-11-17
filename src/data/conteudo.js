@@ -75,7 +75,7 @@ export const simulador = {
   linhas: ["Quanto tempo a sua", "bateria aguenta?"],
   texto: "É a mesma fórmula que roda no aparelho, no programa em Python e no relatório de Matemática.",
   nota: "Os valores são exemplos tirados de manuais de modelos comuns. O número certo está na etiqueta ou no manual do seu aparelho.",
-  limite: "A conta vale para bateria nova: bateria usada dura menos.",
+  limite: "A conta vale para bateria nova e não diz se o nobreak consegue ligar o aparelho. Os manuais de nobreak comum avisam que ele não foi feito para motor nem para aparelho de sustentação da vida. Pergunte à equipe de saúde qual fonte reserva serve para o seu aparelho.",
   tipo: "Bateria de chumbo rende menos quanto mais potência o aparelho puxa, e a conta desconta isso. Bateria de lítio quase não perde.",
   mensagens: {
     reserva: "Duas horas ou mais na conta. Combine a ajuda mesmo assim: é uma estimativa.",
