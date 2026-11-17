@@ -48,6 +48,7 @@ Decisões do grupo:
 - As regras da rede, que valem também para o Python e o Edge: a confirmação de energia dura duas horas, o alerta começa em duas horas de bateria e a fila segue o tempo que resta.
 - A direção visual do site, escolhida entre as referências pesquisadas.
 - A regra da troca de bateria, levantada por um integrante do grupo.
+- A escolha do Campo Limpo como bairro do piloto, proposta por integrantes do grupo. A IA levantou os números da Enel e da ANEEL que sustentam a escolha.
 
 ## 4. Validação das respostas
 
