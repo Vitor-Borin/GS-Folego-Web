@@ -120,9 +120,21 @@ Ficam em `src/utils`, fora dos componentes.
 
 ## Instalação e execução
 
+1. Instale as dependências:
+
 ```bash
 npm install
 ```
+
+2. Crie o arquivo `.env` a partir do `.env.example`, que já traz o endereço da API do projeto:
+
+```bash
+cp .env.example .env
+```
+
+No Prompt de Comando do Windows, o comando é `copy .env.example .env`.
+
+3. Rode o projeto:
 
 ```bash
 npm run dev
@@ -130,11 +142,13 @@ npm run dev
 
 O endereço aparece no terminal (normalmente `http://localhost:5173`).
 
-O endereço da API fica na variável `VITE_API_URL`, no arquivo `.env` na raiz do projeto, sem barra no final:
+O endereço da API fica na variável `VITE_API_URL`, sem barra no final. O `.env` fica com esta linha:
 
 ```
-VITE_API_URL=https://SEU-ID.mockapi.io/api/v1
+VITE_API_URL=https://6afc4e51892984c4494b5bd9.mockapi.io/api/v1
 ```
+
+Sem o `.env`, o site abre, mas a rede e os pedidos não carregam.
 
 Outros comandos:
 
@@ -186,7 +200,7 @@ Dois recursos na MockAPI, os dois com criar, consultar, atualizar e excluir.
 
 1. Crie um projeto em [mockapi.io](https://mockapi.io) e, nele, os recursos `pontos` e `pedidos`.
 2. No esquema de cada recurso, deixe só o campo `id` e apague os registros gerados automaticamente.
-3. Copie o endereço do projeto para o `.env`.
+3. Troque o endereço do `.env` pelo do projeto novo.
 4. Rode `npm run api:semear -- https://SEU-ID.mockapi.io/api/v1` uma vez, para enviar os dados de exemplo.
 
 ## Organização das pastas
@@ -224,7 +238,7 @@ mockapi/          dados de exemplo, API local de teste e script de carga
 
 Feito na Vercel: https://gs-folego.vercel.app
 
-O arquivo `vercel.json` reescreve todas as rotas para `/index.html`, para que um link direto como `/rede/3` abra certo. A variável `VITE_API_URL` também precisa estar cadastrada no projeto da Vercel.
+O arquivo `vercel.json` reescreve todas as rotas para `/index.html`, para que um link direto como `/rede/3` abra certo. A variável `VITE_API_URL` está cadastrada no projeto da Vercel, porque o `.env` não vai para o repositório.
 
 ## Acessibilidade e uso no celular
 
