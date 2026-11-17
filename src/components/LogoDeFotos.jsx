@@ -10,34 +10,36 @@ const LogoDeFotos = () => {
   useLogoDeFotos()
 
   return (
-    <section className="js-logo relative grid h-svh place-items-center overflow-hidden bg-papel px-4">
-      <div className="grid justify-items-center gap-[min(2.5rem,5svh)]">
-        <div
-          role="img"
-          aria-label={`Fotos do bairro formando o logo do ${projeto.nome}: uma casa com uma janela acesa`}
-          className={`logo-grade grid auto-rows-[var(--celula)] gap-[calc(var(--celula)*0.09)] ${classeDasColunas}`}
-        >
-          {celulas.map((celula) =>
-            celula.cheia ? (
-              <div key={celula.id} className="js-peca relative overflow-hidden rounded-[3px]">
-                <img
-                  src={fotos[(celula.numero - 1) % fotos.length].src}
-                  alt=""
-                  className="size-full object-cover"
-                />
-                <span
-                  className={`js-peca-tinta absolute inset-0 opacity-0 ${celula.acesa ? "bg-destaque" : "bg-tinta"}`}
-                />
-              </div>
-            ) : (
-              <span key={celula.id} />
-            )
-          )}
-        </div>
+    <section className="bg-papel">
+      <div className="js-logo relative grid h-svh place-items-center overflow-hidden bg-papel px-4">
+        <div className="grid justify-items-center gap-[min(2.5rem,5svh)]">
+          <div
+            role="img"
+            aria-label={`Fotos do bairro formando o logo do ${projeto.nome}: uma casa com uma janela acesa`}
+            className={`logo-grade grid auto-rows-[var(--celula)] gap-[calc(var(--celula)*0.09)] ${classeDasColunas}`}
+          >
+            {celulas.map((celula) =>
+              celula.cheia ? (
+                <div key={celula.id} className="js-peca relative overflow-hidden rounded-[3px]">
+                  <img
+                    src={fotos[(celula.numero - 1) % fotos.length].src}
+                    alt=""
+                    className="size-full object-cover"
+                  />
+                  <span
+                    className={`js-peca-tinta absolute inset-0 opacity-0 ${celula.acesa ? "bg-destaque" : "bg-tinta"}`}
+                  />
+                </div>
+              ) : (
+                <span key={celula.id} />
+              )
+            )}
+          </div>
 
-        <div className="js-logo-nome grid justify-items-center gap-3 text-center">
-          <p className="titulo text-[clamp(3rem,min(7vw,13svh),6rem)]">{projeto.nome}</p>
-          <p className="max-w-md text-lg text-tinta/70">{assinatura.frase}</p>
+          <div className="js-logo-nome grid justify-items-center gap-3 text-center">
+            <p className="titulo text-[clamp(3rem,min(7vw,13svh),6rem)]">{projeto.nome}</p>
+            <p className="max-w-md text-lg text-tinta/70">{assinatura.frase}</p>
+          </div>
         </div>
       </div>
     </section>
