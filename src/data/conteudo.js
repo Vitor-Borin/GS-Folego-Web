@@ -35,6 +35,26 @@ export const apagao = {
   nota: "Modelo do grupo para a disciplina de Matemática: uma curva exponencial ajustada ao pico e ao quinto dia. É uma simplificação.",
 }
 
+export const bairro = {
+  etiqueta: "O bairro",
+  linhas: ["No Campo Limpo, a luz", "demora mais para voltar."],
+  texto: "O Fôlego começa pelo Campo Limpo, na zona sul de São Paulo. A Enel divide a área que atende em 143 regiões elétricas, e a que cobre metade do bairro foi a que mais ficou sem luz em 2024.",
+  tituloDoGrafico: "Horas sem luz por imóvel em 2024",
+  legendaDoGrafico: "Média do ano, contando os dias de temporal",
+  regioes: [
+    { nome: "Região que atende metade do Campo Limpo", horas: 66.81, texto: "66,8 h", destaque: true },
+    { nome: "Mediana das 143 regiões", horas: 17.48, texto: "17,5 h", destaque: false },
+    { nome: "Região que atende parte da Bela Vista, no centro", horas: 7.7, texto: "7,7 h", destaque: false },
+  ],
+  fatos: [
+    { valor: "1º", texto: "lugar em horas sem luz entre as 143 regiões da Enel São Paulo, em 2024." },
+    { valor: "129 h", texto: "sem luz na soma de 2023, 2024 e 2025. Na mediana das regiões foram 55,5 horas." },
+    { valor: "4º dia", texto: "sem luz em outubro de 2024: foi quando moradores fecharam a Estrada do Campo Limpo em protesto." },
+  ],
+  nota: "No mesmo ano, a luz caiu 7,7 vezes nessa região, contra 5 na mediana. A diferença maior está na espera, e é nela que a bateria acaba.",
+  fonte: "Enel São Paulo, Informe de Indicadores (RN ANEEL 1.137), fevereiro de 2026, histórico sem expurgos. Divisão das regiões: mapa de conjuntos elétricos da ANEEL. Protesto: Diário do Transporte, 15/10/2024.",
+}
+
 export const citacao = {
   inicio: "Peguei energia emprestada",
   destaque: "do meu vizinho.",
