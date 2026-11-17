@@ -1,47 +1,58 @@
+import { useState } from "react"
 import { Link } from "react-router"
 import { PiArrowRight } from "react-icons/pi"
-import CabecalhoDeSecao from "./CabecalhoDeSecao"
+import PapelVisual from "./PapelVisual"
 import { quemFaz } from "../data/conteudo"
-import { fotos } from "../data/fotos"
+import useTroca from "../hooks/useTroca"
 
 const QuemFaz = () => {
+  const [escolhido, setEscolhido] = useState(0)
+  const papel = quemFaz.papeis[escolhido]
+
+  useTroca(".js-papel", escolhido)
+
   return (
     <section className="rounded-[2rem] bg-white px-4 py-24 md:rounded-[3rem] md:px-10 md:py-36">
-      <div className="mx-auto grid max-w-6xl gap-12 md:gap-16">
-        <CabecalhoDeSecao etiqueta={quemFaz.etiqueta} linhas={quemFaz.linhas} />
+      <div className="mx-auto grid max-w-6xl gap-10 md:gap-12">
+        <header className="js-revelar grid justify-items-center gap-5 text-center">
+          <p className="etiqueta">{quemFaz.etiqueta}</p>
+          <h2 className="titulo text-balance text-[clamp(2.4rem,5.4vw,5.25rem)]">{quemFaz.titulo}</h2>
+        </header>
 
-        <ul className="border-t border-tinta/15">
-          {quemFaz.papeis.map((papel) => (
-            <li key={papel.titulo} className="js-revelar border-b border-tinta/15">
-              <Link
-                to={papel.para}
-                className="group relative grid gap-5 py-8 md:grid-cols-[6rem_minmax(0,1fr)_auto] md:items-center md:gap-x-8 md:gap-y-3 md:px-5 md:py-10 xl:grid-cols-[6rem_minmax(0,1.5fr)_minmax(0,1fr)_16rem] xl:py-12"
+        <ul className="js-revelar flex flex-wrap justify-center gap-2 md:gap-3">
+          {quemFaz.papeis.map((item, indice) => (
+            <li key={item.rotulo}>
+              <button
+                type="button"
+                aria-pressed={escolhido === indice}
+                onClick={() => setEscolhido(indice)}
+                className={`min-h-12 cursor-pointer rounded-full border px-5 py-3 text-lg font-medium transition-colors duration-200 md:px-7 md:py-4 md:text-xl ${
+                  escolhido === indice ? "border-tinta bg-tinta text-white" : "border-tinta/25 hover:border-tinta"
+                }`}
               >
-                <span
-                  aria-hidden="true"
-                  className="absolute inset-0 origin-bottom scale-y-0 rounded-3xl bg-destaque transition-transform duration-500 ease-out group-hover:scale-y-100 group-focus-visible:scale-y-100"
-                />
-                <span className="relative block h-12 w-24 overflow-hidden rounded-full md:row-span-2 xl:row-span-1">
-                  <img
-                    src={fotos[papel.foto].src}
-                    alt=""
-                    className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-125"
-                  />
-                </span>
-                <span className="titulo relative text-[clamp(1.9rem,2.9vw,2.6rem)] transition-transform duration-500 ease-out group-hover:translate-x-2">
-                  {papel.titulo}
-                </span>
-                <span className="relative text-lg text-tinta/70 transition-colors duration-300 group-hover:text-tinta md:col-start-2 md:row-start-2 xl:col-start-3 xl:row-start-1">
-                  {papel.texto}
-                </span>
-                <span className="botao botao-linha relative justify-self-start whitespace-nowrap group-hover:border-tinta group-hover:bg-tinta group-hover:text-white md:col-start-3 md:row-span-2 md:row-start-1 md:justify-self-end xl:col-start-4 xl:row-span-1">
-                  {papel.acao}
-                  <PiArrowRight size={18} aria-hidden="true" />
-                </span>
-              </Link>
+                {item.rotulo}
+              </button>
             </li>
           ))}
         </ul>
+
+        <div
+          aria-live="polite"
+          className="js-revelar grid gap-10 rounded-[2rem] bg-papel p-6 md:p-12 lg:min-h-[26rem] lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:items-center lg:gap-12"
+        >
+          <div className="grid justify-items-start gap-6 md:gap-7">
+            <p className="js-papel dado">{papel.titulo}</p>
+            <p className="js-papel titulo text-balance text-[clamp(1.9rem,3.6vw,3rem)] leading-[1.05]">{papel.texto}</p>
+            <Link to={papel.para} className="js-papel botao botao-tinta">
+              {papel.acao}
+              <PiArrowRight size={18} aria-hidden="true" />
+            </Link>
+          </div>
+
+          <div className="js-papel">
+            <PapelVisual tipo={papel.visual} />
+          </div>
+        </div>
       </div>
     </section>
   )

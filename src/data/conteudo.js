@@ -101,28 +101,31 @@ export const assinatura = {
 
 export const quemFaz = {
   etiqueta: "Quem faz a rede",
-  linhas: ["Três jeitos", "de entrar."],
+  titulo: "Qual é o seu jeito de entrar?",
   papeis: [
     {
+      rotulo: "Cuido de alguém",
       titulo: "Quem cuida",
-      texto: "Monta o plano antes. No apagão, abre um pedido com os minutos de bateria que sobram.",
+      texto: "Monte o plano antes. No apagão, abra um pedido com os minutos de bateria que sobram.",
       acao: "Montar meu plano",
       para: "/plano",
-      foto: 32,
+      visual: "plano",
     },
     {
+      rotulo: "Tenho energia",
       titulo: "Quem tem energia",
-      texto: "Gerador, placa solar, nobreak ou bateria reserva. Cadastra o ponto e diz se pode emprestar uma bateria.",
+      texto: "Gerador, placa solar, nobreak ou bateria reserva: cadastre o ponto e diga se pode emprestar uma bateria.",
       acao: "Cadastrar meu ponto",
       para: "/rede/novo",
-      foto: 23,
+      visual: "ponto",
     },
     {
+      rotulo: "Posso levar e buscar",
       titulo: "Quem leva e traz",
-      texto: "Voluntário ou equipe de saúde do bairro. Atende a fila na ordem do relógio: leva a bateria cheia e traz a vazia.",
+      texto: "Voluntário ou equipe de saúde do bairro: atenda a fila na ordem do relógio, leve a bateria cheia e traga a vazia.",
       acao: "Ver a fila",
       para: "/pedidos",
-      foto: 1,
+      visual: "fila",
     },
   ],
 }
