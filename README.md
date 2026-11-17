@@ -9,7 +9,7 @@ Global Solution 2026.2 (CitizenTech) · FIAP · Engenharia de Software, 1º ano 
 | Item | Resposta |
 |---|---|
 | Nome da CitizenTech | Fôlego |
-| Cidade e bairro | São Paulo, SP. **[PREENCHER: bairro do piloto escolhido pelo grupo]**. Os dados de exemplo usam Bela Vista, Liberdade e Cambuci |
+| Cidade e bairro | São Paulo, SP. Piloto no Campo Limpo, distrito da zona sul. Em 2024, a região elétrica que atende metade do distrito foi a que mais ficou sem luz entre as 143 da Enel São Paulo (ver "Fontes dos números do Campo Limpo"). Os dados de exemplo usam Parque Arariba, Jardim Iracema e Jardim Rosana, bairros do distrito |
 | Cidadão beneficiado | Famílias e cuidadores de pessoas eletrodependentes: quem usa em casa concentrador de oxigênio, ventilador mecânico, aspirador de secreção ou outro aparelho que não pode desligar |
 | Problema, em uma frase | Quando a luz cai, quem respira por aparelho tem minutos ou horas de bateria, a energia leva dias para voltar, e a ajuda que está a uma quadra ninguém sabe onde fica |
 | Como funciona | Antes do apagão, a família monta e imprime o plano (quanto a bateria dura, quando pedir ajuda, pontos do bairro com telefone). Durante, um aparelho na tomada percebe a queda de luz e conta o tempo, o pedido entra numa fila ordenada pelo tempo de bateria que resta, e uma bateria carregada vai até a casa |
@@ -67,11 +67,27 @@ Tabelas de descarga em potência constante usadas para ajustar o expoente da bat
 - Autonomia publicada pela APC para os nobreaks BZ400, BZ600 e BZ700 (bateria de 12 V e 7 Ah), usada para conferir a fórmula, e os avisos sobre motor e sustentação da vida: [manual](https://ckm-content.se.com/ckmContent/sfc/servlet.shepherd/document/download/0698V00000mKZCnQAO)
 - Conta de tempo de uso das estações portáteis de lítio (capacidade × 0,85 ÷ potência), que é a fórmula com k = 1: [EcoFlow](https://www.ecoflow.com/us/blog/battery-run-time-calculator), [Jackery](https://uk.jackery.com/blogs/all/what-is-a-watthour) e [Anker](https://www.ankersolix.com/blogs/portable-power-station/how-long-will-a-power-station-last)
 
+### Fontes dos números do Campo Limpo
+
+O piloto é o Campo Limpo, distrito da zona sul de São Paulo. A Enel divide a área que atende em 143 conjuntos elétricos (no site, "regiões elétricas"), que não seguem o limite dos bairros.
+
+| Dado | Valor | De onde vem |
+|---|---|---|
+| Conjuntos que cobrem o distrito | Germânia (51% da área), Taboão da Serra (27%) e Embu (22%) | Cruzamento feito pelo grupo entre o contorno do distrito (OpenStreetMap) e o [mapa de conjuntos da ANEEL](https://sigel.aneel.gov.br/arcgis/rest/services/SRD/Conjuntos/MapServer), base de 31/12/2020 |
+| Horas sem luz por imóvel em 2024, conjunto Germânia | 66,81 h, o maior valor entre os 143 conjuntos | Enel São Paulo, [Informe de Indicadores (RN ANEEL 1.137)](https://www.enel.com.br/content/dam/enel-br/para_voce/dec_fec/2026/02fevereiro/Informe%20Indicadores%20Aneel%20-%20RN%201137%20SP.pdf), fevereiro de 2026, tabela "Histórico 12 meses - Sem aplicação de expurgos" (DEC) |
+| Mediana dos 143 conjuntos em 2024 | 17,48 h | Conta do grupo sobre o mesmo informe |
+| Conjunto Brigadeiro (34% da área da Bela Vista) em 2024 | 7,70 h | Mesmo informe |
+| Soma de 2023, 2024 e 2025, conjunto Germânia | 129,26 h (mediana: 55,5 h) | Mesmo informe |
+| Quedas de luz em 2024, conjunto Germânia | 7,68 (mediana: 4,99) | Mesmo informe (FEC) |
+| Protesto na Estrada do Campo Limpo, em 15/10/2024 | Moradores sem luz desde 11/10 | [Diário do Transporte](https://diariodotransporte.com.br/2024/10/15/video-estrada-do-campo-limpo-na-zona-sul-de-sao-paulo-volta-a-ser-fechada-em-protesto-contra-a-enel-na-noite-desta-terca-15/) |
+
+As horas são a média por imóvel na soma do ano, não a duração de um apagão só. O conjunto Germânia cobre metade do Campo Limpo e também parte do Capão Redondo, por isso o site fala em "região que atende metade do Campo Limpo".
+
 ## O que a aplicação faz
 
 | Rota | Página | O que dá para fazer | API |
 |---|---|---|---|
-| `/` | Início | Conta o problema, mostra os quatro passos, tem o simulador de bateria e os três pontos mais recentes da rede | GET `pontos` |
+| `/` | Início | Conta o problema, mostra os números do Campo Limpo e os quatro passos, tem o simulador de bateria e os três pontos mais recentes da rede | GET `pontos` |
 | `/plano` | Meu plano | Ajustar a bateria e o consumo do aparelho, escolher o bairro e imprimir a folha do plano | GET `pontos` |
 | `/rede` | Rede | Ver os pontos, atualizar a lista, buscar, filtrar por tipo e por quem empresta bateria, confirmar "com energia agora" e apagar | GET, PUT e DELETE `pontos` |
 | `/rede/novo` | Cadastrar ponto | Cadastrar um ponto, com prévia de como ele aparece na rede | POST `pontos` |
@@ -171,10 +187,10 @@ Dois recursos na MockAPI, os dois com criar, consultar, atualizar e excluir.
 | Campo | Tipo | Exemplo |
 |---|---|---|
 | `id` | texto (gerado pela API) | `"1"` |
-| `nome` | texto | `"Padaria Estrela do Bixiga"` |
+| `nome` | texto | `"Padaria Estrela do Arariba"` |
 | `tipo` | texto | `comercio`, `condominio`, `associacao`, `morador` ou `servico` |
-| `bairro` | texto | `"Bela Vista"` |
-| `endereco` | texto | `"Rua Treze de Maio, altura do 900"` |
+| `bairro` | texto | `"Parque Arariba"` |
+| `endereco` | texto | `"Rua Francisco Soares, portaria principal"` |
 | `telefone` | texto | `"(11) 90000-0001"` |
 | `fonte` | texto | `gerador`, `solar`, `nobreak` ou `carro` |
 | `descricao` | texto, até 200 letras | |
@@ -189,7 +205,7 @@ Dois recursos na MockAPI, os dois com criar, consultar, atualizar e excluir.
 |---|---|---|
 | `id` | texto (gerado pela API) | `"1"` |
 | `titulo` | texto | `"Preciso de uma bateria carregada"` |
-| `bairro` | texto | `"Bela Vista"` |
+| `bairro` | texto | `"Parque Arariba"` |
 | `detalhe` | texto, até 200 letras | |
 | `ajuda` | texto | `emprestimo`, `recarga` ou `tomada` |
 | `minutos` | número de 0 a 1440 | minutos de bateria na hora do pedido |
@@ -226,7 +242,7 @@ mockapi/          dados de exemplo, API local de teste e script de carga
 |---|---|
 | React com Vite | `package.json`, `vite.config.js` |
 | Tailwind CSS | `src/index.css` e as classes em todos os componentes |
-| No mínimo 8 componentes reutilizáveis | 33 em `src/components`. Exemplos usados em mais de uma página: `Campo`, `Estado`, `Indicador`, `CabecalhoPagina`, `CartaoResumo`, `ControleDeslizante`, `FormularioPonto` |
+| No mínimo 8 componentes reutilizáveis | 34 em `src/components`. Exemplos usados em mais de uma página: `Campo`, `Estado`, `Indicador`, `CabecalhoPagina`, `CartaoResumo`, `ControleDeslizante`, `FormularioPonto` |
 | `useState` e `useEffect` | Em todos os hooks de dados, por exemplo `src/hooks/usePontos.js` |
 | No mínimo 2 custom hooks | Dados: `usePontos`, `usePonto`, `usePedidos`. Lógica: `useAutonomia`, `useFormularioPonto`, `useFormularioPedido`. Os outros hooks da pasta cuidam das animações |
 | Lógica e dados separados da apresentação | `src/services` (API), `src/utils` (regras) e `src/hooks` (estado). Só `src/services/api.js` faz `fetch`. Os componentes recebem os dados por props ou chamam um hook; nenhum fala com a API |
