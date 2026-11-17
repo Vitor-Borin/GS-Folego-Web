@@ -1,13 +1,23 @@
 import CabecalhoDeSecao from "./CabecalhoDeSecao"
 import { apagao } from "../data/conteudo"
 import useApagao from "../hooks/useApagao"
-import { DIAS_DO_MODELO, fracaoSemLuz, porCento } from "../utils/autonomia"
+import { calcularAutonomia, DIAS_DO_MODELO, fracaoSemLuz, porCento, textoDaDuracao } from "../utils/autonomia"
 import { montarCurva } from "../utils/desenho"
 
 const linhaDaCurva = montarCurva(false)
 const areaDaCurva = montarCurva(true)
 
 const larguraDaFaixa = (720 / (DIAS_DO_MODELO * 1440)) * 100
+
+const baterias = apagao.baterias.map((bateria) => {
+  if (bateria.energia) {
+    const minutos = calcularAutonomia(bateria.energia, bateria.consumo, bateria.tipo)
+
+    return { nome: bateria.nome, minutos: minutos, duracao: textoDaDuracao(minutos) }
+  }
+
+  return bateria
+})
 
 const Apagao = () => {
   useApagao()
@@ -76,7 +86,7 @@ const Apagao = () => {
             <h3 className="js-revelar subtitulo text-2xl md:text-3xl">{apagao.tituloDasBaterias}</h3>
 
             <ul className="js-baterias grid gap-4 md:grid-cols-3">
-              {apagao.baterias.map((bateria) => (
+              {baterias.map((bateria) => (
                 <li key={bateria.nome} className="js-revelar grid gap-5 rounded-3xl bg-white/[0.06] p-5 md:p-7">
                   <p className="grid">
                     <span className="text-sm text-white/60">{bateria.nome}</span>

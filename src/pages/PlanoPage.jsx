@@ -5,7 +5,8 @@ import CabecalhoPagina from "../components/CabecalhoPagina"
 import Campo from "../components/Campo"
 import ControleDeslizante from "../components/ControleDeslizante"
 import FolhaDoPlano from "../components/FolhaDoPlano"
-import { plano } from "../data/conteudo"
+import SeletorDeTipo from "../components/SeletorDeTipo"
+import { plano, simulador } from "../data/conteudo"
 import { aparelhosDeExemplo, bateriasDeExemplo } from "../data/opcoes"
 import useAutonomia from "../hooks/useAutonomia"
 import usePontos from "../hooks/usePontos"
@@ -13,7 +14,7 @@ import { listarBairros, pontosDoBairro } from "../utils/regras"
 
 const PlanoPage = () => {
   const { pontos, carregando, erro } = usePontos()
-  const { energia, setEnergia, consumo, setConsumo, minutos, estado } = useAutonomia()
+  const { energia, setEnergia, consumo, setConsumo, tipo, setTipo, escolherBateria, minutos, estado } = useAutonomia()
   const [bairro, setBairro] = useState("")
 
   const bairros = listarBairros(pontos).map((nome) => {
@@ -50,7 +51,10 @@ const PlanoPage = () => {
               passo={4}
               aoMudar={setEnergia}
               exemplos={bateriasDeExemplo}
+              tipo={tipo}
+              aoEscolher={escolherBateria}
             />
+            <SeletorDeTipo valor={tipo} aoMudar={setTipo} dica={simulador.tipo} />
             <ControleDeslizante
               id="plano-consumo"
               rotulo="Consumo do aparelho"
@@ -104,6 +108,7 @@ const PlanoPage = () => {
         <FolhaDoPlano
           energia={energia}
           consumo={consumo}
+          tipo={tipo}
           minutos={minutos}
           estado={estado}
           bairro={bairro}

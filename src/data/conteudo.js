@@ -28,7 +28,7 @@ export const apagao = {
   dias: ["Pico", "Dia 1", "Dia 2", "Dia 3", "Dia 4", "Dia 5"],
   tituloDasBaterias: "Quando a bateria acaba, quantas casas ainda estão no escuro?",
   baterias: [
-    { nome: "Nobreak comum", duracao: "15 min", minutos: 15 },
+    { nome: "Nobreak comum com concentrador", energia: 84, consumo: 290, tipo: "chumbo" },
     { nome: "Bateria de duas horas", duracao: "2 h", minutos: 120 },
     { nome: "A melhor bateria dos relatos", duracao: "12 h", minutos: 720 },
   ],
@@ -75,7 +75,8 @@ export const simulador = {
   linhas: ["Quanto tempo a sua", "bateria aguenta?"],
   texto: "É a mesma fórmula que roda no aparelho, no programa em Python e no relatório de Matemática.",
   nota: "Os valores são exemplos tirados de manuais de modelos comuns. O número certo está na etiqueta ou no manual do seu aparelho.",
-  limite: "A conta mostra o melhor caso. Um nobreak pequeno ligado a um aparelho de muita potência dura bem menos do que isso.",
+  limite: "A conta vale para bateria nova: bateria usada dura menos.",
+  tipo: "Bateria de chumbo rende menos quanto mais potência o aparelho puxa, e a conta desconta isso. Bateria de lítio quase não perde.",
   mensagens: {
     reserva: "Duas horas ou mais na conta. Combine a ajuda mesmo assim: é uma estimativa.",
     alerta: "Menos de duas horas. É a hora de abrir o pedido na fila do bairro.",

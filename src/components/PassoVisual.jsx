@@ -1,8 +1,9 @@
 import { PiBellRingingFill, PiLightningSlash, PiPersonSimpleWalk } from "react-icons/pi"
-import { calcularAutonomia, textoDaDuracao } from "../utils/autonomia"
+import { calcularAutonomia, EXPOENTE_DO_CHUMBO, HORAS_NOMINAIS, textoDaDuracao } from "../utils/autonomia"
 
-const bateriaGrande = textoDaDuracao(calcularAutonomia(1200, 290))
-const nobreakComum = textoDaDuracao(calcularAutonomia(84, 290))
+const bateriaGrande = textoDaDuracao(calcularAutonomia(1200, 290, "litio"))
+const nobreakComum = textoDaDuracao(calcularAutonomia(84, 290, "chumbo"))
+const expoente = String(EXPOENTE_DO_CHUMBO).replace(".", ",")
 
 const PassoVisual = ({ tipo }) => {
   return (
@@ -35,13 +36,19 @@ const PassoVisual = ({ tipo }) => {
         <div className="grid w-full max-w-sm gap-6 rounded-3xl bg-white p-5 md:p-6">
           <p className="dado">Nobreak comum ligado a um concentrador de oxigênio</p>
           <p className="flex flex-wrap items-center gap-x-2 gap-y-2.5 text-lg font-medium">
+            <span className="rounded-full bg-papel px-3 py-1">{HORAS_NOMINAIS} h</span>
+            <span>×</span>
+            <span>(</span>
             <span className="rounded-full bg-papel px-3 py-1">84 Wh</span>
             <span>×</span>
             <span className="rounded-full bg-papel px-3 py-1">0,85</span>
             <span>÷</span>
             <span className="rounded-full bg-papel px-3 py-1">290 W</span>
-            <span>×</span>
-            <span className="rounded-full bg-papel px-3 py-1">60</span>
+            <span>÷</span>
+            <span className="rounded-full bg-papel px-3 py-1">{HORAS_NOMINAIS} h</span>
+            <span>
+              )<sup>{expoente}</sup>
+            </span>
           </p>
           <p className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-t border-tinta/10 pt-5">
             <span className="dado">Tempo de bateria</span>

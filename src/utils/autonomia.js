@@ -1,4 +1,7 @@
 export const RENDIMENTO = 0.85
+export const HORAS_NOMINAIS = 20
+export const EXPOENTE_DO_CHUMBO = 1.3
+export const EXPOENTE_DO_LITIO = 1
 
 export const LIMITE_ALERTA_MIN = 120
 export const LIMITE_CRITICO_MIN = 30
@@ -9,12 +12,23 @@ export const DIAS_DO_MODELO = 5
 
 export const TAXA_DE_VOLTA = Math.log(PICO_SEM_LUZ / SEM_LUZ_NO_FIM) / DIAS_DO_MODELO
 
-export const calcularAutonomia = (energia, consumo) => {
-  if (consumo <= 0) {
+export const expoenteDaBateria = (tipo) => {
+  if (tipo === "litio") {
+    return EXPOENTE_DO_LITIO
+  }
+
+  return EXPOENTE_DO_CHUMBO
+}
+
+export const calcularAutonomia = (energia, consumo, tipo) => {
+  if (energia <= 0 || consumo <= 0) {
     return 0
   }
 
-  return Math.round(((energia * RENDIMENTO) / consumo) * 60)
+  const fracao = (energia * RENDIMENTO) / (consumo * HORAS_NOMINAIS)
+  const horas = HORAS_NOMINAIS * Math.pow(fracao, expoenteDaBateria(tipo))
+
+  return Math.round(horas * 60)
 }
 
 export const estadoDaBateria = (minutos) => {

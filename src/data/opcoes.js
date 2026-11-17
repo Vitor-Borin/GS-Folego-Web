@@ -25,11 +25,16 @@ export const statusDoPedido = [
   { valor: "resolvido", rotulo: "Resolvido" },
 ]
 
+export const tiposDeBateria = [
+  { valor: "chumbo", rotulo: "Chumbo (nobreak)" },
+  { valor: "litio", rotulo: "Lítio (estação portátil)" },
+]
+
 export const bateriasDeExemplo = [
-  { rotulo: "Nobreak comum", valor: 84 },
-  { rotulo: "Nobreak de 1.200 VA", valor: 120 },
-  { rotulo: "Estação portátil", valor: 512 },
-  { rotulo: "Bateria grande", valor: 1200 },
+  { rotulo: "Nobreak comum", valor: 84, tipo: "chumbo" },
+  { rotulo: "Nobreak de 1.200 VA", valor: 120, tipo: "chumbo" },
+  { rotulo: "Estação portátil", valor: 512, tipo: "litio" },
+  { rotulo: "Bateria de lítio grande", valor: 1200, tipo: "litio" },
 ]
 
 export const aparelhosDeExemplo = [

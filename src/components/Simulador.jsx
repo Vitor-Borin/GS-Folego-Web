@@ -2,6 +2,7 @@ import { Link } from "react-router"
 import { PiArrowRight } from "react-icons/pi"
 import CabecalhoDeSecao from "./CabecalhoDeSecao"
 import ControleDeslizante from "./ControleDeslizante"
+import SeletorDeTipo from "./SeletorDeTipo"
 import { simulador } from "../data/conteudo"
 import { aparelhosDeExemplo, bateriasDeExemplo, estadosDaBateria } from "../data/opcoes"
 import useAutonomia from "../hooks/useAutonomia"
@@ -14,7 +15,8 @@ const coresDoEstado = {
 }
 
 const Simulador = () => {
-  const { energia, setEnergia, consumo, setConsumo, minutos, estado, semLuz } = useAutonomia()
+  const { energia, setEnergia, consumo, setConsumo, tipo, setTipo, escolherBateria, minutos, estado, semLuz } =
+    useAutonomia()
 
   return (
     <section className="px-3 pb-24 md:px-6 md:pb-36">
@@ -33,7 +35,10 @@ const Simulador = () => {
               passo={4}
               aoMudar={setEnergia}
               exemplos={bateriasDeExemplo}
+              tipo={tipo}
+              aoEscolher={escolherBateria}
             />
+            <SeletorDeTipo valor={tipo} aoMudar={setTipo} dica={simulador.tipo} />
             <ControleDeslizante
               id="simulador-consumo"
               rotulo="Consumo do aparelho"

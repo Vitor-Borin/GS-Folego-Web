@@ -1,4 +1,16 @@
-const ControleDeslizante = ({ id, rotulo, valor, unidade, minimo, maximo, passo, aoMudar, exemplos }) => {
+const ControleDeslizante = ({ id, rotulo, valor, unidade, minimo, maximo, passo, aoMudar, exemplos, tipo, aoEscolher }) => {
+  const marcado = (exemplo) => {
+    return valor === exemplo.valor && (exemplo.tipo === undefined || exemplo.tipo === tipo)
+  }
+
+  const escolher = (exemplo) => {
+    if (aoEscolher) {
+      aoEscolher(exemplo)
+    } else {
+      aoMudar(exemplo.valor)
+    }
+  }
+
   return (
     <div className="grid gap-4">
       <div className="flex items-end justify-between gap-4">
@@ -27,10 +39,10 @@ const ControleDeslizante = ({ id, rotulo, valor, unidade, minimo, maximo, passo,
           <li key={exemplo.rotulo}>
             <button
               type="button"
-              aria-pressed={valor === exemplo.valor}
-              onClick={() => aoMudar(exemplo.valor)}
+              aria-pressed={marcado(exemplo)}
+              onClick={() => escolher(exemplo)}
               className={`min-h-11 cursor-pointer rounded-full border px-3.5 py-1.5 text-sm transition-colors duration-200 ${
-                valor === exemplo.valor ? "border-tinta bg-tinta text-white" : "border-tinta/20 hover:border-tinta"
+                marcado(exemplo) ? "border-tinta bg-tinta text-white" : "border-tinta/20 hover:border-tinta"
               }`}
             >
               {exemplo.rotulo} ·{" "}

@@ -1,7 +1,7 @@
 import { PiCheck } from "react-icons/pi"
 import { calcularAutonomia, textoDaDuracao } from "../utils/autonomia"
 
-const nobreakComum = textoDaDuracao(calcularAutonomia(84, 290))
+const nobreakComum = textoDaDuracao(calcularAutonomia(84, 290, "chumbo"))
 
 const passosDoPlano = ["Anote a hora em que a luz caiu.", "Ligue para um ponto da lista.", "Combine quem traz a bateria carregada."]
 

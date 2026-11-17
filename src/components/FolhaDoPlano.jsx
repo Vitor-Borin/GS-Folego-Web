@@ -9,7 +9,7 @@ const coresDoEstado = {
   critico: "bg-perigo text-white",
 }
 
-const FolhaDoPlano = ({ energia, consumo, minutos, estado, bairro, pontos, redeVazia }) => {
+const FolhaDoPlano = ({ energia, consumo, tipo, minutos, estado, bairro, pontos, redeVazia }) => {
   const folga = folgaParaPedir(minutos)
 
   return (
@@ -48,8 +48,8 @@ const FolhaDoPlano = ({ energia, consumo, minutos, estado, bairro, pontos, redeV
         </div>
 
         <p className="dado md:col-span-2 print:col-span-2">
-          Conta feita com bateria de {energia.toLocaleString("pt-BR")} Wh e aparelho de {consumo} W. É o melhor
-          caso: bateria usada ou nobreak pequeno dura menos.
+          Conta feita com bateria de {tipo === "litio" ? "lítio" : "chumbo"} de {energia.toLocaleString("pt-BR")} Wh
+          e aparelho de {consumo} W. Vale para bateria nova: bateria usada dura menos.
         </p>
       </section>
 
