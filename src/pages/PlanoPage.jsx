@@ -56,9 +56,9 @@ const PlanoPage = () => {
               rotulo="Consumo do aparelho"
               valor={consumo}
               unidade="W"
-              minimo={20}
+              minimo={5}
               maximo={600}
-              passo={10}
+              passo={1}
               aoMudar={setConsumo}
               exemplos={aparelhosDeExemplo}
             />

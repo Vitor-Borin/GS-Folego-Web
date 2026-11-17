@@ -74,7 +74,8 @@ export const simulador = {
   etiqueta: "Faça a conta",
   linhas: ["Quanto tempo a sua", "bateria aguenta?"],
   texto: "É a mesma fórmula que roda no aparelho, no programa em Python e no relatório de Matemática.",
-  nota: "Os 290 W são uma referência para concentrador de oxigênio doméstico. O número certo está no manual do seu aparelho.",
+  nota: "Os valores são exemplos tirados de manuais de modelos comuns. O número certo está na etiqueta ou no manual do seu aparelho.",
+  limite: "A conta mostra o melhor caso. Um nobreak pequeno ligado a um aparelho de muita potência dura bem menos do que isso.",
   mensagens: {
     reserva: "Duas horas ou mais na conta. Combine a ajuda mesmo assim: é uma estimativa.",
     alerta: "Menos de duas horas. É a hora de abrir o pedido na fila do bairro.",

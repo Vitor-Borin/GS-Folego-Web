@@ -27,10 +27,19 @@ export const statusDoPedido = [
 
 export const bateriasDeExemplo = [
   { rotulo: "Nobreak comum", valor: 84 },
+  { rotulo: "Nobreak de 1.500 VA", valor: 168 },
+  { rotulo: "Estação portátil", valor: 512 },
   { rotulo: "Bateria grande", valor: 1200 },
 ]
 
-export const aparelhosDeExemplo = [{ rotulo: "Concentrador de oxigênio", valor: 290 }]
+export const aparelhosDeExemplo = [
+  { rotulo: "Bomba de dieta", valor: 9 },
+  { rotulo: "CPAP", valor: 20 },
+  { rotulo: "CPAP com umidificador", valor: 53 },
+  { rotulo: "Concentrador portátil", valor: 62 },
+  { rotulo: "Ventilador domiciliar", valor: 90 },
+  { rotulo: "Concentrador de oxigênio", valor: 290 },
+]
 
 export const estadosDaBateria = [
   { valor: "critico", rotulo: "Crítico", faixa: "até 30 min" },

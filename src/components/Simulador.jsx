@@ -39,14 +39,16 @@ const Simulador = () => {
               rotulo="Consumo do aparelho"
               valor={consumo}
               unidade="W"
-              minimo={20}
+              minimo={5}
               maximo={600}
-              passo={10}
+              passo={1}
               aoMudar={setConsumo}
               exemplos={aparelhosDeExemplo}
             />
             <div className="grid justify-items-start gap-4">
-              <p className="dado">{simulador.nota}</p>
+              <p className="dado">
+                {simulador.nota} {simulador.limite}
+              </p>
               <Link to="/plano" className="botao botao-linha">
                 Montar meu plano de apagão
                 <PiArrowRight size={18} aria-hidden="true" />
