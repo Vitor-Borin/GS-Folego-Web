@@ -48,8 +48,8 @@ const FolhaDoPlano = ({ energia, consumo, minutos, estado, bairro, pontos, redeV
         </div>
 
         <p className="dado md:col-span-2 print:col-span-2">
-          Conta feita com bateria de {energia.toLocaleString("pt-BR")} Wh e aparelho de {consumo} W. É uma
-          estimativa: bateria usada dura menos.
+          Conta feita com bateria de {energia.toLocaleString("pt-BR")} Wh e aparelho de {consumo} W. É o melhor
+          caso: bateria usada ou nobreak pequeno dura menos.
         </p>
       </section>
 

@@ -27,7 +27,7 @@ export const statusDoPedido = [
 
 export const bateriasDeExemplo = [
   { rotulo: "Nobreak comum", valor: 84 },
-  { rotulo: "Nobreak de 1.500 VA", valor: 168 },
+  { rotulo: "Nobreak de 1.200 VA", valor: 120 },
   { rotulo: "Estação portátil", valor: 512 },
   { rotulo: "Bateria grande", valor: 1200 },
 ]
