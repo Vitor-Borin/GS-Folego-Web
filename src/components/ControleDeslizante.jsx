@@ -29,7 +29,7 @@ const ControleDeslizante = ({ id, rotulo, valor, unidade, minimo, maximo, passo,
               type="button"
               aria-pressed={valor === exemplo.valor}
               onClick={() => aoMudar(exemplo.valor)}
-              className={`min-h-10 cursor-pointer rounded-full border px-3.5 py-1.5 text-sm transition-colors duration-200 ${
+              className={`min-h-11 cursor-pointer rounded-full border px-3.5 py-1.5 text-sm transition-colors duration-200 ${
                 valor === exemplo.valor ? "border-tinta bg-tinta text-white" : "border-tinta/20 hover:border-tinta"
               }`}
             >

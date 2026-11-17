@@ -67,10 +67,13 @@ const Rodape = () => {
                 Projeto acadêmico da {projeto.edicao}, FIAP, Engenharia de Software, 1º ano. Os dados da rede são
                 simulados.
               </p>
-              <p className="grid w-max rounded-3xl bg-destaque px-7 py-5 text-tinta">
+              <a
+                href="tel:192"
+                className="grid w-max gap-1.5 rounded-3xl bg-destaque px-7 py-5 text-tinta transition-colors duration-200 hover:bg-white"
+              >
                 <span className="text-sm font-medium">Em emergência, ligue</span>
                 <span className="titulo text-7xl">192</span>
-              </p>
+              </a>
             </div>
           </div>
         </div>

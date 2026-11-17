@@ -14,20 +14,20 @@ const PapelVisual = ({ tipo }) => {
             <span>Plano de apagão</span>
             <span>Exemplo · Bela Vista</span>
           </p>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid gap-3 min-[400px]:grid-cols-2">
             <p className="grid content-between gap-2 rounded-2xl bg-perigo p-4 text-white">
               <span className="text-xs text-white/80">A bateria dura cerca de</span>
-              <span className="titulo text-4xl tabular-nums md:text-5xl">{nobreakComum}</span>
+              <span className="titulo whitespace-nowrap text-3xl tabular-nums sm:text-4xl">{nobreakComum}</span>
             </p>
             <p className="grid content-between gap-2 rounded-2xl bg-papel p-4">
               <span className="text-xs text-tinta/60">Peça ajuda</span>
-              <span className="titulo text-3xl md:text-4xl">na hora</span>
+              <span className="titulo whitespace-nowrap text-2xl sm:text-3xl">na hora</span>
             </p>
           </div>
           <ol className="grid gap-2 text-sm text-tinta/75">
             {passosDoPlano.map((passo, indice) => (
               <li key={passo} className="flex items-center gap-2.5">
-                <span className="grid size-5 shrink-0 place-items-center rounded-full bg-tinta text-[0.65rem] text-white">
+                <span className="grid size-6 shrink-0 place-items-center rounded-full bg-tinta text-xs text-white">
                   {indice + 1}
                 </span>
                 {passo}
