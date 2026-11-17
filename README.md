@@ -14,7 +14,7 @@ Global Solution 2026.2 (CitizenTech) · FIAP · Engenharia de Software, 1º ano 
 | Problema, em uma frase | Quando a luz cai, quem respira por aparelho tem minutos ou horas de bateria, a energia leva dias para voltar, e a ajuda que está a uma quadra ninguém sabe onde fica |
 | Como funciona | Antes do apagão, a família monta e imprime o plano (quanto a bateria dura, quando pedir ajuda, pontos do bairro com telefone). Durante, um aparelho na tomada percebe a queda de luz e conta o tempo, o pedido entra numa fila ordenada pelo tempo de bateria que resta, e uma bateria carregada vai até a casa |
 | O que cada parte faz | **Edge Computing:** dispositivo com ESP32 que percebe a queda de luz, conta o tempo e decide sozinho. **Python:** central que simula o apagão e monta a fila. **Matemática:** modelo da bateria descarregando e da cidade voltando a ter luz. **Front-end e Web (este repositório):** o plano, a rede de pontos e a fila de pedidos. **Experiência:** a jornada de quem cuida. **Pitch:** a história em três minutos |
-| Link do repositório | **[PREENCHER: link do repositório no GitHub]** |
+| Link do repositório | https://github.com/Vitor-Borin/GS-Folego-Web |
 | Link do deploy | **[PREENCHER: link da Vercel]** |
 | Indicador de impacto | Famílias com plano pronto, tempo entre o pedido e a chegada da bateria carregada, pontos ativos e baterias reserva por bairro |
 | ODS conectados | 3 (saúde e bem-estar), 7 (energia limpa e acessível), 10 (redução das desigualdades), 11 (cidades e comunidades sustentáveis) e 13 (ação contra a mudança global do clima) |
@@ -24,8 +24,8 @@ Global Solution 2026.2 (CitizenTech) · FIAP · Engenharia de Software, 1º ano 
 | Nome | RM | Parte |
 |---|---|---|
 | Vitor Borin | RM573194 | Front-end Design e Web Development |
-| **[PREENCHER: nome completo do Ryan]** | **[RM]** | **[parte]** |
-| **[PREENCHER: nome completo do Robert]** | **[RM]** | **[parte]** |
+| Ryan Maick | RM573051 | **[PREENCHER: parte]** |
+| Robert Josino | RM571622 | **[PREENCHER: parte]** |
 
 ## Avisos
 

@@ -199,8 +199,8 @@ export const chamada = {
 
 export const equipe = [
   { nome: "Vitor Borin", rm: "RM573194", parte: "Front-end e Web Development" },
-  { nome: "Ryan", rm: "", parte: "" },
-  { nome: "Robert", rm: "", parte: "" },
+  { nome: "Ryan Maick", rm: "RM573051", parte: "" },
+  { nome: "Robert Josino", rm: "RM571622", parte: "" },
 ]
 
 export const linksDoMenu = [
