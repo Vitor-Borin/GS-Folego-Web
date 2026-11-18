@@ -12,8 +12,8 @@ export const DIAS_DO_MODELO = 5
 
 export const TAXA_DE_VOLTA = Math.log(PICO_SEM_LUZ / SEM_LUZ_NO_FIM) / DIAS_DO_MODELO
 
-export const expoenteDaBateria = (tipo) => {
-  if (tipo === "litio") {
+export const expoenteDaBateria = (tipo, fracao) => {
+  if (tipo === "litio" || fracao > 1) {
     return EXPOENTE_DO_LITIO
   }
 
@@ -26,7 +26,7 @@ export const calcularAutonomia = (energia, consumo, tipo) => {
   }
 
   const fracao = (energia * RENDIMENTO) / (consumo * HORAS_NOMINAIS)
-  const horas = HORAS_NOMINAIS * Math.pow(fracao, expoenteDaBateria(tipo))
+  const horas = HORAS_NOMINAIS * Math.pow(fracao, expoenteDaBateria(tipo, fracao))
 
   return Math.round(horas * 60)
 }
