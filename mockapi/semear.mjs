@@ -41,10 +41,40 @@ const enviar = (recurso, lista, posicao) => {
   })
 }
 
+const apagar = (recurso, lista, posicao) => {
+  if (posicao >= lista.length) {
+    console.log(`${recurso}: ${lista.length} registros antigos apagados`)
+
+    return Promise.resolve()
+  }
+
+  return fetch(`${endereco}/${recurso}/${lista[posicao].id}`, { method: "DELETE" }).then((resposta) => {
+    if (!resposta.ok) {
+      throw new Error(`A API respondeu ${resposta.status} ao apagar em "${recurso}"`)
+    }
+
+    return apagar(recurso, lista, posicao + 1)
+  })
+}
+
+const limpar = (recurso) => {
+  return fetch(`${endereco}/${recurso}`)
+    .then((resposta) => {
+      if (!resposta.ok) {
+        throw new Error(`A API respondeu ${resposta.status} ao listar "${recurso}"`)
+      }
+
+      return resposta.json()
+    })
+    .then((lista) => apagar(recurso, lista, 0))
+}
+
 if (endereco === undefined) {
   console.log("Faltou o endereço da API. Exemplo: npm run api:semear -- https://SEU-ID.mockapi.io/api/v1")
 } else {
-  enviar("pontos", prepararLista("pontos"), 0)
+  limpar("pontos")
+    .then(() => limpar("pedidos"))
+    .then(() => enviar("pontos", prepararLista("pontos"), 0))
     .then(() => enviar("pedidos", prepararLista("pedidos"), 0))
     .then(() => console.log("Pronto. Confira os dados no painel da MockAPI."))
     .catch((erro) => console.log(`Não deu certo: ${erro.message}`))
