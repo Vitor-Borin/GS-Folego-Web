@@ -97,24 +97,26 @@ As horas são a média por imóvel na soma do ano, não a duração de um apagã
 
 ### Roteiro rápido para testar o CRUD
 
-1. Em `/rede/novo`, cadastre um ponto (POST). Ele aparece em `/rede`.
+1. Em `/rede/novo`, cadastre um ponto (POST). O site abre a página do ponto, e ele passa a aparecer em `/rede`.
 2. Em `/rede`, clique em **Confirmar agora** num ponto (PUT). O cartão passa a mostrar "Com energia, confirmado agora".
-3. Abra um ponto, mude o telefone e salve (PUT). Depois use **Apagar este ponto** (DELETE).
-4. Em `/pedidos`, abra um pedido com 20 minutos de bateria (POST). Ele entra no topo da fila, em vermelho.
-5. Clique em **Estou a caminho** e depois em **Marcar como resolvido** (PUT). Apague com a lixeira (DELETE).
+3. Abra um ponto, mude o telefone e salve (PUT). Depois clique em **Apagar este ponto** e confirme em **Apagar de vez** (DELETE).
+4. Em `/pedidos`, abra um pedido com 20 minutos de bateria (POST). Ele entra na fila em vermelho, como Crítico, acima de todos os pedidos que têm mais tempo.
+5. Clique em **Estou a caminho** e depois em **Marcar como resolvido** (PUT): o pedido vai para o fim da fila. Clique na lixeira e confirme em **Apagar de vez** (DELETE).
 6. Em `/plano`, escolha "Bateria de lítio grande" e um bairro e use **Imprimir o plano**.
+
+Os dados de exemplo ficam gravados na MockAPI com data fixa. Por isso, duas horas depois da carga os pontos aparecem como "Aguardando", e um dia depois os pedidos abertos saem da fila e vão para "Sem resposta há mais de um dia". São as regras funcionando. Para ver um ponto "com energia", use **Confirmar agora**; para ver a fila, abra um pedido.
 
 ## Regras de negócio
 
 Ficam em `src/utils`, fora dos componentes.
 
-- **Tempo de bateria:** horas = 20 × (energia × 0,85 ÷ (consumo × 20)) elevado a k, e minutos = horas × 60, arredondado. O 0,85 é o rendimento do inversor e 20 são as horas do regime em que a capacidade da bateria é medida. O expoente k é 1,3 para bateria de chumbo (nobreak) e 1 para bateria de lítio (estação portátil). Com k = 1 a conta vira energia × 0,85 ÷ consumo.
-- **Por que o expoente:** bateria de chumbo entrega menos energia quanto mais rápido é descarregada (lei de Peukert). O 1,3 foi ajustado com as tabelas de descarga de dez fichas de fabricantes (lista em "Fontes da fórmula da bateria"): de 15 minutos para cima, a conta nunca passa do que as fichas dizem.
+- **Tempo de bateria:** horas = 20 × (energia × 0,85 ÷ (consumo × 20)) elevado a k, e minutos = horas × 60, arredondado. O 0,85 é o rendimento do inversor e 20 são as horas do regime em que a capacidade da bateria é medida. O expoente k é 1,3 para bateria de chumbo (nobreak) e 1 para bateria de lítio (estação portátil). Com k = 1 a conta vira energia × 0,85 ÷ consumo. Quando essa conta simples passa de 20 horas, o expoente deixa de valer e ela é usada também para o chumbo: sem isso, o expoente aumentaria o tempo em vez de descontar.
+- **Por que o expoente:** bateria de chumbo entrega menos energia quanto mais rápido é descarregada (lei de Peukert). O 1,3 foi ajustado com as tabelas de descarga de dez fichas de fabricantes (lista em "Fontes da fórmula da bateria"): entre 15 minutos e 20 horas, a conta nunca passa do que as fichas dizem.
 - **Estados da bateria:** Reserva (2 h ou mais), Alerta (menos de 2 h, hora de pedir ajuda) e Crítico (menos de 30 min). São os mesmos limites do aparelho, do programa em Python e do relatório de Matemática.
 - **Confirmação do ponto vale por 2 horas.** Depois disso o ponto deixa de contar como "com energia agora" e as tomadas dele saem da soma, até alguém confirmar de novo. Cadastrar e confirmar renovam a confirmação; editar os dados do ponto não renova.
 - **Ponto repetido não entra:** mesmo nome no mesmo bairro é recusado no cadastro. O bairro é comparado sem diferença de maiúsculas e de espaços.
 - **Validação:** telefone com DDD (10 ou 11 números), tomadas de 0 a 50 e minutos de 0 a 1440, sempre números inteiros, e limite de letras nos textos.
-- **A fila anda pelo relógio:** o tempo que resta num pedido é o que a pessoa informou menos o tempo que já passou. Quem tem menos tempo fica em primeiro e, no empate, o pedido mais antigo. Resolvidos vão para o fim.
+- **A fila anda pelo relógio:** o tempo que resta num pedido é o que a pessoa informou menos o tempo que já passou. Quem tem menos tempo fica em primeiro e, no empate, o pedido mais antigo. Resolvidos vão para o fim. O tempo é recalculado quando a página abre, depois de cada ação e no botão **Atualizar a fila**; a tela não conta sozinha.
 - **Pedido sem solução há mais de um dia sai da fila** e aparece numa lista à parte, porque o relógio dele já não vale.
 - **O pedido não tem campo para doença nem diagnóstico:** só o tipo de ajuda, os minutos de bateria, um resumo, um detalhe e o bairro. O formulário orienta a não contar o motivo.
 - **O plano impresso** dá o prazo para pedir ajuda (o tempo até a bateria chegar a duas horas) e lista só os pontos do bairro que estão na rede, com quem empresta bateria em primeiro lugar.
@@ -174,7 +176,7 @@ Outros comandos:
 | `npm run preview` | Abre a versão final gerada |
 | `npm run lint` | Confere o código com o ESLint |
 | `npm run api:local` | Liga uma imitação local da MockAPI em `http://localhost:4010`, para desenvolver sem internet |
-| `npm run api:semear -- ENDERECO` | Envia os dados de exemplo para a API do endereço informado |
+| `npm run api:semear -- ENDERECO` | Apaga os registros da API do endereço informado e envia os dados de exemplo de novo, com a data de agora |
 
 Para usar a API local, crie um arquivo `.env.local` com `VITE_API_URL=http://localhost:4010` e rode `npm run api:local` em outro terminal.
 
@@ -190,7 +192,7 @@ Dois recursos na MockAPI, os dois com criar, consultar, atualizar e excluir.
 | `nome` | texto | `"Padaria Estrela do Arariba"` |
 | `tipo` | texto | `comercio`, `condominio`, `associacao`, `morador` ou `servico` |
 | `bairro` | texto | `"Parque Arariba"` |
-| `endereco` | texto | `"Rua Francisco Soares, portaria principal"` |
+| `endereco` | texto | `"Rua Eurico de Azevedo Marques, ao lado do ponto de ônibus"` |
 | `telefone` | texto | `"(11) 90000-0001"` |
 | `fonte` | texto | `gerador`, `solar`, `nobreak` ou `carro` |
 | `descricao` | texto, até 200 letras | |
