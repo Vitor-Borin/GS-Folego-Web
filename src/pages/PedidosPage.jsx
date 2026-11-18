@@ -70,7 +70,7 @@ const PedidosPage = () => {
       <CabecalhoPagina
         rotulo="Durante o apagão"
         titulo="Fila de pedidos"
-        texto="A fila anda pelo relógio: quem tem menos bateria fica em primeiro. Quem está por perto leva uma bateria carregada ou busca a vazia para recarregar."
+        texto="A fila anda pelo relógio: quem tem menos bateria fica em primeiro. Quem está por perto leva uma bateria carregada ou busca a vazia para recarregar. O tempo é recalculado ao abrir a página e no botão de atualizar."
       >
         <button type="button" disabled={ocupado || carregando} onClick={aoAtualizar} className="botao botao-linha">
           <PiArrowsClockwise size={18} aria-hidden="true" />

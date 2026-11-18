@@ -15,7 +15,7 @@ const LogoDeFotos = () => {
         <div className="grid justify-items-center gap-[min(2.5rem,5svh)]">
           <div
             role="img"
-            aria-label={`Fotos do bairro formando o logo do ${projeto.nome}: uma casa com uma janela acesa`}
+            aria-label={`Fotos formando o logo do ${projeto.nome}: uma casa com uma janela acesa`}
             className={`logo-grade grid auto-rows-[var(--celula)] gap-[calc(var(--celula)*0.09)] ${classeDasColunas}`}
           >
             {celulas.map((celula) =>

@@ -46,7 +46,7 @@ const PapelVisual = ({ tipo }) => {
           <p className="subtitulo text-2xl md:text-3xl">Padaria Estrela do Arariba</p>
           <p className="grid gap-1 border-t border-tinta/10 pt-4">
             <span className="font-medium">Com energia, confirmado há 19 min</span>
-            <span className="dado">Gerador · 3 tomadas livres · empresta bateria</span>
+            <span className="dado">Gerador · 3 tomadas livres</span>
           </p>
           <span className="botao botao-tinta justify-self-start">
             <PiCheck size={18} />
